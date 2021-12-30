@@ -81,7 +81,6 @@ public class Player : MonoBehaviour
         Reload();
         Grenade();
 
-
         UpdateTimer(); // Ãß°¡ : UpdateInput
     }
 
@@ -175,7 +174,7 @@ public class Player : MonoBehaviour
         direction = new Vector3(hAxis, 0, vAxis);
 
         movement.MoveTo(direction);
-        movement.Rotation();
+        //movement.Rotation();
         animator.OnMovement(Mathf.Clamp01(Mathf.Abs(hAxis) + Mathf.Abs(vAxis)));
     }
 

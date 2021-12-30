@@ -7,10 +7,19 @@ public class Movement : MonoBehaviour
     [Header("MoveSpeed")]
     private float defaultMoveSpeed; //추가
     public float moveSpeed;
+    private float gravity = 20f;
 
+    [Header("Rotation")]
     [SerializeField]
-    private float rotateAngle;
     private float rotateSpeed = 10.0f;
+
+    [Header("Slide")]
+    [SerializeField]
+    private float _slideSpeed = 3.0f;
+    public float _slopeLimit = 10.0f;
+    private float _groundRayDistance = 1.0f;
+    private RaycastHit _slopeHit;
+    private bool risingSlope = false;
 
     [HideInInspector]
     public Vector3 moveDirection;
@@ -25,7 +34,7 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-
+        moveDirection = Vector3.zero;
         defaultMoveSpeed = moveSpeed; //추가
     }
 
@@ -37,18 +46,34 @@ public class Movement : MonoBehaviour
     
     public void MoveTo(Vector3 direction)
     {
+        risingSlope = false;
         moveDirection = new Vector3(direction.x, moveDirection.y, direction.z);
-        moveDirection.Normalize();
         moveDirection.y = 0.0f;
 
         if (isRoll)
             moveDirection = rollDirection;
 
-        moveDirection *= moveSpeed;
+        //if (!characterController.isGrounded)
+        //    moveDirection.y -= gravity * Time.deltaTime;
 
+        if (OnSteepSlope())
+            SteepSlopeMovement();
+
+        Rotation();
+
+        moveDirection *= moveSpeed;
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, Vector3.zero);
         projectedVelocity.y -= 9.81f;
+
+        if (risingSlope)
+        {
+            characterController.Move(projectedVelocity * Time.deltaTime);
+            // characterController.Move(moveDirection * Time.deltaTime);
+            return;
+        }
         characterController.Move(projectedVelocity * Time.deltaTime);
+
+        //characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
     }
 
     public void Rotation()
@@ -56,7 +81,6 @@ public class Movement : MonoBehaviour
         Vector3 targetDir = Vector3.zero;
         targetDir.z = moveDirection.z;
         targetDir.x += moveDirection.x;
-        targetDir.Normalize();
         targetDir.y = 0.0f;
 
         if (targetDir == Vector3.zero)
@@ -86,6 +110,54 @@ public class Movement : MonoBehaviour
         transform.rotation = rollRotation;
     }
 
+    private bool OnSteepSlope()
+    {
+        if (!characterController.isGrounded) return false;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out _slopeHit,
+            (characterController.height / 2) + _groundRayDistance))
+        {
+            float _slopeAngle = Vector3.Angle(_slopeHit.normal, Vector3.up);
+            return _slopeAngle > _slopeLimit;
+        }
+
+        return false;
+    }
+
+    private void SteepSlopeMovement()
+    {
+        Vector3 slopeDirection = Vector3.up - _slopeHit.normal * Vector3.Dot(Vector3.up, _slopeHit.normal);
+        float slideSpeed = _slideSpeed + (1 - Mathf.Abs(slopeDirection.normalized.x));
+
+        Debug.Log("Move : " + moveDirection.normalized.x + ", Slope : " + slopeDirection.normalized.x);
+        if(moveDirection.normalized.x == 0)
+        {
+            moveSpeed = slideSpeed;
+            moveDirection = slopeDirection * -slideSpeed;
+            moveDirection.y = moveDirection.y - _slopeHit.point.y;
+            risingSlope = false;
+            return;
+        }
+        else if ( (moveDirection.normalized.x < 0 && slopeDirection.normalized.x < 0 )
+            || (moveDirection.normalized.x > 0 && slopeDirection.normalized.x > 0))
+        {
+            moveSpeed -= slideSpeed;
+            risingSlope = true;
+        }
+        else if ((moveDirection.normalized.x < 0 && slopeDirection.normalized.x > 0)
+            || (moveDirection.normalized.x > 0 && slopeDirection.normalized.x < 0))
+        {
+            moveSpeed += slideSpeed;
+            risingSlope = false;
+        }
+        //if (moveDirection.normalized.magnitude < slopeDirection.normalized.magnitude)
+        //{
+        //    moveDirection = slopeDirection * -slideSpeed;
+        //    moveDirection.y = moveDirection.y - _slopeHit.point.y;
+        //    risingSlope = false;
+        //    return;
+        //}
+    }
 
     //=========추가
     private Timer SpeedUpTimer = new Timer();
