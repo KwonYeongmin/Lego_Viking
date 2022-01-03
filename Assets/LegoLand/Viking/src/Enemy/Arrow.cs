@@ -24,7 +24,7 @@ public class Arrow : MonoBehaviour
 
     [Header("lifetime")]
     [SerializeField]
-    private float lifeTime = 10.0f;
+    private float lifeTime = 1.0f;
 
 
     Rigidbody rig;
@@ -37,7 +37,7 @@ public class Arrow : MonoBehaviour
 
     private void Start()
     {
-        Destroy(this.gameObject, lifeTime);
+       // Destroy(this.gameObject, lifeTime);
     }
 
     private void Update()
@@ -47,7 +47,7 @@ public class Arrow : MonoBehaviour
 
     private void Move()
     {
-        rig.AddForce(transform.forward * arrow_fall_speed);
+        rig.AddForce(- transform.up * arrow_fall_speed);
     }
 
     private void InitializeState()
@@ -75,7 +75,7 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == ("deck")) Destroy(this.gameObject);
+        if (collision.gameObject.tag == ("deck")) Destroy(this.gameObject,1f);
 
         if (collision.gameObject.GetComponent<Player>()) //플레이어가 맞았다면
         {

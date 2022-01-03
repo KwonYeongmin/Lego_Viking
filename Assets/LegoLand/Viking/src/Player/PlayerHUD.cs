@@ -6,7 +6,12 @@ using UnityEngine.UI;
 public class PlayerHUD : MonoBehaviour
 {
     public Image HPImg;
+   
+   
     public Image AmmoImg;
+    private Image[] AmmoImgs = new Image[20];
+    private int DefaultAmmoNum;
+
     public Text speedTXT;
     public Text pinSpeedTXT;
     private GameObject player;
@@ -15,15 +20,25 @@ public class PlayerHUD : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        DefaultAmmoNum = player.GetComponent<Player>().defaultAmmo;
+        for (int i = 0; i < DefaultAmmoNum; i++)
+            AmmoImgs[i] = AmmoImg.transform.GetChild(i).gameObject.GetComponent<Image>();
     }
 
     void Update()
     {
         HPImg.fillAmount = (float)(player.GetComponent<Player>().HP) / (float)(player.GetComponent<Player>().DefaultHP);
-      
-        AmmoImg.fillAmount = (float)(player.GetComponent<Player>().ammo) / (float)(player.GetComponent<Player>().defaultAmmo);
 
+        int ammoNum = player.GetComponent<Player>().ammo;
+
+        for (int i = 0; i < ammoNum; i++)
+            AmmoImgs[i].enabled = true; 
+
+        for (int i = DefaultAmmoNum-1; i > ammoNum-1; i--)
+            AmmoImgs[i].enabled = false;
+          
         speedTXT.text ="speed : "+ player.GetComponent<Movement>().moveSpeed.ToString();
+        pinSpeedTXT.text = 5.ToString();
         pin.GetComponent<Viking>().speed = float.Parse(pinSpeedTXT.text.ToString());
     }
 }

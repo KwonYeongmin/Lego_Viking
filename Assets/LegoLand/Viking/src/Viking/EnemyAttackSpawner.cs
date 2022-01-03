@@ -31,7 +31,7 @@ public class EnemyAttackSpawner : MonoBehaviour
             switch (spaceSaver)
             {
                 case 0: { InstantiateObjects(Missile, Quaternion.Euler(180.0f, 0, 0)); } break;
-                case 1: { InstantiateObjects(Arrow, Quaternion.Euler(90.0f, 0, 0)); } break;
+                case 1: { InstantiateObjects(Arrow, Quaternion.Euler(0, 0, 0)); } break;
                 case 2: { InstantiateObjects(Dagger, Quaternion.Euler(0, 0, 90.0f)); } break;
             }
             
@@ -59,6 +59,7 @@ public class EnemyAttackSpawner : MonoBehaviour
                                                     //Quaternion.Euler(180.0f, 0, 0)
                                                     rot
                                                     );
+        obj_.transform.parent = this.gameObject.transform;
 
     }
 }

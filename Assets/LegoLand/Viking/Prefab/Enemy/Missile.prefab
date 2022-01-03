@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3859595124364559463}
   - component: {fileID: 7237764700659948384}
   - component: {fileID: 406337828}
+  - component: {fileID: 6773937642623606809}
   m_Layer: 0
   m_Name: Missile
   m_TagString: Untagged
@@ -112,11 +113,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cef113bfb3f344bb11565835988c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Missile_range1: 1
-  Missile_range2: 2
-  Missile_damage1: 5
-  Missile_damage2: 3
+  state: 0
+  Missile1_damage_center: 2
+  Missile1_damage_edge: 1
   Missile_fall_speed: 10
+  Missile_range_edge: 1
+  lifeTime: 10
 --- !u!65 &406337828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -130,3 +132,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5586095, y: 9.780996, z: 2.5586097}
   m_Center: {x: 0.0000032782557, y: 0.98390317, z: 0.000007867813}
+--- !u!119 &6773937642623606809
+Projector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255278661010280}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: 0.1
+  m_FarClipPlane: 100
+  m_FieldOfView: 100
+  m_AspectRatio: 1
+  m_Orthographic: 1
+  m_OrthographicSize: 0.1
+  m_Material: {fileID: 2100000, guid: 7690c253568d70946a3060affeecfbde, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 0

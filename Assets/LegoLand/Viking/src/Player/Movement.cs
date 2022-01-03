@@ -129,7 +129,7 @@ public class Movement : MonoBehaviour
         Vector3 slopeDirection = Vector3.up - _slopeHit.normal * Vector3.Dot(Vector3.up, _slopeHit.normal);
         float slideSpeed = _slideSpeed + (1 - Mathf.Abs(slopeDirection.normalized.x));
 
-        Debug.Log("Move : " + moveDirection.normalized.x + ", Slope : " + slopeDirection.normalized.x);
+        // Debug.Log("Move : " + moveDirection.normalized.x + ", Slope : " + slopeDirection.normalized.x);
         if(moveDirection.normalized.x == 0)
         {
             moveSpeed = slideSpeed;
