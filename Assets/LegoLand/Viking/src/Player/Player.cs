@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public Weapon weapon;
     [HideInInspector]
-    public bool isReload;
     float fireDelay;
     bool isFireReady;
     public int defaultAmmo; //추가
@@ -78,7 +77,6 @@ public class Player : MonoBehaviour
         Move();
         Roll();
         Fire();
-        Reload();
         Grenade();
 
         UpdateTimer(); // 추가 : UpdateInput
@@ -153,12 +151,6 @@ public class Player : MonoBehaviour
         isButtonFire = false;
     }
 
-    public void ButtonReload()
-    {
-        isButtonReload = true;
-        Reload();                       //  추가
-    }
-
     public void ButtonGrenadeDown()
     {
         isButtonGrenade = true;
@@ -174,7 +166,7 @@ public class Player : MonoBehaviour
         direction = new Vector3(hAxis, 0, vAxis);
 
         movement.MoveTo(direction);
-        //movement.Rotation();
+
         animator.OnMovement(Mathf.Clamp01(Mathf.Abs(hAxis) + Mathf.Abs(vAxis)));
     }
 
@@ -200,7 +192,7 @@ public class Player : MonoBehaviour
         fireDelay += Time.deltaTime;
         isFireReady = weapon.rate < fireDelay;
 
-        if (isButtonFire && isFireReady && !isButtonRoll && !isReload)
+        if (isButtonFire && isFireReady && !isButtonRoll)
         {
             Debug.Log("Fire");
             weapon.Use();
@@ -211,25 +203,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Reload()
-    {
-        if (weapon == null) return;
-
-        if (ammo == 0) return;
-
-        if (isButtonReload && !isButtonRoll && isFireReady && !isReload)
-        {
-            Debug.Log("Reload");
-            isReload = true;
-            animator.OnReload();
-        }
-    }
-
     private void Grenade()
     {
         if (hasGrenades == 0 || !bIsGrenadesEnable) return; //추가 : bIsGrenadesEnable 추가
 
-        if (isButtonGrenade && !isReload)
+        if (isButtonGrenade)
         {
             Debug.Log("Grenade");
             GameObject instantGrenade = Instantiate(grenadeObj, grenadePos.position, grenadePos.rotation);

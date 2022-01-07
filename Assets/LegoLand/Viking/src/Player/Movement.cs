@@ -25,9 +25,13 @@ public class Movement : MonoBehaviour
     public Vector3 moveDirection;
     [HideInInspector]
     public Vector3 rollDirection;
+    [HideInInspector]
+    public Vector3 lastDirection;
 
     [HideInInspector]
-    public bool isRoll =false;
+    public bool isRoll = false;
+    public bool isCheck = false;
+
 
     private CharacterController characterController;
 
@@ -47,6 +51,7 @@ public class Movement : MonoBehaviour
     public void MoveTo(Vector3 direction)
     {
         risingSlope = false;
+
         moveDirection = new Vector3(direction.x, moveDirection.y, direction.z);
         moveDirection.y = 0.0f;
 
@@ -58,8 +63,10 @@ public class Movement : MonoBehaviour
 
         if (OnSteepSlope())
             SteepSlopeMovement();
-
-        Rotation();
+        else if(!OnSteepSlope() && direction != Vector3.zero)
+            lastDirection = moveDirection;
+        
+        Rotation(direction);
 
         moveDirection *= moveSpeed;
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, Vector3.zero);
@@ -76,15 +83,22 @@ public class Movement : MonoBehaviour
         //characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
     }
 
-    public void Rotation()
+    public void Rotation(Vector3 direction)
     {
         Vector3 targetDir = Vector3.zero;
-        targetDir.z = moveDirection.z;
-        targetDir.x += moveDirection.x;
-        targetDir.y = 0.0f;
 
-        if (targetDir == Vector3.zero)
-            targetDir = transform.forward;
+        if(direction != Vector3.zero)
+        {
+            targetDir.z = moveDirection.z;
+            targetDir.x += moveDirection.x;
+            targetDir.y = 0.0f;
+        }
+        else
+        {
+            targetDir.z = lastDirection.z;
+            targetDir.x += lastDirection.x;
+            targetDir.y = 0.0f;
+        }
 
         Quaternion tr = Quaternion.LookRotation(targetDir);
         Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotateSpeed * Time.deltaTime);
@@ -94,15 +108,6 @@ public class Movement : MonoBehaviour
 
     public void Roll(Vector3 direction)
     {
-        //if (direction != Vector3.zero)
-        //{
-        //    rollDirection = Vector3.zero;
-        //    rollDirection.z = direction.z;
-        //    rollDirection.x += direction.x;
-        //    rollDirection.Normalize();
-        //    rollDirection.y = 0.0f;
-        //}
-
         rollDirection = transform.forward;
         rollDirection.Normalize();
 
@@ -129,8 +134,8 @@ public class Movement : MonoBehaviour
         Vector3 slopeDirection = Vector3.up - _slopeHit.normal * Vector3.Dot(Vector3.up, _slopeHit.normal);
         float slideSpeed = _slideSpeed + (1 - Mathf.Abs(slopeDirection.normalized.x));
 
-        // Debug.Log("Move : " + moveDirection.normalized.x + ", Slope : " + slopeDirection.normalized.x);
-        if(moveDirection.normalized.x == 0)
+        // Debug.Log("Move : " + moveDirection.normalized.z + ", Slope : " + slopeDirection.normalized.z);
+        if(moveDirection.normalized.x == 0 && moveDirection.normalized.z == 0)
         {
             moveSpeed = slideSpeed;
             moveDirection = slopeDirection * -slideSpeed;
@@ -150,13 +155,7 @@ public class Movement : MonoBehaviour
             moveSpeed += slideSpeed;
             risingSlope = false;
         }
-        //if (moveDirection.normalized.magnitude < slopeDirection.normalized.magnitude)
-        //{
-        //    moveDirection = slopeDirection * -slideSpeed;
-        //    moveDirection.y = moveDirection.y - _slopeHit.point.y;
-        //    risingSlope = false;
-        //    return;
-        //}
+        lastDirection = moveDirection.normalized;
     }
 
     //=========Ãß°¡

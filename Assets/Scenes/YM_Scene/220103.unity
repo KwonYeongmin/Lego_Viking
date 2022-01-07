@@ -221,13 +221,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19506376}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.430433, y: 7.572312, z: 4.735488}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 14.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &20400994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,8 +1597,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -596, y: -87}
-  m_SizeDelta: {x: 690, y: 60}
+  m_AnchoredPosition: {x: -525, y: -87}
+  m_SizeDelta: {x: 800, y: 60}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &587315281
 MonoBehaviour:
@@ -1863,7 +1863,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -596, y: -20}
+  m_AnchoredPosition: {x: -580, y: -20}
   m_SizeDelta: {x: 690, y: 60}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &753820821
@@ -8555,7 +8555,6 @@ MonoBehaviour:
   isButtonReload: 0
   isButtonGrenade: 0
   weapon: {fileID: 0}
-  isReload: 0
   defaultAmmo: 20
   ammo: 100
   grenadeObj: {fileID: 1823491788257583384, guid: 5aafc07a7c3c2e94aa43e04dea962c9f, type: 3}
@@ -8583,7 +8582,9 @@ MonoBehaviour:
   _slopeLimit: 10
   moveDirection: {x: 0, y: 0, z: 0}
   rollDirection: {x: 0, y: 0, z: 1}
+  lastDirection: {x: 0, y: 0, z: 0}
   isRoll: 0
+  isCheck: 0
 --- !u!4 &279789218345347540
 Transform:
   m_ObjectHideFlags: 0
@@ -11525,7 +11526,7 @@ GameObject:
   - component: {fileID: 3889192128731113659}
   - component: {fileID: 3889192128731113656}
   - component: {fileID: 3889192128731113657}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: deck
   m_Icon: {fileID: 0}
@@ -11545,7 +11546,7 @@ GameObject:
   - component: {fileID: 3889192129288164626}
   - component: {fileID: 3889192129288164627}
   - component: {fileID: 3889192129288164625}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: deck
   m_Icon: {fileID: 0}
@@ -11730,7 +11731,7 @@ GameObject:
   - component: {fileID: 3889192130256483668}
   - component: {fileID: 3889192130256483669}
   - component: {fileID: 3889192130256483691}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: deck
   m_Icon: {fileID: 0}
@@ -13788,7 +13789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8030891028900772614}
   m_LocalRotation: {x: 0.105125315, y: -0, z: -0, w: 0.994459}
-  m_LocalPosition: {x: -0.23000002, y: 10.380001, z: -11.76}
+  m_LocalPosition: {x: 0, y: 10.48, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13822,7 +13823,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -13877,6 +13878,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 279789218345347530}
+  maxZPos: -5
+  minZPos: -12
+  maxXPos: 5
+  minXPos: -5
 --- !u!33 &8030891029341707990
 MeshFilter:
   m_ObjectHideFlags: 0

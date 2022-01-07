@@ -6,6 +6,11 @@ public class CameraController : MonoBehaviour
 {
     public GameObject player;
     private Vector3 offset;
+    public float maxZPos;
+    public float minZPos;
+    public float maxXPos;
+    public float minXPos;
+
 
     private void Awake()
     {
@@ -15,5 +20,24 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         transform.position = player.transform.position + offset;
+
+        //Vector3 newPos = player.transform.position + offset;
+        //if (newPos.x <= minXPos)
+        //{
+        //    newPos.x = minXPos;
+        //}
+        //if (newPos.x >= maxXPos)
+        //{
+        //    newPos.x = maxXPos;
+        //}
+        //if (newPos.z <= minZPos)
+        //{
+        //    newPos.z = minZPos;
+        //}
+        //if (newPos.z >= maxZPos)
+        //{
+        //    newPos.z = maxZPos;
+        //}
+        //transform.position = newPos;
     }
 }
