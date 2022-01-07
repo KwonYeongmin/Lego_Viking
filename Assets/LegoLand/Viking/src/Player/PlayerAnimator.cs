@@ -35,17 +35,4 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator.SetTrigger("doShot");
     }
-
-    public void OnReload()
-    {
-        animator.SetTrigger("doReload");
-    }
-
-    public void EndReload()
-    {
-        int reAmmo = player.ammo < player.weapon.maxAmmo ? player.ammo : player.weapon.maxAmmo;
-        player.ammo -= (reAmmo - player.weapon.currentAmmo);
-        player.weapon.currentAmmo = reAmmo;
-        player.isReload = false;
-    }
 }

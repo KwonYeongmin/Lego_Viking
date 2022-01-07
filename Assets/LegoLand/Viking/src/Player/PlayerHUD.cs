@@ -37,8 +37,8 @@ public class PlayerHUD : MonoBehaviour
         for (int i = DefaultAmmoNum-1; i > ammoNum-1; i--)
             AmmoImgs[i].enabled = false;
           
-        speedTXT.text ="speed : "+ player.GetComponent<Movement>().moveSpeed.ToString();
-        pinSpeedTXT.text = 5.ToString();
-        pin.GetComponent<Viking>().speed = float.Parse(pinSpeedTXT.text.ToString());
+        //speedTXT.text ="speed : "+ player.GetComponent<Movement>().moveSpeed.ToString();
+        //pinSpeedTXT.text = 5.ToString();
+        //pin.GetComponent<Viking>().speed = float.Parse(pinSpeedTXT.text.ToString());
     }
 }
