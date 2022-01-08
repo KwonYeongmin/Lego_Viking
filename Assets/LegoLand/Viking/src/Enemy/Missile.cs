@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackState { one, two, three };
+public enum AttackState { one, two, three,Max };
 
 
 public class Missile : MonoBehaviour

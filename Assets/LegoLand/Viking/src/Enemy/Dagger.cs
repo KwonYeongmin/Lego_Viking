@@ -47,20 +47,11 @@ public class Dagger : MonoBehaviour
     {
         switch (state)
         {
-            case AttackState.one:
-                {
-                    dagger_damage = dagger1_damage;
-                }
+            case AttackState.one:  {  dagger_damage = dagger1_damage; }
                 break;
-            case AttackState.two:
-                {
-                    dagger_damage = dagger2_damage;
-                }
+            case AttackState.two:{  dagger_damage = dagger2_damage;  }
                 break;
-            case AttackState.three:
-                {
-                    dagger_damage = dagger3_damage;
-                }
+            case AttackState.three: {  dagger_damage = dagger3_damage; }
                 break;
         }
     }
@@ -76,7 +67,7 @@ public class Dagger : MonoBehaviour
     {
         //targetPosition = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
 
-       // if (bIsFallen)
+        if (bIsFallen)
         {
             targetPosition = Player.transform.position;
             transform.LookAt(targetPosition);
@@ -116,7 +107,7 @@ public class Dagger : MonoBehaviour
             if (collider.gameObject.tag == "deck")
             {
                 Debug.Log("deckø° ¥Í¿Ω ");
-                //bIsFallen = true;
+                bIsFallen = true;
                 direction = transform.forward;
                 speed = dagger_speed;
             }

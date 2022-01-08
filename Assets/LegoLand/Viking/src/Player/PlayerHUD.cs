@@ -13,7 +13,6 @@ public class PlayerHUD : MonoBehaviour
     private int DefaultAmmoNum;
 
     public Text speedTXT;
-    public Text pinSpeedTXT;
     private GameObject player;
     public GameObject pin;
 
