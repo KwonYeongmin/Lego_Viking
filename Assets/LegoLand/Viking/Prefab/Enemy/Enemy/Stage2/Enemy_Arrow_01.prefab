@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 79219089695756029}
   - component: {fileID: 79219089695756002}
   m_Layer: 0
-  m_Name: Enemy_Arrow
+  m_Name: Enemy_Arrow_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -870,7 +870,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9a563ffc77d94094bac866f46e58cfa5, type: 2}
+  - {fileID: 2100000, guid: 5b9b45a2d68e4a145adffec7122ca708, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1338,7 +1338,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00eb1ba92a205e143944fa63388db963, type: 2}
+  - {fileID: 2100000, guid: 198ee9081f0982a4baef2da47e2a1c0c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [Header("MoveSpeed")]
-    private float defaultMoveSpeed; //추가
+    public float defaultMoveSpeed; //추가
     public float moveSpeed;
     private float gravity = 20f;
 
@@ -177,9 +177,10 @@ public class Movement : MonoBehaviour
         SpeedUpTimer.ResetTimer(); //리셋 타이머
         SpeedUpTimer.StartTimer(); // 타이머 시작
 
-        moveSpeed += value;
+        moveSpeed = value;
         Debug.Log("moveSpeed : " + moveSpeed);
         speedupDuration = duration;
+        isSpeedUp = true;
     }
 
     private void UpdateSpeedUp()
@@ -189,7 +190,6 @@ public class Movement : MonoBehaviour
         if (SpeedUpTimer.GetTimerStopState()) //타이머가 멈춘 상태가 아니면 스피드 상승
         {
             moveSpeed = defaultMoveSpeed;
-           // Debug.Log("moveSpeed : " + moveSpeed);
         }
     }
 

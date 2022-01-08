@@ -64,7 +64,6 @@ public class Player : MonoBehaviour
         animator = GetComponent<PlayerAnimator>();
         weapon = GetComponentInChildren<Weapon>();
 
-
         HP = DefaultHP; // 추가
         ammo = defaultAmmo; // 추가
     }

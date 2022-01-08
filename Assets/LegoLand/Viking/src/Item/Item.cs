@@ -77,8 +77,8 @@ public class Item : MonoBehaviour
     private void UseSpeedupItem(Collider other)
     {
         Debug.Log("스피드업 아이템 사용");
-        float speed = other.gameObject.GetComponent<Movement>().moveSpeed;
-        speed *= (buff_speedup*0.01f);
+        float speed = other.gameObject.GetComponent<Movement>().defaultMoveSpeed;
+        speed += speed * (buff_speedup*0.01f);
         other.gameObject.GetComponent<Movement>().IncreaseSpeed(speed, duration_speedup);
     }
 
