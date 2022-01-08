@@ -186,8 +186,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshObj: {fileID: 8219211158835101251}
   effectObj: {fileID: 4479551928636043636}
-  rigid: {fileID: 1082315103603814531}
+  damage: 20
   explosionTime: 3
+  explosionRadius: 5
 --- !u!1 &8219211158835101251
 GameObject:
   m_ObjectHideFlags: 0

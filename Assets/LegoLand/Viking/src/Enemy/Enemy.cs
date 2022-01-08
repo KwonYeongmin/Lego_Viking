@@ -27,7 +27,9 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int value)
     {
-        HP = (HP - value) > 0 ? HP - value : 0; 
+        HP = (HP - value) > 0 ? HP - value : 0;
+        if (HP <= 0)
+            Destroy(gameObject);
     }
 
     public void Dead()

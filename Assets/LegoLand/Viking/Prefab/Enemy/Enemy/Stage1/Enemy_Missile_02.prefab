@@ -1252,8 +1252,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7345634737031458492}
   - component: {fileID: 7345634737031458467}
-  - component: {fileID: 7254375673707420833}
-  m_Layer: 0
+  - component: {fileID: 7965900612204638275}
+  - component: {fileID: -1613921251019499648}
+  m_Layer: 8
   m_Name: Enemy_Missile_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1269,7 +1270,7 @@ Transform:
   m_GameObject: {fileID: 7345634737031458466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 7345634736332089939}
   - {fileID: 7345634735499509900}
@@ -1296,7 +1297,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7254375673707420833
+--- !u!65 &7965900612204638275
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345634737031458466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 10, z: 0.2}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &-1613921251019499648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1309,7 +1323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  enemyManager: {fileID: 0}
 --- !u!1 &7345634737143025827
 GameObject:
   m_ObjectHideFlags: 0
