@@ -1510,13 +1510,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626077101}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.021814799, w: 0.999762}
   m_LocalPosition: {x: 0, y: -28.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3400991893231793415}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.5}
 --- !u!65 &626077103
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1991,9 +1991,9 @@ GameObject:
   - component: {fileID: 918203879}
   - component: {fileID: 918203878}
   - component: {fileID: 918203877}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Plane (2)
-  m_TagString: deck
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3118,9 +3118,9 @@ GameObject:
   - component: {fileID: 1801994516}
   - component: {fileID: 1801994515}
   - component: {fileID: 1801994514}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Plane (1)
-  m_TagString: deck
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
