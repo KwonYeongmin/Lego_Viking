@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class EnemyAttackSpawner : MonoBehaviour
 {
+    [Header("미사일 관련 변수")]
+    public GameObject Missile;
+    // public Transform MissileSpawner;
+    public float Range = 5.0f;
+    //public float[] Interval;
+    public float interval = 5f;
+
     [Header("화살 관련 변수")]
     public GameObject Arrow;
     public float arrow_range = 3.0f;
@@ -13,30 +20,18 @@ public class EnemyAttackSpawner : MonoBehaviour
     public GameObject Dagger;
     public float dagger_range = 2.0f;
     
-    [Header("미사일 관련 변수")]
-    public GameObject Missile;
-   // public Transform MissileSpawner;
- 
 
-    public float Range = 5.0f;
-    //public float[] Interval;
-    public float interval = 5f;
-    private int spaceSaver = 0;
 
-    public int type = 0;
+    private EnemyType Type = EnemyManager.Instance.Type;
 
     IEnumerator Start() //일정시간마다 실행
     {
-
         while (true)
         {
-            switch (spaceSaver)
-          
-
-           // switch (type)
+            switch(Type)
             {
-                case 0: { InstantiateObjects(Missile, Quaternion.Euler(180.0f, 0, 0)); } break;
-                case 1:
+                case EnemyType.Enemy_Missile: { InstantiateObjects(Missile, Quaternion.Euler(180.0f, 0, 0)); } break;
+                case EnemyType.Enemy_Arrow:
                     {
                         float[] direction = new float[4];
                         direction[0] = 0;
@@ -44,24 +39,26 @@ public class EnemyAttackSpawner : MonoBehaviour
                         direction[2] = -90;
                         direction[3] = 180;
                         InstantiateObjects(Arrow, Quaternion.Euler(0, direction[Random.Range(0, 4)], 0)); } break;
-                case 2: { InstantiateObjects(Dagger, Quaternion.Euler(90.0f,0, 0)); } break;
+                case EnemyType.Enemy_Dagger: { InstantiateObjects(Dagger, Quaternion.Euler(90.0f,0, 0)); } break;
+                case EnemyType.Enemy_Boss:
+                    {
+                        InstantiateObjects(Missile, Quaternion.Euler(180.0f, 0, 0));
+                        float[] direction = new float[4];
+                        direction[0] = 0;
+                        direction[1] = 90;
+                        direction[2] = -90;
+                        direction[3] = 180;
+                        InstantiateObjects(Arrow, Quaternion.Euler(0, direction[Random.Range(0, 4)], 0));
+                        InstantiateObjects(Dagger, Quaternion.Euler(90.0f,0, 0));
+                    } break;
             }
-
-            Debug.Log("생성");
             yield return new WaitForSeconds(interval);
-
         }
     }
 
     private void Update()
     {
-        spaceSaver %= 3;
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            spaceSaver++;
-            Debug.Log("space 누름");
-        }
-            
+        Type = EnemyManager.Instance.Type;
     }
 
     private void InstantiateObjects(GameObject obj, Quaternion rot)
@@ -77,6 +74,12 @@ public class EnemyAttackSpawner : MonoBehaviour
                                                     //Quaternion.Euler(180.0f, 0, 0)
                                                     rot
                                                     );
+        AttackState state = (AttackState)(EnemyManager.Instance.GetStage() % 3);
+
+        if (obj == Missile) { Missile.GetComponent<Missile>().state = state; }
+       else if (obj == Arrow) { Arrow.GetComponent<Arrow>().state = state; }
+        else if (obj == Dagger) { Dagger.GetComponent<Dagger>().state = state; }
+
         obj_.transform.parent = this.gameObject.transform;
 
     }

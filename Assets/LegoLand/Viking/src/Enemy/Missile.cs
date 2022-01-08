@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackState { one, two, three,Max };
+public enum AttackState {  one, two, three };
 
 
 public class Missile : MonoBehaviour
@@ -51,6 +51,7 @@ public class Missile : MonoBehaviour
     {
         switch (state)
         {
+
             case AttackState.one:
                 {
                     Missile_damage_center = Missile1_damage_center;
