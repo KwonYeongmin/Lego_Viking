@@ -17,11 +17,14 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+
         if (GameObject.FindWithTag("Enemy").gameObject.GetComponent<Image>())
         {
             HPImg= GameObject.FindWithTag("Enemy").gameObject.GetComponent<Image>();
             HPImg.fillAmount = (float)HP / (float)DefaultHP;
-        } 
+        }
+
+        Dead();
 
     }
 
