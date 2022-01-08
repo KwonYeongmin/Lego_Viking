@@ -86,7 +86,7 @@ public class Item : MonoBehaviour
     private void UseBombItem(Collider other)
     {
         Debug.Log("수류탄 아이템 사용");
-        other.gameObject.GetComponent<Player>().SetGrenadesEnable(true);
+        other.gameObject.GetComponent<Player>().AddGrenade();
     }
 
     private void UseInvincibleItem(Collider other)

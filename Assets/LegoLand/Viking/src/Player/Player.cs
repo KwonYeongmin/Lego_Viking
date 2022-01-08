@@ -16,9 +16,9 @@ public class Player : MonoBehaviour
     private float vAxis;
 
     // #. Joypad(KeyPad)
-    [HideInInspector]
+    //[HideInInspector]
     public bool[] keyControl = new bool[9];
-    [HideInInspector]
+    //[HideInInspector]
     public bool isControl;
     [HideInInspector]
     public bool isButtonRoll;
@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
     [Header("Grenade")]
     public GameObject grenadeObj;
     public Transform grenadePos;
-    private bool bIsGrenadesEnable = false; //추가 : 수류탄 공격이 가능한지
-    public void SetGrenadesEnable(bool value) { bIsGrenadesEnable = value; } //추가 
+    private bool bIsGrenadesEnable = true; //추가 : 수류탄 공격이 가능한지
+    private int maxGrenades = 3;
     public int hasGrenades;
     public float throwPower;
     public float throwHeight;
@@ -53,6 +53,9 @@ public class Player : MonoBehaviour
     [Header("HP")]
     public int DefaultHP;
     [HideInInspector] public int HP;
+
+    public float invincible_Duration;
+    public bool isInvincible = false;
     #endregion
 
     #endregion
@@ -78,7 +81,8 @@ public class Player : MonoBehaviour
         Fire();
         Grenade();
 
-        UpdateTimer(); // 추가 : UpdateInput
+        if(isInvincible)
+            UpdateTimer(); // 추가 : UpdateInput
     }
 
     #region Input
@@ -98,8 +102,8 @@ public class Player : MonoBehaviour
         if (!isControl) { hAxis = 0; vAxis = 0; }
 
         // #. KeyBoard Control
-        hAxis = Input.GetAxisRaw("Horizontal"); // 좌,우 움직임
-        vAxis = Input.GetAxisRaw("Vertical"); // 위, 아래 움직임
+        // hAxis = Input.GetAxisRaw("Horizontal"); // 좌,우 움직임
+        // vAxis = Input.GetAxisRaw("Vertical"); // 위, 아래 움직임
 
         isButtonRoll = Input.GetKeyDown(KeyCode.LeftShift);
         isButtonFire = Input.GetButton("Fire2"); //("Fire1");
@@ -216,6 +220,8 @@ public class Player : MonoBehaviour
             rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
 
             hasGrenades--;
+            if (hasGrenades == 0)
+                bIsGrenadesEnable = false;
         }
 
     }
@@ -225,6 +231,8 @@ public class Player : MonoBehaviour
     #region Damage
     public void TakeDamage(int value)
     {
+        if (isInvincible) return;
+
         HP = (HP - value) > 0 ? HP - value : 0; // 추가
         Debug.Log("HP: " +HP);
         Debug.Log("value: " +  value);
@@ -249,6 +257,13 @@ public class Player : MonoBehaviour
         Debug.Log("Add ammo : "+ ammo);
     }
 
+    public void AddGrenade()
+    {
+        if(hasGrenades < maxGrenades)
+            hasGrenades++;
+        bIsGrenadesEnable = true;
+    }
+
     // 플레이어 무적 상태
     private Timer InvincibleTimer = new Timer();
 
@@ -256,16 +271,20 @@ public class Player : MonoBehaviour
     {
         InvincibleTimer.ResetTimer();
         InvincibleTimer.StartTimer(); //타이머시작
-       
-        if (InvincibleTimer.GetTimer() >= duration) InvincibleTimer.StopTimer(); // 일정시간이 지나면 타이머 종료
 
-        // 플레이어 무적상태 코드 추가해야됨
-        if (!InvincibleTimer.GetTimerStopState()) Debug.Log("플레이어 무적상태~");// 타이머가 멈춘상태가 아니면 아니면
+        isInvincible = true;
+        invincible_Duration = duration;
     }
 
     // 타이머 업데이트 함수
     private void UpdateTimer()
     {
         InvincibleTimer.UpdateTimer();
+
+        if (InvincibleTimer.GetTimer() >= invincible_Duration)
+        {
+            InvincibleTimer.StopTimer(); // 일정시간이 지나면 타이머 종료
+            isInvincible = false;
+        }
     }
 }
