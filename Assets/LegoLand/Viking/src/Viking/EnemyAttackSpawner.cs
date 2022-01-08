@@ -27,11 +27,13 @@ public class EnemyAttackSpawner : MonoBehaviour
 
     IEnumerator Start() //일정시간마다 실행
     {
-        Debug.Log("start");
+
         while (true)
         {
-            //switch (spaceSaver)
-            switch (type)
+            switch (spaceSaver)
+          
+
+           // switch (type)
             {
                 case 0: { InstantiateObjects(Missile, Quaternion.Euler(180.0f, 0, 0)); } break;
                 case 1:
@@ -44,9 +46,10 @@ public class EnemyAttackSpawner : MonoBehaviour
                         InstantiateObjects(Arrow, Quaternion.Euler(0, direction[Random.Range(0, 4)], 0)); } break;
                 case 2: { InstantiateObjects(Dagger, Quaternion.Euler(90.0f,0, 0)); } break;
             }
+
             Debug.Log("생성");
             yield return new WaitForSeconds(interval);
-           
+
         }
     }
 

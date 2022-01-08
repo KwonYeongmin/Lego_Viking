@@ -36,6 +36,8 @@ public class Dagger : MonoBehaviour
      private GameObject Player;
      private Vector3 targetPosition;
 
+    public GameObject[] deckEdges;
+
     private void Awake()
     {
         rig = this.GetComponent<Rigidbody>();
@@ -60,21 +62,33 @@ public class Dagger : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         targetPosition = Player.transform.position;
-        Destroy(this.gameObject, lifeTime);
+       // Destroy(this.gameObject, lifeTime);
     }
+
+    float timeSaver = 0;
 
     private void Update()
     {
         //targetPosition = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
+       
+        timeSaver += Time.deltaTime;
 
         if (bIsFallen)
         {
-            targetPosition = Player.transform.position;
+            if (timeSaver > lifeTime)
+            {
+                deckEdges[0] = GameObject.FindGameObjectWithTag("deckEdge");
+                targetPosition = deckEdges[0].transform.position;
+            }
+            else { targetPosition = Player.transform.position; }
+
+          
             transform.LookAt(targetPosition);
         }
-        
-
         Move();
+
+     
+       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -108,12 +122,13 @@ public class Dagger : MonoBehaviour
             {
                 Debug.Log("deckø° ¥Í¿Ω ");
                 bIsFallen = true;
-                direction = transform.forward;
+                direction = -transform.up;
                 speed = dagger_speed;
             }
+            else if (collider.gameObject.tag == "deckEdge") { Destroy(this.gameObject); }
             else
             {
-                direction = - transform.right;
+                direction = -transform.right;
                 speed = Dagger_fall_speed;
             }
         }

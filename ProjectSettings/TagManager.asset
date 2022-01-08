@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - deck
+  - deckEdge
   layers:
   - Default
   - TransparentFX
