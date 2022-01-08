@@ -102,8 +102,8 @@ public class Player : MonoBehaviour
         if (!isControl) { hAxis = 0; vAxis = 0; }
 
         // #. KeyBoard Control
-        // hAxis = Input.GetAxisRaw("Horizontal"); // 좌,우 움직임
-        // vAxis = Input.GetAxisRaw("Vertical"); // 위, 아래 움직임
+         hAxis = Input.GetAxisRaw("Horizontal"); // 좌,우 움직임
+         vAxis = Input.GetAxisRaw("Vertical"); // 위, 아래 움직임
 
         isButtonRoll = Input.GetKeyDown(KeyCode.LeftShift);
         isButtonFire = Input.GetButton("Fire2"); //("Fire1");
