@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/New Folder/New Scene.unity
     guid: 01517eceadb5a934e9e6c23def967fa8
+  - enabled: 1
+    path: Assets/Scenes/YM_Scene/220103.unity
+    guid: cade5493c64ed7b47bd9e40b0a0c267e
   m_configObjects: {}
