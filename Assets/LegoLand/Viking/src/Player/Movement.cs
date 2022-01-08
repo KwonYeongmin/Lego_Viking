@@ -30,8 +30,7 @@ public class Movement : MonoBehaviour
 
     [HideInInspector]
     public bool isRoll = false;
-    public bool isCheck = false;
-
+    public bool isSpeedUp = false;
 
     private CharacterController characterController;
 
@@ -39,6 +38,7 @@ public class Movement : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         moveDirection = Vector3.zero;
+        lastDirection = Vector3.forward;
         defaultMoveSpeed = moveSpeed; //Ãß°¡
     }
 
@@ -100,10 +100,13 @@ public class Movement : MonoBehaviour
             targetDir.y = 0.0f;
         }
 
-        Quaternion tr = Quaternion.LookRotation(targetDir);
-        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotateSpeed * Time.deltaTime);
+        if(targetDir != Vector3.zero)
+        {
+            Quaternion tr = Quaternion.LookRotation(targetDir);
+            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotateSpeed * Time.deltaTime);
 
-        transform.rotation = targetRotation;
+            transform.rotation = targetRotation;
+        }
     }
 
     public void Roll(Vector3 direction)
@@ -117,6 +120,8 @@ public class Movement : MonoBehaviour
 
     private bool OnSteepSlope()
     {
+        if (isSpeedUp) return false;
+
         if (!characterController.isGrounded) return false;
 
         if (Physics.Raycast(transform.position, Vector3.down, out _slopeHit,
@@ -134,7 +139,6 @@ public class Movement : MonoBehaviour
         Vector3 slopeDirection = Vector3.up - _slopeHit.normal * Vector3.Dot(Vector3.up, _slopeHit.normal);
         float slideSpeed = _slideSpeed + (1 - Mathf.Abs(slopeDirection.normalized.x));
 
-        // Debug.Log("Move : " + moveDirection.normalized.z + ", Slope : " + slopeDirection.normalized.z);
         if(moveDirection.normalized.x == 0 && moveDirection.normalized.z == 0)
         {
             moveSpeed = slideSpeed;

@@ -194,11 +194,9 @@ public class Player : MonoBehaviour
 
         if (isButtonFire && isFireReady && !isButtonRoll)
         {
-            Debug.Log("Fire");
             weapon.Use();
             animator.OnFire();
             fireDelay = 0;
-
             ammo--; //추가
         }
     }
@@ -225,8 +223,6 @@ public class Player : MonoBehaviour
 
     #endregion
 
-
-
     #region Damage
     public void TakeDamage(int value)
     {
@@ -235,8 +231,6 @@ public class Player : MonoBehaviour
         Debug.Log("value: " +  value);
     }
     #endregion
-
-
 
 
     // ====== 추가
@@ -252,6 +246,7 @@ public class Player : MonoBehaviour
     public void AddAmmo(int value)
     {
         ammo = ammo + value < defaultAmmo ?   ammo + value : defaultAmmo;
+        weapon.currentAmmo = ammo;
         Debug.Log("Add ammo : "+ ammo);
     }
 

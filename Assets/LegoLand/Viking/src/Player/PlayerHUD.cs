@@ -7,7 +7,6 @@ public class PlayerHUD : MonoBehaviour
 {
     public Image HPImg;
    
-   
     public Image AmmoImg;
     private Image[] AmmoImgs = new Image[20];
     private int DefaultAmmoNum;
@@ -30,12 +29,15 @@ public class PlayerHUD : MonoBehaviour
 
         int ammoNum = player.GetComponent<Player>().ammo;
 
-        for (int i = 0; i < ammoNum; i++)
-            AmmoImgs[i].enabled = true; 
+        if(ammoNum >= 0)
+        {
+            for (int i = 0; i < ammoNum; i++)
+                AmmoImgs[i].enabled = true;
 
-        for (int i = DefaultAmmoNum-1; i > ammoNum-1; i--)
-            AmmoImgs[i].enabled = false;
-          
+            for (int i = DefaultAmmoNum - 1; i > ammoNum - 1; i--)
+                AmmoImgs[i].enabled = false;
+        }
+
         //speedTXT.text ="speed : "+ player.GetComponent<Movement>().moveSpeed.ToString();
         //pinSpeedTXT.text = 5.ToString();
         //pin.GetComponent<Viking>().speed = float.Parse(pinSpeedTXT.text.ToString());

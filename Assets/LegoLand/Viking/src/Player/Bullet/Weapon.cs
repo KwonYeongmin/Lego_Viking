@@ -10,11 +10,6 @@ public class Weapon : MonoBehaviour
     public int maxAmmo;
     public int currentAmmo;
 
-    private void Awake()
-    {
-        currentAmmo = GetComponentInParent<Player>().ammo;  
-    }
-
     public void Use()
     {
         if(currentAmmo > 0)
