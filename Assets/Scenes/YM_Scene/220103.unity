@@ -3423,6 +3423,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f9d2a65eb2147f468fe1e267ea2e816, type: 3}
+--- !u!1 &1814778222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1814778223}
+  m_Layer: 0
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1814778223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814778222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.32, z: 8.43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1847270879
 GameObject:
   m_ObjectHideFlags: 0
@@ -8584,7 +8614,7 @@ MonoBehaviour:
   rollDirection: {x: 0, y: 0, z: 1}
   lastDirection: {x: 0, y: 0, z: 0}
   isRoll: 0
-  isCheck: 0
+  isSpeedUp: 0
 --- !u!4 &279789218345347540
 Transform:
   m_ObjectHideFlags: 0
@@ -13788,13 +13818,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8030891028900772614}
-  m_LocalRotation: {x: 0.105125315, y: -0, z: -0, w: 0.994459}
-  m_LocalPosition: {x: 0, y: 10.48, z: -10}
+  m_LocalRotation: {x: 0.15489809, y: -0, z: -0, w: 0.9879305}
+  m_LocalPosition: {x: 0, y: 11.89, z: -6.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 12.069, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.822, y: 0, z: 0}
 --- !u!20 &8030891028900772612
 Camera:
   m_ObjectHideFlags: 0
@@ -13880,8 +13910,8 @@ MonoBehaviour:
   player: {fileID: 279789218345347530}
   maxZPos: -5
   minZPos: -12
-  maxXPos: 5
-  minXPos: -5
+  maxXPos: 18
+  minXPos: -18
 --- !u!33 &8030891029341707990
 MeshFilter:
   m_ObjectHideFlags: 0
