@@ -475,7 +475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166069300}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: -23, z: 6.81}
+  m_LocalPosition: {x: 0, y: -34.2, z: 6.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1215170277}
@@ -508,7 +508,6 @@ MonoBehaviour:
   - {fileID: 1678548408577177889, guid: 86bef02242450af48a7354fae35bd029, type: 3}
   - {fileID: 1678548408577177889, guid: d7b3c1da3aa3b2049adc3ac2b552fb61, type: 3}
   - {fileID: 1678548408577177889, guid: 6f9d2a65eb2147f468fe1e267ea2e816, type: 3}
-  GetWeaponLevel: 0
 --- !u!1 &229158466
 GameObject:
   m_ObjectHideFlags: 0

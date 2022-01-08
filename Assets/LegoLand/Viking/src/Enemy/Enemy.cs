@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
         if (GameObject.FindWithTag("Enemy").gameObject.GetComponent<Image>())
         {
             HPImg= GameObject.FindWithTag("Enemy").gameObject.GetComponent<Image>();
-            HPImg.fillAmount = HP / DefaultHP;
+            HPImg.fillAmount = (float)HP / (float)DefaultHP;
         } 
 
     }
@@ -28,13 +28,14 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int value)
     {
         HP = (HP - value) > 0 ? HP - value : 0;
-        if (HP <= 0)
-            Destroy(gameObject);
+        Debug.Log("TakeDamage : " + HP);
+       // if (HP <= 0)
+        //    Destroy(gameObject);
     }
 
     public void Dead()
     {
-        if (HP < 0)
+        if (HP <= 0)
         {
             EnemyManager.Instance.ChangeStage();
             Destroy(this.gameObject);
