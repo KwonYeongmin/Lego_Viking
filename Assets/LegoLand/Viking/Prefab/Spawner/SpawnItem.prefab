@@ -52,5 +52,5 @@ MonoBehaviour:
   SpawnPoint: {fileID: 0}
   SpawnPointNum: 10
   Interval: 5
-  InstanceCount: 10
+  InstanceCount: 1000
   Range: 5

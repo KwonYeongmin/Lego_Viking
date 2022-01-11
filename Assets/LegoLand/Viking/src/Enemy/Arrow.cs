@@ -26,8 +26,10 @@ public class Arrow : MonoBehaviour
     [SerializeField]
     private float lifeTime = 1.0f;
 
+    public GameObject[] particles;
+    public GameObject[] projectors;
 
-    Rigidbody rig;
+    private Rigidbody rig;
 
     private void Awake()
     {
@@ -37,7 +39,7 @@ public class Arrow : MonoBehaviour
 
     private void Start()
     {
-       // Destroy(this.gameObject, lifeTime);
+       Destroy(this.gameObject, 10.0f);
     }
 
     private void Update()
@@ -57,19 +59,51 @@ public class Arrow : MonoBehaviour
             case AttackState.one:
                 {
                     arrow_damage = arrow1_damage;
+                    particles[0].SetActive(true);
+                    particles[1].SetActive(false);
+                    particles[2].SetActive(false);
+
+                    projectors[0].SetActive(true);
+                    projectors[1].SetActive(false);
+                    projectors[2].SetActive(false);
                 }
                 break;
             case AttackState.two:
                 {
-                    arrow_damage = arrow2_damage;
+                    arrow_damage = arrow2_damage; 
+                     particles[0].SetActive(false);
+                    particles[1].SetActive(true);
+                    particles[2].SetActive(false);
+                    projectors[0].SetActive(false);
+                    projectors[1].SetActive(true);
+                    projectors[2].SetActive(false);
                 }
                 break;
             case AttackState.three:
                 {
-                    arrow_damage = arrow3_damage;
+                    arrow_damage = arrow3_damage; //
+                    particles[0].SetActive(false);
+                    particles[1].SetActive(false);
+                    particles[2].SetActive(true);
+
+                    projectors[0].SetActive(false);
+                    projectors[1].SetActive(false);
+                    projectors[2].SetActive(true);
                 }
                 break;
         }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        // Debug.Log("OnDrawGizmos");
+
+        Gizmos.color = Color.red;
+      //  Gizmos.DrawWireSphere(transform.position, Missile_damage_edge);
+
+        Gizmos.color = Color.yellow;
+     //   Gizmos.DrawWireSphere(transform.position, Missile_damage_center);
     }
 
 
@@ -79,13 +113,13 @@ public class Arrow : MonoBehaviour
 
         if (collision.gameObject.GetComponent<Player>()) //플레이어가 맞았다면
         {
-            GiveDamage(collision);
+            GiveDamage(collision.gameObject.GetComponent<Collider>());
             Destroy(this.gameObject);
         }
     }
 
 
-    private void GiveDamage(Collision collision)
+    private void GiveDamage(Collider collision)
     {
         collision.gameObject.GetComponent<Player>().TakeDamage(arrow_damage); //데미지 주기
 

@@ -234,8 +234,8 @@ public class Player : MonoBehaviour
         if (isInvincible) return;
 
         HP = (HP - value) > 0 ? HP - value : 0; // 추가
-        Debug.Log("HP: " +HP);
-        Debug.Log("value: " +  value);
+       // Debug.Log("HP: " +HP);
+       // Debug.Log("value: " +  value);
     }
     #endregion
 
@@ -246,7 +246,7 @@ public class Player : MonoBehaviour
     public void AddHP(int value)
     {
         HP = HP + value < DefaultHP ? HP + value : DefaultHP;
-        Debug.Log("Add HP : " + HP);
+       //  Debug.Log("Add HP : " + HP);
     }
 
     // 탄창 회복
@@ -254,7 +254,7 @@ public class Player : MonoBehaviour
     {
         ammo = ammo + value < defaultAmmo ?   ammo + value : defaultAmmo;
         weapon.currentAmmo = ammo;
-        Debug.Log("Add ammo : "+ ammo);
+       // Debug.Log("Add ammo : "+ ammo);
     }
 
     public void AddGrenade()

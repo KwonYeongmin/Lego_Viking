@@ -4,7 +4,6 @@ using UnityEngine;
 
 public enum AttackState {  one, two, three };
 
-
 public class Missile : MonoBehaviour
 {
     public AttackState state = AttackState.one;
@@ -29,13 +28,13 @@ public class Missile : MonoBehaviour
 
     [Header("피해 범위")]
     [SerializeField]
-    private float Missile_range_edge = 1.0f; //미사일 외곽 피해범위
+    private float Missile_range_edge = 3.0f; //미사일 외곽 피해범위
     private float Missile_range_center = 2.0f; //미사일 중앙 피해범위
 
     [Header("lifetime")]
     [SerializeField]
     private float lifeTime = 10.0f;
-
+    
 
     private Rigidbody rigid;
 
@@ -44,7 +43,6 @@ public class Missile : MonoBehaviour
     {
         InitializeState(); //미사일 단계별 피해량 설정
     }
-
 
 
     private void InitializeState()
@@ -78,10 +76,11 @@ public class Missile : MonoBehaviour
         Destroy(this.gameObject, lifeTime);
     }
 
-
     private void Update()
     {
         Move();
+        JudgeEdgePlayer(Missile_damage_edge);
+        JudgeEdgePlayer(Missile_damage_center);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -91,28 +90,45 @@ public class Missile : MonoBehaviour
 
         if (collision.gameObject.GetComponent<Player>()) // 플레이어와 부딪히면
         {
-            GiveDamage(collision, Missile_damage_center); //미사일 중앙 범위 피해
+            GiveDamage(collision.gameObject.GetComponent<Collider>(), Missile_damage_center); //미사일 중앙 범위 피해
             Destroy(this.gameObject);
         }
     }
     
-    private void GiveDamage(Collision collision,int damage)
+    private void GiveDamage(Collider collision,int damage)
     {
         collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+        Debug.Log(damage);
     }
 
-    private void JudgeEdgePlayer() // 미사일 외곽 범위 피해
+
+    private void JudgeEdgePlayer(int damage) 
     {
-        Collider[] collidersEdge = Physics.OverlapSphere(transform.position, Missile_damage_edge);
+        Collider[] collidersEdge = Physics.OverlapSphere(transform.position, damage);
+
         foreach (Collider collider in collidersEdge)
         {
             if (collider.gameObject.GetComponent<Player>())
             {
-                GiveDamage(collider.gameObject.GetComponent<Collision>(), Missile_damage_edge);
+                GiveDamage(collider.gameObject.GetComponent<Collider>(), damage);
+                if (damage == Missile_damage_center) Debug.Log("중심 데미지");
+                if (damage == Missile_damage_edge) Debug.Log("외곽 데미지");
                 Destroy(this.gameObject);
             }
         } 
     }
+
+    private void OnDrawGizmos()
+    {
+      //  Debug.Log("OnDrawGizmos");
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, Missile_damage_edge);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, Missile_damage_center);
+    }
+
 
     private void Move()
     {

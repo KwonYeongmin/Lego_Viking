@@ -40,7 +40,9 @@ public class Enemy : MonoBehaviour
     {
         if (HP <= 0)
         {
-            EnemyManager.Instance.ChangeStage();
+            if(EnemyManager.Instance.GetStage()%4 != 3 ) EnemyManager.Instance.ChangeStage();
+            else EnemyManager.Instance.ChangeStage_final(this.gameObject);
+
             Destroy(this.gameObject);
         }
     }

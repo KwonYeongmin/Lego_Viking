@@ -5,9 +5,10 @@ using UnityEngine;
 public class EnemyAttackSpawner : MonoBehaviour
 {
     [Header("미사일 관련 변수")]
-    public GameObject Missile;
+    public GameObject[] Missiles;
     // public Transform MissileSpawner;
-    public float Range = 5.0f;
+    public float RangeX = 4.0f;
+    public float RangeZ = 2.0f;
     //public float[] Interval;
     public float interval = 5f;
 
@@ -28,26 +29,33 @@ public class EnemyAttackSpawner : MonoBehaviour
     {
         while (true)
         {
-            switch(Type)
+            int index = 0;
+
+            float[] direction = new float[4];
+            direction[0] = 0;
+            direction[1] = 90;
+            direction[2] = -90;
+            direction[3] = 180;
+
+            if (EnemyManager.Instance.GetIndex() == 0) index = 0;
+            else if (EnemyManager.Instance.GetIndex() == 1) index = 1;
+            else if (EnemyManager.Instance.GetIndex() == 2) index = 2;
+            else   index = Random.Range(0,3);
+            Debug.Log("인덱스 결정");
+
+            switch (Type)
             {
-                case EnemyType.Enemy_Missile: { InstantiateObjects(Missile, Quaternion.Euler(180.0f, 0, 0)); } break;
+                case EnemyType.Enemy_Missile: //Stage 1
+                    {
+                        InstantiateObjects(Missiles[index], Quaternion.Euler(180.0f, 0, 0));
+                    } break;
                 case EnemyType.Enemy_Arrow:
                     {
-                        float[] direction = new float[4];
-                        direction[0] = 0;
-                        direction[1] = 90;
-                        direction[2] = -90;
-                        direction[3] = 180;
                         InstantiateObjects(Arrow, Quaternion.Euler(0, direction[Random.Range(0, 4)], 0)); } break;
                 case EnemyType.Enemy_Dagger: { InstantiateObjects(Dagger, Quaternion.Euler(90.0f,0, 0)); } break;
                 case EnemyType.Enemy_Boss:
                     {
-                        InstantiateObjects(Missile, Quaternion.Euler(180.0f, 0, 0));
-                        float[] direction = new float[4];
-                        direction[0] = 0;
-                        direction[1] = 90;
-                        direction[2] = -90;
-                        direction[3] = 180;
+                        InstantiateObjects(Missiles[EnemyManager.Instance.GetStage()%4], Quaternion.Euler(180.0f, 0, 0));
                         InstantiateObjects(Arrow, Quaternion.Euler(0, direction[Random.Range(0, 4)], 0));
                         InstantiateObjects(Dagger, Quaternion.Euler(90.0f,0, 0));
                     } break;
@@ -63,22 +71,28 @@ public class EnemyAttackSpawner : MonoBehaviour
 
     private void InstantiateObjects(GameObject obj, Quaternion rot)
     {
+        AttackState state = (AttackState)(EnemyManager.Instance.GetIndex() % 3);
+        Debug.Log(EnemyManager.Instance.GetIndex() % 3);
+        if (obj == Arrow) { Arrow.GetComponent<Arrow>().state = state; }
+        else if (obj == Dagger) { Dagger.GetComponent<Dagger>().state = state; }
 
-        transform.position = new Vector3(Random.Range(-Range, Range)
+        transform.position = new Vector3(Random.Range(-RangeX, RangeX)
                                                                             , transform.position.y,
-                                                                              transform.position.z);
+                                                                              Random.Range(-RangeZ, RangeZ));
         GameObject obj_ = Instantiate(
                                                     obj,
                                                     transform.position,
                                                     //transform.rotation
                                                     //Quaternion.Euler(180.0f, 0, 0)
                                                     rot
+        
                                                     );
-        AttackState state = (AttackState)(EnemyManager.Instance.GetStage() % 3);
 
-        if (obj == Missile) { Missile.GetComponent<Missile>().state = state; }
-       else if (obj == Arrow) { Arrow.GetComponent<Arrow>().state = state; }
-        else if (obj == Dagger) { Dagger.GetComponent<Dagger>().state = state; }
+       // 0,1,2 ,3/ 3,4,5,6 / 5,6,7,8/ 8,9,10,11 
+
+        
+       // if (obj == Missiles) { Missile.GetComponent<Missile>().state = state; }
+
 
         obj_.transform.parent = this.gameObject.transform;
 

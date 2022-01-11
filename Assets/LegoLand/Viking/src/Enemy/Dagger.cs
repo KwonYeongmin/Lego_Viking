@@ -31,12 +31,14 @@ public class Dagger : MonoBehaviour
     [SerializeField]
     private float lifeTime = 10.0f;
 
+    public GameObject[] particles;
+    public GameObject[] projectors;
 
     private Rigidbody rig;
      private GameObject Player;
      private Vector3 targetPosition;
 
-    public GameObject[] deckEdges;
+    private GameObject[] deckEdges;
 
     private void Awake()
     {
@@ -49,11 +51,38 @@ public class Dagger : MonoBehaviour
     {
         switch (state)
         {
-            case AttackState.one:  {  dagger_damage = dagger1_damage; }
+            case AttackState.one:
+                {
+                    dagger_damage = dagger1_damage;
+                    particles[0].SetActive(true);
+                    particles[1].SetActive(false);
+                    particles[2].SetActive(false);
+
+                    projectors[0].SetActive(true);
+                    projectors[1].SetActive(false);
+                    projectors[2].SetActive(false);
+                }
                 break;
-            case AttackState.two:{  dagger_damage = dagger2_damage;  }
+            case AttackState.two:
+                {
+                    dagger_damage = dagger2_damage;
+                    particles[0].SetActive(false);
+                    particles[1].SetActive(true);
+                    particles[2].SetActive(false);
+                    projectors[0].SetActive(false);
+                    projectors[1].SetActive(true);
+                    projectors[2].SetActive(false);
+                }
                 break;
-            case AttackState.three: {  dagger_damage = dagger3_damage; }
+            case AttackState.three: {  dagger_damage = dagger3_damage;
+                    particles[0].SetActive(false);
+                    particles[1].SetActive(false);
+                    particles[2].SetActive(true);
+
+                    projectors[0].SetActive(false);
+                    projectors[1].SetActive(false);
+                    projectors[2].SetActive(true);
+                }
                 break;
         }
     }
@@ -62,7 +91,7 @@ public class Dagger : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         targetPosition = Player.transform.position;
-       // Destroy(this.gameObject, lifeTime);
+       Destroy(this.gameObject, 10.0f);
     }
 
     float timeSaver = 0;
@@ -77,13 +106,15 @@ public class Dagger : MonoBehaviour
         {
             if (timeSaver > lifeTime)
             {
-                deckEdges[0] = GameObject.FindGameObjectWithTag("deckEdge");
+                deckEdges = GameObject.FindGameObjectsWithTag("deckEdge");
                 targetPosition = deckEdges[0].transform.position;
+
+                transform.LookAt(targetPosition);
             }
-            else { targetPosition = Player.transform.position; }
+            // else { targetPosition = Player.transform.position; }
 
           
-            transform.LookAt(targetPosition);
+            // 
         }
         Move();
 
@@ -95,12 +126,15 @@ public class Dagger : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Player>())
         {
-            GiveDamage(collision);
+            GiveDamage(collision.gameObject.GetComponent<Collider>());
             Destroy(this.gameObject);
         }
+
+        if (collision.gameObject.tag =="deckEdge")
+        { Destroy(this.gameObject); }
     }
 
-    private void GiveDamage(Collision collision)
+    private void GiveDamage(Collider collision)
     {
         collision.gameObject.GetComponent<Player>().TakeDamage(dagger_damage);
     }
@@ -122,10 +156,10 @@ public class Dagger : MonoBehaviour
             {
                 Debug.Log("deckø° ¥Í¿Ω ");
                 bIsFallen = true;
-                direction = -transform.up;
+                direction = transform.forward;
                 speed = dagger_speed;
             }
-            else if (collider.gameObject.tag == "deckEdge") { Destroy(this.gameObject); }
+           // else if (collider.gameObject.tag == "deckEdge") { Destroy(this.gameObject); }
             else
             {
                 direction = -transform.right;

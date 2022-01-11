@@ -3,7 +3,7 @@
 
 Shader "Projector/Multiply" {
 	Properties {
-		 _Color ("MainColor", Color)    = (1,1,1,1)
+		 _Color ("MainColor", Color)    = (1,1,1,1) 
 		_ShadowTex ("Cookie", 2D) = "gray" {}
 		_FalloffTex ("FallOff", 2D) = "white" {}
 	}
