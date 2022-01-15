@@ -79,7 +79,7 @@ public class Item : MonoBehaviour
         Debug.Log("스피드업 아이템 사용");
         float speed = other.gameObject.GetComponent<Movement>().defaultMoveSpeed;
         speed += speed * (buff_speedup*0.01f);
-        other.gameObject.GetComponent<Movement>().IncreaseSpeed(speed, duration_speedup);
+        other.gameObject.GetComponent<Player>().AddSpeedUp(speed, duration_speedup);
     }
 
 
@@ -92,7 +92,7 @@ public class Item : MonoBehaviour
     private void UseInvincibleItem(Collider other)
     {
         Debug.Log("무적 아이템사용");
-        other.gameObject.GetComponent<Player>().SetInvincibleMode(duration_invincible);
+        other.gameObject.GetComponent<Player>().AddInvincible(duration_invincible);
     }
 
 }

@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     float fireDelay;
     bool isFireReady;
     public int defaultAmmo; //추가
-    [HideInInspector]public int ammo;//수정
+    public int ammo;//수정
 
     [Header("Grenade")]
     public GameObject grenadeObj;
@@ -49,13 +49,23 @@ public class Player : MonoBehaviour
     public float throwHeight;
     #endregion
 
-    #region HP variables
+    #region Player Stat variables
     [Header("HP")]
     public int DefaultHP;
     [HideInInspector] public int HP;
 
+    private Timer InvincibleTimer = new Timer();
+    private Timer SpeedUpTimer = new Timer();
+    private float speedupDuration = 0;
+
     public float invincible_Duration;
     public bool isInvincible = false;
+    #endregion
+
+    #region Item FX
+    public GameObject HealFX;
+    public GameObject OtherFX;
+    public float FX_Duration = 2.0f;
     #endregion
 
     #endregion
@@ -82,7 +92,8 @@ public class Player : MonoBehaviour
         Grenade();
 
         if(isInvincible)
-            UpdateTimer(); // 추가 : UpdateInput
+            UpdateInvincibleTimer(); // 추가 : UpdateInput
+        UpdateSpeedUpTimer();
     }
 
     #region Input
@@ -177,7 +188,7 @@ public class Player : MonoBehaviour
     {
         if (isButtonRoll && !movement.isRoll && !isButtonReload)
         {
-            Debug.Log("Roll");
+            SoundManager.Instance.PlaySE(SoundList.Sound_roll, transform.position);
             movement.isRoll = true;
             movement.Roll(direction);
             animator.OnRoll();
@@ -200,7 +211,7 @@ public class Player : MonoBehaviour
             weapon.Use();
             animator.OnFire();
             fireDelay = 0;
-            ammo--; //추가
+            ammo = weapon.currentAmmo; //추가
         }
     }
 
@@ -210,7 +221,6 @@ public class Player : MonoBehaviour
 
         if (isButtonGrenade)
         {
-            Debug.Log("Grenade");
             GameObject instantGrenade = Instantiate(grenadeObj, grenadePos.position, grenadePos.rotation);
             Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
             Vector3 throwVec = transform.forward * throwPower;
@@ -225,7 +235,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
     #endregion
 
     #region Damage
@@ -239,52 +248,110 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    #region Item
 
-    // ====== 추가
-
-    // HP 회복
+    // #. HP
     public void AddHP(int value)
     {
+        SoundManager.Instance.PlaySE(SoundList.Sound_acquisition_heal, transform.position);
         HP = HP + value < DefaultHP ? HP + value : DefaultHP;
-       //  Debug.Log("Add HP : " + HP);
+
+        HealFX.SetActive(true);
+        StartCoroutine(OffHealFX());
     }
 
-    // 탄창 회복
+    // #. Ammo
     public void AddAmmo(int value)
     {
-        ammo = ammo + value < defaultAmmo ?   ammo + value : defaultAmmo;
+        SoundManager.Instance.PlaySE(SoundList.Sound_acquisition_bullet, transform.position);
+        ammo = ammo + value < defaultAmmo ? ammo + value : defaultAmmo;
         weapon.currentAmmo = ammo;
-       // Debug.Log("Add ammo : "+ ammo);
+        OtherFX.SetActive(true);
+        StartCoroutine(OffOtherFX());
     }
-
+    
+    // #. Greande
     public void AddGrenade()
     {
-        if(hasGrenades < maxGrenades)
+        SoundManager.Instance.PlaySE(SoundList.Sound_acquisition_item, transform.position);
+        if (hasGrenades < maxGrenades)
             hasGrenades++;
         bIsGrenadesEnable = true;
+        OtherFX.SetActive(true);
+        StartCoroutine(OffOtherFX());
     }
 
-    // 플레이어 무적 상태
-    private Timer InvincibleTimer = new Timer();
-
-    public void SetInvincibleMode(float duration)
+    // #. Invincible
+    public void AddInvincible(float duration)
     {
         InvincibleTimer.ResetTimer();
-        InvincibleTimer.StartTimer(); //타이머시작
-
+        InvincibleTimer.StartTimer(); 
+        SoundManager.Instance.PlaySE(SoundList.Sound_acquisition_item, transform.position);
         isInvincible = true;
         invincible_Duration = duration;
+        OtherFX.SetActive(true);
+        StartCoroutine(OffOtherFX());
     }
 
-    // 타이머 업데이트 함수
-    private void UpdateTimer()
+    private void UpdateInvincibleTimer()
     {
         InvincibleTimer.UpdateTimer();
 
         if (InvincibleTimer.GetTimer() >= invincible_Duration)
         {
-            InvincibleTimer.StopTimer(); // 일정시간이 지나면 타이머 종료
+            InvincibleTimer.StopTimer();
             isInvincible = false;
         }
     }
+
+    // #. SpeedUp
+    public void AddSpeedUp(float value, float duration)
+    {
+        SpeedUpTimer.ResetTimer();
+        SpeedUpTimer.StartTimer();
+
+        SoundManager.Instance.PlaySE(SoundList.Sound_acquisition_item, transform.position);
+        movement.moveSpeed = value;
+        speedupDuration = duration;
+        movement.isSpeedUp = true;
+        OtherFX.SetActive(true);
+        StartCoroutine(OffOtherFX());
+    }
+
+    public void DecreaseSpeed(float value)
+    {
+        float moveSpeed = movement.moveSpeed;
+        moveSpeed = moveSpeed - value >= 0 ? moveSpeed - value : 0;
+        movement.moveSpeed = moveSpeed;
+    }
+
+    private void UpdateSpeedUpTimer()
+    {
+        SpeedUpTimer.UpdateTimer();
+
+        if (SpeedUpTimer.GetTimer() >= speedupDuration)
+        {
+            movement.isSpeedUp = false;
+            SpeedUpTimer.StopTimer();
+        }
+        if (SpeedUpTimer.GetTimerStopState())
+        {
+            movement.moveSpeed = movement.defaultMoveSpeed;
+        }
+    }
+    #endregion
+
+
+    IEnumerator OffHealFX()
+    {
+        yield return new WaitForSeconds(FX_Duration);
+        HealFX.SetActive(false);
+    }
+
+    IEnumerator OffOtherFX()
+    {
+        yield return new WaitForSeconds(FX_Duration);
+        OtherFX.SetActive(false);
+    }
+
 }
