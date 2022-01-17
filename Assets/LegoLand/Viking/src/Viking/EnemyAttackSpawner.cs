@@ -35,12 +35,12 @@ public class EnemyAttackSpawner : MonoBehaviour
             direction[0] = 0;
             direction[1] = 90;
             direction[2] = -90;
-            direction[3] = 180;
+            direction[3] = 180.0f;
 
-            if (EnemyManager.Instance.GetIndex() == 0) index = 0;
-            else if (EnemyManager.Instance.GetIndex() == 1) index = 1;
-            else if (EnemyManager.Instance.GetIndex() == 2) index = 2;
-            else   index = Random.Range(0,3);
+          //  if (EnemyManager.Instance.GetIndex() == 0) index = 0;
+          //  else if (EnemyManager.Instance.GetIndex() == 1) index = 1;
+          //  else if (EnemyManager.Instance.GetIndex() == 2) index = 2;
+        //    else   index = Random.Range(0,3);
             Debug.Log("¿Œµ¶Ω∫ ∞·¡§");
 
             switch (Type)
@@ -51,11 +51,11 @@ public class EnemyAttackSpawner : MonoBehaviour
                     } break;
                 case EnemyType.Enemy_Arrow:
                     {
-                        InstantiateObjects(Arrow, Quaternion.Euler(0, direction[Random.Range(0, 4)], 0)); } break;
-                case EnemyType.Enemy_Dagger: { InstantiateObjects(Dagger, Quaternion.Euler(90.0f,0, 0)); } break;
+                        InstantiateObjects(Arrow, Quaternion.Euler(0, 0, 0)); } break;
+                case EnemyType.Enemy_Dagger: { InstantiateObjects(Dagger, Quaternion.Euler(90.0f, direction[Random.Range(0, 4)], 0)); } break;
                 case EnemyType.Enemy_Boss:
                     {
-                        InstantiateObjects(Missiles[EnemyManager.Instance.GetStage()%4], Quaternion.Euler(180.0f, 0, 0));
+                      //  InstantiateObjects(Missiles[EnemyManager.Instance.GetStage()%4], Quaternion.Euler(180.0f, 0, 0));
                         InstantiateObjects(Arrow, Quaternion.Euler(0, direction[Random.Range(0, 4)], 0));
                         InstantiateObjects(Dagger, Quaternion.Euler(90.0f,0, 0));
                     } break;
@@ -71,10 +71,10 @@ public class EnemyAttackSpawner : MonoBehaviour
 
     private void InstantiateObjects(GameObject obj, Quaternion rot)
     {
-        AttackState state = (AttackState)(EnemyManager.Instance.GetIndex() % 3);
-        Debug.Log(EnemyManager.Instance.GetIndex() % 3);
-        if (obj == Arrow) { Arrow.GetComponent<Arrow>().state = state; }
-        else if (obj == Dagger) { Dagger.GetComponent<Dagger>().state = state; }
+       // AttackState state = (AttackState)(EnemyManager.Instance.GetIndex() % 3);
+       // Debug.Log(EnemyManager.Instance.GetIndex() % 3);
+      //  if (obj == Arrow) { Arrow.GetComponent<Arrow>().state = state; }
+       // else if (obj == Dagger) { Dagger.GetComponent<Dagger>().state = state; }
 
         transform.position = new Vector3(Random.Range(-RangeX, RangeX)
                                                                             , transform.position.y,
@@ -84,9 +84,7 @@ public class EnemyAttackSpawner : MonoBehaviour
                                                     transform.position,
                                                     //transform.rotation
                                                     //Quaternion.Euler(180.0f, 0, 0)
-                                                    rot
-        
-                                                    );
+                                                    rot  );
 
        // 0,1,2 ,3/ 3,4,5,6 / 5,6,7,8/ 8,9,10,11 
 

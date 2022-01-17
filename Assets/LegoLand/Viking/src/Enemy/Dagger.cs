@@ -39,11 +39,21 @@ public class Dagger : MonoBehaviour
      private Vector3 targetPosition;
 
     private GameObject[] deckEdges;
+    float[] direction = new float[4];
 
     private void Awake()
     {
         rig = this.GetComponent<Rigidbody>();
         InitializeState(); // 단계별 피해량 설정
+
+        direction[0] = 0;
+        direction[1] = 90;
+        direction[2] = -90;
+        direction[3] = 180.0f;
+        float num = direction[Random.Range(0, 4)];
+        this.gameObject.transform.rotation = Quaternion.Euler(90.0f, num, 0);
+
+        Debug.Log(num);
     }
 
 
@@ -89,37 +99,17 @@ public class Dagger : MonoBehaviour
 
     private void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
-        targetPosition = Player.transform.position;
-       Destroy(this.gameObject, 10.0f);
+
     }
 
-    float timeSaver = 0;
+   
 
     private void Update()
     {
-        //targetPosition = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
-       
-        timeSaver += Time.deltaTime;
+        CheckDeck();
+         Move();
 
-        if (bIsFallen)
-        {
-            if (timeSaver > lifeTime)
-            {
-                deckEdges = GameObject.FindGameObjectsWithTag("deckEdge");
-                targetPosition = deckEdges[0].transform.position;
-
-                transform.LookAt(targetPosition);
-            }
-            // else { targetPosition = Player.transform.position; }
-
-          
-            // 
-        }
-        Move();
-
-     
-       
+        // deck에 떨어지고 나서 이동이  안됨
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -131,7 +121,7 @@ public class Dagger : MonoBehaviour
         }
 
         if (collision.gameObject.tag =="deckEdge")
-        { Destroy(this.gameObject); }
+        { Debug.Log("edge에 닿음"); Destroy(this.gameObject); }
     }
 
     private void GiveDamage(Collider collision)
@@ -143,31 +133,31 @@ public class Dagger : MonoBehaviour
 
     private void Move()
     {
-        Vector3 direction = transform.forward;// -transform.right;
-        float speed = Dagger_fall_speed;
 
-        rig.AddForce( direction * speed);
-
-        Collider[] collidersEdge = Physics.OverlapSphere(transform.position, 1f);
-
-        foreach (Collider collider in collidersEdge)
+        if (!bIsFallen)
         {
-            if (collider.gameObject.tag == "deck")
-            {
-                Debug.Log("deck에 닿음 ");
-                bIsFallen = true;
-                direction = transform.forward;
-                speed = dagger_speed;
-            }
-           // else if (collider.gameObject.tag == "deckEdge") { Destroy(this.gameObject); }
-            else
-            {
-                direction = -transform.right;
-                speed = Dagger_fall_speed;
-            }
+            Vector3 direction = transform.forward;
+           float sp= Dagger_fall_speed;
+            rig.AddForce(direction * sp);
+            Debug.Log("Not bIsFallen");
+        }
+        else
+        {
+            Vector3 direction = - transform.up;
+            float sp = dagger_speed;
+            rig.AddForce(direction * sp);
+            transform.Rotate(0.0f,0.0f,0.0f);
+            Debug.Log("bIsFallen");
         }
 
+    }
 
-        
+    private void CheckDeck()
+    {
+        Collider[] collidersEdge = Physics.OverlapSphere(transform.position, 0.5f);
+
+        foreach (Collider collider in collidersEdge)
+            if (collider.gameObject.tag == "deck")
+                bIsFallen = true;
     }
 }

@@ -7,11 +7,17 @@ public enum EnemyType { Enemy_Missile, Enemy_Arrow, Enemy_Dagger, Enemy_Boss };
 public class EnemyManager : MonoBehaviour
 {
     #region EnemyVariables
+
     public EnemyType Type = EnemyType.Enemy_Missile;
-    //public EnemyType GetEnemyType() { return Type; }
-    public GameObject[] Enemies;
-    List<GameObject> enemies_stage_final= new List<GameObject>(); 
-    private int Stage = 0;
+
+    public List<GameObject> enemies= new List<GameObject>(); 
+
+    private int Stage = 0; 
+    private int InStageNum = 0; //0123 4567 891011 12131415
+    public int GetStage() { return Stage; }
+    public int GetInStageNum() { return InStageNum; }
+
+    private EnemySpawner enemySpawner;
     #endregion
 
     #region Singleton
@@ -32,9 +38,19 @@ public class EnemyManager : MonoBehaviour
     void Awake()
     {
         sInstance = this;
+
+        enemySpawner = GameObject.FindGameObjectWithTag("enemySpawner").GetComponent<EnemySpawner>();
     }
     #endregion
 
+    /*
+
+ EnemyManager - > 적 종류, 공격 종류 지정
+enemySpawner 적 생성
+AttackSpawner 공격 생성
+*/
+
+    /*
     void Start()
     {
         InstantiateEnemy();
@@ -129,7 +145,7 @@ public class EnemyManager : MonoBehaviour
                       enemies[0].transform.parent = this.transform;
                   }       */
 
-
+    /*
         }
         else // 3,7,11,15
         {
@@ -152,18 +168,30 @@ public class EnemyManager : MonoBehaviour
         }
     }
     
-    
-    // 생성되어야 하는 적 index
-    void SettingEnemies()
+*/
+
+
+    public void ChangeStage()
     {
-        /*
-        switch (Stage)
-        {
-            case 0:
-                {
-                    
-                } break;
-        }*/
+        Stage++;
+        if (Stage % 4 == 0) InStageNum = 0;
+
+        SettingStage();
+    } 
+
+    void SettingStage()
+    {
+        Type = (EnemyType)(Stage / 4);         
     }
 
+
+    public void InstantiateEnemies()
+    {
+        enemySpawner.InstantiateEnemy();
+    }
+
+    // 스테이지 관리자 
+    // MakeEnemy()
+    // 생성 
+    // -> 적 공격, 적(적 캐릭터, HUD)
 }

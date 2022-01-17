@@ -32,18 +32,17 @@ public class Enemy : MonoBehaviour
     {
         HP = (HP - value) > 0 ? HP - value : 0;
         Debug.Log("TakeDamage : " + HP);
-       // if (HP <= 0)
-        //    Destroy(gameObject);
     }
 
     public void Dead()
     {
         if (HP <= 0)
         {
-            if(EnemyManager.Instance.GetStage()%4 != 3 ) EnemyManager.Instance.ChangeStage();
-            else EnemyManager.Instance.ChangeStage_final(this.gameObject);
+            EnemyManager.Instance.InstantiateEnemies();
 
             Destroy(this.gameObject);
         }
     }
+
+
 }
