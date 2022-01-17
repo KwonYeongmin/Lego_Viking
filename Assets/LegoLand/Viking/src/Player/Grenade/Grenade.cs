@@ -39,6 +39,7 @@ public class Grenade : MonoBehaviour
         meshObj.SetActive(false);
         effectObj.SetActive(true);
         trail.enabled = false;
+        SoundManager.Instance.PlaySE(SoundList.Sound_grenade, transform.position);
     }
 
     private void HitGrenade()

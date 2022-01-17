@@ -7,7 +7,6 @@ public class Weapon : MonoBehaviour
     public float rate;
     public Transform bulletPos;
     public GameObject bullet;
-    public int maxAmmo;
     public int currentAmmo;
 
     private void Awake()
@@ -19,8 +18,13 @@ public class Weapon : MonoBehaviour
     {
         if(currentAmmo > 0)
         {
+            SoundManager.Instance.PlaySE(SoundList.Sound_shoot, transform.position);
             currentAmmo--;
             StartCoroutine(Shot());
+        }
+        else
+        {
+            SoundManager.Instance.PlaySE(SoundList.Sound_lack, transform.position);
         }
     }
 

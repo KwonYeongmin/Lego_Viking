@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int value)
     {
         HP = (HP - value) > 0 ? HP - value : 0;
+        SoundManager.Instance.PlaySE(SoundList.Sound_monster_hit, transform.position);
         Debug.Log("TakeDamage : " + HP);
     }
 
@@ -38,8 +39,9 @@ public class Enemy : MonoBehaviour
     {
         if (HP <= 0)
         {
-            EnemyManager.Instance.InstantiateEnemies();
-
+            if(EnemyManager.Instance.GetStage()%4 != 3 ) EnemyManager.Instance.ChangeStage();
+            else EnemyManager.Instance.ChangeStage_final(this.gameObject);
+            SoundManager.Instance.PlaySE(SoundList.Sound_monster_death, transform.position);
             Destroy(this.gameObject);
         }
     }

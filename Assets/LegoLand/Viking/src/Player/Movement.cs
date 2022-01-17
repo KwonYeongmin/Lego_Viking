@@ -7,7 +7,6 @@ public class Movement : MonoBehaviour
     [Header("MoveSpeed")]
     public float defaultMoveSpeed; //추가
     public float moveSpeed;
-    private float gravity = 20f;
 
     [Header("Rotation")]
     [SerializeField]
@@ -42,12 +41,6 @@ public class Movement : MonoBehaviour
         defaultMoveSpeed = moveSpeed; //추가
     }
 
-    private void Update()
-    {
-        UpdateTimer(); // 추가
-        UpdateSpeedUp(); // 추가
-    }
-    
     public void MoveTo(Vector3 direction)
     {
         risingSlope = false;
@@ -63,9 +56,9 @@ public class Movement : MonoBehaviour
 
         if (OnSteepSlope())
             SteepSlopeMovement();
-        else if(!OnSteepSlope() && direction != Vector3.zero)
+        else if (!OnSteepSlope() && direction != Vector3.zero)
             lastDirection = moveDirection;
-        
+
         Rotation(direction);
 
         moveDirection *= moveSpeed;
@@ -87,7 +80,7 @@ public class Movement : MonoBehaviour
     {
         Vector3 targetDir = Vector3.zero;
 
-        if(direction != Vector3.zero)
+        if (direction != Vector3.zero)
         {
             targetDir.z = moveDirection.z;
             targetDir.x += moveDirection.x;
@@ -100,7 +93,7 @@ public class Movement : MonoBehaviour
             targetDir.y = 0.0f;
         }
 
-        if(targetDir != Vector3.zero)
+        if (targetDir != Vector3.zero)
         {
             Quaternion tr = Quaternion.LookRotation(targetDir);
             Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotateSpeed * Time.deltaTime);
@@ -139,7 +132,7 @@ public class Movement : MonoBehaviour
         Vector3 slopeDirection = Vector3.up - _slopeHit.normal * Vector3.Dot(Vector3.up, _slopeHit.normal);
         float slideSpeed = _slideSpeed + (1 - Mathf.Abs(slopeDirection.normalized.x));
 
-        if(moveDirection.normalized.x == 0 && moveDirection.normalized.z == 0)
+        if (moveDirection.normalized.x == 0 && moveDirection.normalized.z == 0)
         {
             moveSpeed = slideSpeed;
             moveDirection = slopeDirection * -slideSpeed;
@@ -147,7 +140,7 @@ public class Movement : MonoBehaviour
             risingSlope = false;
             return;
         }
-        else if ( (moveDirection.normalized.x < 0 && slopeDirection.normalized.x < 0 )
+        else if ((moveDirection.normalized.x < 0 && slopeDirection.normalized.x < 0)
             || (moveDirection.normalized.x > 0 && slopeDirection.normalized.x > 0))
         {
             moveSpeed -= slideSpeed;
@@ -162,39 +155,5 @@ public class Movement : MonoBehaviour
         lastDirection = moveDirection.normalized;
     }
 
-    //=========추가
-    private Timer SpeedUpTimer = new Timer();
 
-    private float speedupDuration = 0;
-
-    public void DecreaseSpeed(float value)
-    {
-        moveSpeed = moveSpeed-value >=  0 ? moveSpeed - value : 0;
-    }
-
-    public void IncreaseSpeed(float value,float duration)
-    {
-        SpeedUpTimer.ResetTimer(); //리셋 타이머
-        SpeedUpTimer.StartTimer(); // 타이머 시작
-
-        moveSpeed = value;
-        Debug.Log("moveSpeed : " + moveSpeed);
-        speedupDuration = duration;
-        isSpeedUp = true;
-    }
-
-    private void UpdateSpeedUp()
-    {
-        if (SpeedUpTimer.GetTimer() >= speedupDuration) SpeedUpTimer.StopTimer(); //일정시간동안 타이머 지속
-
-        if (SpeedUpTimer.GetTimerStopState()) //타이머가 멈춘 상태가 아니면 스피드 상승
-        {
-            moveSpeed = defaultMoveSpeed;
-        }
-    }
-
-    private void UpdateTimer()
-    {
-        SpeedUpTimer.UpdateTimer();
-    }
 }

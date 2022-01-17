@@ -125,6 +125,6 @@ public class Arrow : MonoBehaviour
 
         float value = collision.gameObject.GetComponent<Movement>().moveSpeed;
         value *= arrow_speed_down;
-        collision.gameObject.GetComponent<Movement>().DecreaseSpeed(value); //스피드 감소
+        collision.gameObject.GetComponent<Player>().DecreaseSpeed(value); //스피드 감소
     }
 }
