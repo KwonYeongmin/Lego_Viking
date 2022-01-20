@@ -30,7 +30,7 @@ public class StageManager : Singleton<StageManager>
 
     void Start()
     {
-        Stage = 3;
+        Stage = 0;
         
         SetStage();
     }
@@ -212,7 +212,7 @@ public class StageManager : Singleton<StageManager>
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Boss);
                     enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
-                    viking.speed = Speed * 1.7f;
+                    viking.speed = Speed * 1.f;
                 }
                 break;
         }
