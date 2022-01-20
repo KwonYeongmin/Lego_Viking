@@ -6,14 +6,12 @@ using TMPro;
 
 public class Countdown : MonoBehaviour
 {
-     [HideInInspector]
+    [HideInInspector]
     public TMP_Text TimeTEXT;
 
     private float timer;
     private float MaxTime = 3f;
     private bool bIsEnded;
-
-    
 
     void Update()
     {
@@ -25,19 +23,16 @@ public class Countdown : MonoBehaviour
 
     private void Check_Timer()
     {
-
         if (0 < timer)
         {
             timer -= Time.deltaTime;
-            TimeTEXT.text =((int)timer).ToString();
+            TimeTEXT.text = ((int)timer).ToString();
         }
         else if (!bIsEnded)
         {
             EndTimer();
             this.gameObject.SetActive(false); // 3,2,1,0 끝나면 이 게임 오브젝트 삭제
         }
-
-
     }
 
     private void EndTimer()
@@ -45,16 +40,17 @@ public class Countdown : MonoBehaviour
         timer = 0;
         TimeTEXT.text = ((int)timer).ToString();
         bIsEnded = true;
+        if (StageManager.Instance.Stage == 0)
+            StageManager.Instance.SetStage();
+        else StageManager.Instance.ChangeStage();
     }
 
-
-    private void StartTimer() //여기서 시작해주면 됨
+    public void StartTimer() //여기서 시작해주면 됨
     {
         timer = MaxTime;
         TimeTEXT.text = ((int)timer).ToString();
         bIsEnded = false;
     }
-
 }
 
 

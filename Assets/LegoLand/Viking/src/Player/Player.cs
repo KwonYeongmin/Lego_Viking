@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
     private Movement movement;
     private PlayerAnimator animator;
     public SceneManagement scene;
-    [SerializeField]private PlayerHUD playerHUD;
+    [SerializeField] private PlayerHUD playerHUD;
+    [SerializeField] private InterfaceTimer interfaceTimer;
 
     #region Input variables
     // #. Keyboard
@@ -85,6 +86,7 @@ public class Player : MonoBehaviour
         weapon = GetComponentInChildren<Weapon>();
         playerHUD = FindObjectOfType<PlayerHUD>();
         scene = FindObjectOfType<SceneManagement>();
+        interfaceTimer = FindObjectOfType<InterfaceTimer>();
 
         HP = DefaultHP; // 추가
         ammo = defaultAmmo; // 추가
@@ -99,7 +101,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (isDead) return;
+        if (!interfaceTimer.isPlay || isDead) return;
 
         GetInput(); // Update Input
 
@@ -274,6 +276,9 @@ public class Player : MonoBehaviour
         HP = (HP - value) > 0 ? HP - value : 0; // 추가
         if (HP <= 0)
         {
+            HP = 0;
+            playerHUD.UpdateHP(HP);
+            SoundManager.Instance.PlaySE(SoundList.Sound_lose, transform.position);
             isDead = true;
             animator.OnDead();
             Invoke("GameOverScene", 3.0f);

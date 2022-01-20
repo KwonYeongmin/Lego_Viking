@@ -7,16 +7,14 @@ using System.IO;
 public class InterfaceTimer : MonoBehaviour
 {
     [Header("Interface GameObject")]
-    [SerializeField] private GameObject SceneInfo;
+    [SerializeField] private GameObject StageInfo;
     [SerializeField] private GameObject Tutorial;
     [SerializeField] private GameObject Clear;
-
-    private float SceneInfoTimer = 0.0f;
-    private float TutorialTimer = 0.0f;
-    private float ClearTimer = 0.0f;
+    [SerializeField] private Countdown countdown;
 
     [Header("Interface DelayTime")]
     [SerializeField]private float DelayTime = 3.0f;
+    public bool isPlay = false;
 
     [Header("Stage Infomation")]
     [SerializeField] private TextMeshProUGUI stage_num;
@@ -27,16 +25,19 @@ public class InterfaceTimer : MonoBehaviour
 
     [Header("Clear Time")]
     [SerializeField] private TextMeshProUGUI clear_time;
+    [SerializeField] private TextMeshProUGUI timer;
 
     private void Awake()
     {
-        SceneInfo.SetActive(false);
+        StageInfo.SetActive(false);
         Tutorial.SetActive(false);
         Clear.SetActive(false);
 
         stageText = new List<Stagetext>();
 
         ReadTextFile();
+
+        StageInfoSetup(0);
     }
 
     private void ReadTextFile()
@@ -63,18 +64,50 @@ public class InterfaceTimer : MonoBehaviour
 
     public void StageInfoSetup(int num)
     {
+        isPlay = false;
+        StageInfo.SetActive(true);
         stage_num.text = "Stage " + stageText[num].stage_num;
         stage_attack.text = stageText[num].stage_attack;
         stage_enemy.text = stageText[num].stage_enemy;
+        StartCoroutine(OFF_StageInfo());
     }
 
-    public void ClearTimeSetup(string time)
+    public void ClearTimeSetup()
     {
-        clear_time.text = time;
+        isPlay = false;
+        Clear.SetActive(true);
+        clear_time.text = timer.text;
+        StartCoroutine(OFF_Clear());
     }
 
-    void Update()
+    IEnumerator OFF_StageInfo()
     {
-        
+        yield return new WaitForSeconds(DelayTime);
+        StageInfo.SetActive(false);
+        if(StageManager.Instance.Stage < 4)
+        {
+            Tutorial.SetActive(true);
+            StartCoroutine(OFF_StageTutorial());
+        }
+        else
+        {
+            countdown.gameObject.SetActive(true);
+            countdown.StartTimer();
+        }
+    }
+
+    IEnumerator OFF_StageTutorial()
+    {
+        yield return new WaitForSeconds(DelayTime);
+        Tutorial.SetActive(false);
+        countdown.gameObject.SetActive(true);
+        countdown.StartTimer();
+    }
+
+    IEnumerator OFF_Clear()
+    {
+        yield return new WaitForSeconds(DelayTime);
+        Clear.SetActive(false);
+        StageInfoSetup(StageManager.Instance.Stage + 1);
     }
 }

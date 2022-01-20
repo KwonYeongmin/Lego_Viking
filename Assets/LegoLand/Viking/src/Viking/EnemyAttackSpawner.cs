@@ -21,16 +21,17 @@ public class EnemyAttackSpawner : MonoBehaviour
     private Transform transform_;
     private Quaternion rot;
 
+    public InterfaceTimer interfaceTimer;
+
     private void Awake()
     {
         transform_ = GameObject.Find("AttackSpawnPoint").transform;
         rot = this.transform.rotation;
     }
 
-    
-    
     IEnumerator Start()
     {
+
         Debug.Log("오브젝트 생성");
 
         float[] direction = new float[4];

@@ -10607,7 +10607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &738295414
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12451,14 +12451,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c26c9893cbb7a44b1c370602f094ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneInfo: {fileID: 738295413}
+  StageInfo: {fileID: 738295413}
   Tutorial: {fileID: 788140345}
   Clear: {fileID: 2052555369}
+  countdown: {fileID: 1895389693}
   DelayTime: 3
   stage_num: {fileID: 1382331467}
   stage_attack: {fileID: 1152870125}
   stage_enemy: {fileID: 1517289596}
   clear_time: {fileID: 348409251}
+  timer: {fileID: 5761365480649278604}
 --- !u!1 &1849905806
 GameObject:
   m_ObjectHideFlags: 0
@@ -12686,7 +12688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1895389692
 RectTransform:
   m_ObjectHideFlags: 0

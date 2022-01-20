@@ -12,16 +12,16 @@ public class StageManager : Singleton<StageManager>
     private EnemyAttackSpawner attackSpawner;
     private ItemSpawner itemSpawner;
     private SceneManagement sceneManager;
-     private TimerUI Timer;
+    private TimerUI Timer;
     [HideInInspector]public Viking viking;
     //public ItemSpawner itemSpawner; //bgm
 
     public int Stage;// { get; private set; }
-   // public int Index { get; private set; }
+    //public int Index { get; private set; }
     public EnemyType Type = EnemyType.Enemy_Missile;
     public EnemyColorType ColorType = EnemyColorType.GREY;
 
-     float Speed = 5;
+    float Speed = 5;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class StageManager : Singleton<StageManager>
         itemSpawner = GameObject.Find("ItemSpawner").GetComponent<ItemSpawner>();
         viking = GameObject.Find("Pin").GetComponent<Viking>();
         sceneManager = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
-      Timer = GameObject.Find("Time").GetComponent<TimerUI>();
+        Timer = GameObject.Find("Time").GetComponent<TimerUI>();
         Speed = viking.speed;
     }
 
@@ -47,14 +47,12 @@ public class StageManager : Singleton<StageManager>
         if (SceneManager.GetActiveScene().name == "EndGame") Stage = 0;
     }
 
-
     private List<GameObject> enemies = new List<GameObject>();
     public List<int> enemiesAttacklist = new List<int>();
 
     public void AddEnemies(GameObject obj)
     {
         enemies.Add(obj);
-
     }
     public void RemoveEnemies(GameObject obj)
     {
@@ -77,7 +75,6 @@ public class StageManager : Singleton<StageManager>
         }
         else if (Stage % 4 == 3)
         {
-
             if (enemies.Count <= 0)
             {
                 if (Stage == 15)
@@ -85,17 +82,20 @@ public class StageManager : Singleton<StageManager>
                     sceneManager.ChangeScene("GameOver");
                     Stage = 0;
                 }
-                    
                 Stage++;
                 SetStage();
             }
         }
-        
+
         Debug.Log("Stage: " + Stage);
     }
 
     public void SetStage()
     {
+        var Interface = FindObjectOfType<InterfaceTimer>();
+        if (Interface != null)
+            Interface.isPlay = true;
+
         Timer.StartTimer();
 
         switch (Stage)
@@ -257,8 +257,6 @@ public class StageManager : Singleton<StageManager>
                 }
                 break;
         }
+
     }
-
-
-
 }
