@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-
     public AudioClip title;
 
     private void Awake()
@@ -21,7 +20,6 @@ public class SceneManagement : MonoBehaviour
     public void GameScene()
     {
         SceneManager.LoadScene("GameScene");
-       
     }
 
     public void QuitApplication()

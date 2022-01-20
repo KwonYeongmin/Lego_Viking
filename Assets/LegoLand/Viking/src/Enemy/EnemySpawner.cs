@@ -86,6 +86,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void InstantiateEnemy(EnemyType type, EnemyColorType colorType)
     {
+        transform_ = GameObject.Find("enemyPoint").transform;
+
         switch (type)
         {
             case EnemyType.Enemy_Missile: { enemyPrefab = Enemies_Missile[(int)colorType]; } break;
@@ -99,6 +101,4 @@ public class EnemySpawner : MonoBehaviour
         enemy.GetComponent<Enemy>().initialized((int)colorType);
 
     }
-
-
 }

@@ -22,10 +22,10 @@ public class PlayerHUD : MonoBehaviour
 
     private GameObject player;
 
-    private Canvas canvas;
-    private Camera hud_Camera;
-    private RectTransform rectParent;
-    private RectTransform rectHUD;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private Camera hud_Camera;
+    [SerializeField] private RectTransform rectParent;
+    [SerializeField] private RectTransform rectHUD;
 
     [HideInInspector] public Vector3 offset = Vector3.zero;
     [HideInInspector] public Transform targetTransform;

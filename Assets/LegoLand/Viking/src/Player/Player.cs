@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Player : MonoBehaviour
     private Vector3 direction;
     private Movement movement;
     private PlayerAnimator animator;
-    private PlayerHUD playerHUD;
+    [SerializeField]private PlayerHUD playerHUD;
 
     #region Input variables
     // #. Keyboard
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
     public int hasGrenades;
     public float throwPower;
     public float throwHeight;
+    public Image grenadeImg;
     #endregion
 
     #region Player Stat variables
@@ -83,6 +85,8 @@ public class Player : MonoBehaviour
 
         HP = DefaultHP; // 추가
         ammo = defaultAmmo; // 추가
+
+        grenadeImg.color = new Color(1, 1, 1, 0.5f);
 
         playerHUD.targetTransform = gameObject.transform;
         playerHUD.offset = new Vector3(0, 5f, 0);
@@ -231,7 +235,10 @@ public class Player : MonoBehaviour
 
     private void Grenade()
     {
-        if (hasGrenades == 0 || !bIsGrenadesEnable) return; //추가 : bIsGrenadesEnable 추가
+        if (hasGrenades == 0 || !bIsGrenadesEnable)
+        {
+            return; //추가 : bIsGrenadesEnable 추가
+        }
 
         if (isButtonGrenade)
         {
@@ -245,7 +252,10 @@ public class Player : MonoBehaviour
 
             hasGrenades--;
             if (hasGrenades == 0)
+            {
                 bIsGrenadesEnable = false;
+                grenadeImg.color = new Color(1, 1, 1, 0.5f);
+            }
         }
 
     }
@@ -293,6 +303,7 @@ public class Player : MonoBehaviour
         bIsGrenadesEnable = true;
         OtherFX.SetActive(true);
         StartCoroutine(OffOtherFX());
+        grenadeImg.color = new Color(1, 1, 1, 1.0f);
     }
 
     // #. Invincible

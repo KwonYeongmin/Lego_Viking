@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseWindow : MonoBehaviour
 {
     [HideInInspector]
     public bool isButtonPause;
     [SerializeField] private GameObject PauseMenu;
+    private SceneManagement sceneManagement;
 
     void Start()
     {
         PauseMenu.SetActive(false);
+        sceneManagement = FindObjectOfType<SceneManagement>();
     }
 
     void Update()
@@ -36,12 +37,12 @@ public class PauseWindow : MonoBehaviour
     public void ButtonReStartDown()
     {
         Time.timeScale = 1.0f;
-        SceneManagement.Instance.ChangeScene("GameScene");
+        sceneManagement.ChangeScene("GameScene");
     }
 
     public void ButtonGiveUpDown()
     {
         Time.timeScale = 1.0f;
-        SceneManagement.Instance.ChangeScene("GameOver");
+        sceneManagement.ChangeScene("GameOver");
     }
 }

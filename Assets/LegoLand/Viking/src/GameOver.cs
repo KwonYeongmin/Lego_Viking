@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
+    private SceneManagement sceneManagement;
 
     void Start()
     {
-    }
-
-    void Update()
-    {
+        sceneManagement = FindObjectOfType<SceneManagement>();
     }
 
     public void ButtonReStartDown()
     {
-        SceneManagement.Instance.ChangeScene("GameScene");
+        sceneManagement.ChangeScene("GameScene");
     }
 
     public void ButtonExitDown()
     {
-        SceneManagement.Instance.QuitApplication();
+        sceneManagement.QuitApplication();
     }
 }
