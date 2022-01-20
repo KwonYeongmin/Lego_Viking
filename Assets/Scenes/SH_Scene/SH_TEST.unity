@@ -421,11 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac58b076289cde42860a45a4b058493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemies:
-  - {fileID: 7345634737031458466, guid: 1526c395254adae4ba24bba5648b21f2, type: 3}
-  - {fileID: 79219089695756003, guid: 5b24d5218d396f74ba9e9fb69baa74f0, type: 3}
-  - {fileID: 5130229815644744240, guid: e0bba036cb9f4814fbe646e51493d8e5, type: 3}
-  - {fileID: 1678548408577177889, guid: 6f9d2a65eb2147f468fe1e267ea2e816, type: 3}
+  Type: 0
+  enemies: []
 --- !u!1 &229158466
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7338745420053716009, guid: c9ff1077320add3428ea11dad6de172f, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7338745420053716009, guid: c9ff1077320add3428ea11dad6de172f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4383,7 +4380,7 @@ RectTransform:
   - {fileID: 587315280}
   - {fileID: 375986680}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8947,6 +8944,9 @@ MonoBehaviour:
   HP: 0
   invincible_Duration: 0
   isInvincible: 0
+  HealFX: {fileID: 0}
+  OtherFX: {fileID: 0}
+  FX_Duration: 2
 --- !u!114 &279789218345347535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13762,14 +13762,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4840645ebd6083542acd29f49fe65337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Missiles: []
+  RangeX: 4
+  RangeZ: 2
+  interval: 5
   Arrow: {fileID: 6905510525487199669, guid: 9c48f7b1f63d89f4c8704dd2be418219, type: 3}
   arrow_range: 3
   Dagger: {fileID: 924483161699745594, guid: 3c0a19325fb99214abc8d60090036ed3, type: 3}
   dagger_range: 2
-  Missile: {fileID: 1255278661010280, guid: 1b76c77aee1fc3044b4b2ecaa6c89e66, type: 3}
-  Range: 5
-  interval: 5
-  type: 0
 --- !u!1 &8030891028864210602
 GameObject:
   m_ObjectHideFlags: 0

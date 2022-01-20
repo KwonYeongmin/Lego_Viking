@@ -9,20 +9,43 @@ public class EnemyAttackSpawner : MonoBehaviour
     // public Transform MissileSpawner;
     public float RangeX = 4.0f;
     public float RangeZ = 2.0f;
-    //public float[] Interval;
     public float interval = 5f;
 
     [Header("화살 관련 변수")]
     public GameObject Arrow;
     public float arrow_range = 3.0f;
 
-
     [Header("표창 관련 변수")]
     public GameObject Dagger;
     public float dagger_range = 2.0f;
-    
 
+    private Transform transform_;
 
+    private string str;
+
+    IEnumerator Start()
+    {
+        transform_ = GameObject.Find("AttackSpawnPoint").transform;
+
+        yield return new WaitForSeconds(interval);
+
+        while (true)
+        {
+            Debug.Log(str);
+        }
+
+        
+    }
+    public void test(string str_)
+    {
+         str=str_;
+    }
+
+    public void InstantiateEnemy(EnemyType type, int n)
+    {
+
+    }
+    /*
     private EnemyType Type = EnemyManager.Instance.Type;
 
     IEnumerator Start() //일정시간마다 실행
@@ -94,5 +117,5 @@ public class EnemyAttackSpawner : MonoBehaviour
 
         obj_.transform.parent = this.gameObject.transform;
 
-    }
+    }*/
 }

@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-
         if (GameObject.FindWithTag("Enemy").gameObject.GetComponent<Image>())
         {
             HPImg= GameObject.FindWithTag("Enemy").gameObject.GetComponent<Image>();
@@ -39,8 +38,8 @@ public class Enemy : MonoBehaviour
     {
         if (HP <= 0)
         {
-            if(EnemyManager.Instance.GetStage()%4 != 3 ) EnemyManager.Instance.ChangeStage();
-            else EnemyManager.Instance.ChangeStage_final(this.gameObject);
+           // if(EnemyManager.Instance.GetStage()%4 != 3 ) EnemyManager.Instance.ChangeStage();
+           // else EnemyManager.Instance.ChangeStage_final(this.gameObject);
             SoundManager.Instance.PlaySE(SoundList.Sound_monster_death, transform.position);
             Destroy(this.gameObject);
         }
