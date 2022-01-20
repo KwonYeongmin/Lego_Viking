@@ -9,6 +9,8 @@ TagManager:
   - deckEdge
   - Enemy
   - EnemySpawner
+  - FX
+  - deckBox
   layers:
   - Default
   - TransparentFX

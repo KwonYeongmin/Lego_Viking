@@ -106,14 +106,14 @@ public class Dagger : MonoBehaviour
 
     private void Update()
     {
-        CheckDeck();
+        // CheckDeck();
          Move();
-
-        // deck에 떨어지고 나서 이동이  안됨
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("OnCollisionEnter : "+collision.gameObject.name );
+
         if (collision.gameObject.GetComponent<Player>())
         {
             GiveDamage(collision.gameObject.GetComponent<Collider>());
@@ -121,12 +121,26 @@ public class Dagger : MonoBehaviour
         }
 
         if (collision.gameObject.tag =="deckEdge")
-        { Debug.Log("edge에 닿음"); Destroy(this.gameObject); }
+        {
+            Debug.Log("edge에 닿음");
+            Destroy(this.gameObject); }
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "deck")
+        {
+            bIsFallen = true;
+            Destroy(this.gameObject, 5f);
+        }
+        
+    }
+
 
     private void GiveDamage(Collider collision)
     {
         collision.gameObject.GetComponent<Player>().TakeDamage(dagger_damage);
+        Debug.Log("표창 데미지");
     }
 
     private bool bIsFallen=false;
@@ -139,7 +153,7 @@ public class Dagger : MonoBehaviour
             Vector3 direction = transform.forward;
            float sp= Dagger_fall_speed;
             rig.AddForce(direction * sp);
-            Debug.Log("Not bIsFallen");
+            // Debug.Log("Not bIsFallen");
         }
         else
         {
@@ -147,7 +161,7 @@ public class Dagger : MonoBehaviour
             float sp = dagger_speed;
             rig.AddForce(direction * sp);
             transform.Rotate(0.0f,0.0f,0.0f);
-            Debug.Log("bIsFallen");
+            // Debug.Log("bIsFallen");
         }
 
     }

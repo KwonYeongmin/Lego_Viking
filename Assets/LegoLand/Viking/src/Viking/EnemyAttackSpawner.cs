@@ -91,19 +91,12 @@ public class EnemyAttackSpawner : MonoBehaviour
     }
    
 
-    private void Update()
-    {
-        if (StageManager.Instance.Stage %4==3)
-        {
-          
-        }
-    }
-
     public void InstantiateAttack(GameObject prefab )
     {
         ChangePositionRandom();
 
-        Instantiate(prefab, this.transform.position, rot);
+        GameObject obj= Instantiate(prefab, this.transform.position, rot);
+        obj.transform.parent = GameObject.Find("Deck").transform;
     }
 
     private void ChangePositionRandom()
