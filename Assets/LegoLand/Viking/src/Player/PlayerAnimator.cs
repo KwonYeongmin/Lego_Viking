@@ -23,12 +23,14 @@ public class PlayerAnimator : MonoBehaviour
     public void OnRoll()
     {
         animator.SetTrigger("isRoll");
+        movement.moveSpeed = 7.5f;
     }
 
     public void EndRoll()
     {
         movement.isRoll = false;
         player.isButtonRoll = false;
+        movement.moveSpeed = movement.defaultMoveSpeed;
     }
 
     public void OnFire()

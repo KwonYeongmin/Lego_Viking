@@ -2,39 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
-    public Image HPImg;
-   
-    public Image AmmoImg;
-    private Image[] AmmoImgs = new Image[20];
-    private int DefaultAmmoNum;
+    [Header("HP")]
+    [SerializeField] private Image HP_HUD;
+    [SerializeField] private Image HP_Interface;
+    [SerializeField] private TextMeshProUGUI HP_Value;
+    private int MaxHP;
+    private int CurrentHP;
+
+    [Header("Ammo")]
+    [SerializeField] private Image Ammo_HUD;
+    [SerializeField] private Image Ammo_Interface;
+    [SerializeField] private TextMeshProUGUI Ammo_Value;
+    private int MaxAmmo;
+    private int CurrentAmmo;
 
     private GameObject player;
-    public GameObject pin;
 
-    void Start()
+    private Canvas canvas;
+    private Camera hud_Camera;
+    private RectTransform rectParent;
+    private RectTransform rectHUD;
+
+    [HideInInspector] public Vector3 offset = Vector3.zero;
+    [HideInInspector] public Transform targetTransform;
+
+    private void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        DefaultAmmoNum = player.GetComponent<Player>().defaultAmmo;
-        for (int i = 0; i < DefaultAmmoNum; i++)
-            AmmoImgs[i] = AmmoImg.transform.GetChild(i).gameObject.GetComponent<Image>();
+
+        canvas = GetComponentInParent<Canvas>();
+        hud_Camera = canvas.worldCamera;
+        rectParent = canvas.GetComponent<RectTransform>();
+        rectHUD = GetComponent<RectTransform>();
+
+        MaxHP = player.GetComponent<Player>().DefaultHP;
+        MaxAmmo = player.GetComponent<Player>().defaultAmmo;
+        UpdateHP(MaxHP);
+        UpdateAmmo(MaxAmmo);
     }
 
-    void Update()
+    public void SetUpHUD()
     {
-        HPImg.fillAmount = (float)(player.GetComponent<Player>().HP) / (float)(player.GetComponent<Player>().DefaultHP);
+        var screenPos = Camera.main.WorldToScreenPoint(targetTransform.position + offset);
+        var localPos = Vector2.zero;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectParent, screenPos, hud_Camera, out localPos);
+        rectHUD.localPosition = localPos;
+    }
 
-        int ammoNum = player.GetComponent<Player>().ammo;
+    public void UpdateHP(int hp)
+    {
+        CurrentHP = hp;
+        HP_HUD.fillAmount = (float)CurrentHP / (float)MaxHP;
+        HP_Interface.fillAmount = (float)CurrentHP / (float)MaxHP;
+        HP_Value.text = CurrentHP.ToString() + "/" + MaxHP.ToString();
+    }
 
-        if(ammoNum >= 0)
-        {
-            for (int i = 0; i < ammoNum; i++)
-                AmmoImgs[i].enabled = true;
-
-            for (int i = DefaultAmmoNum - 1; i > ammoNum - 1; i--)
-                AmmoImgs[i].enabled = false;
-        }
+    public void UpdateAmmo(int ammo)
+    {
+        CurrentAmmo = ammo;
+        Ammo_HUD.fillAmount = (float)CurrentAmmo / (float)MaxAmmo;
+        Ammo_Interface.fillAmount = (float)CurrentAmmo / (float)MaxAmmo;
+        Ammo_Value.text = CurrentAmmo.ToString() + "/" + MaxAmmo.ToString();
     }
 }

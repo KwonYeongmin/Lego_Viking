@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private Vector3 direction;
     private Movement movement;
     private PlayerAnimator animator;
+    private PlayerHUD playerHUD;
 
     #region Input variables
     // #. Keyboard
@@ -22,12 +23,15 @@ public class Player : MonoBehaviour
     public bool isControl;
     [HideInInspector]
     public bool isButtonRoll;
+    public float rollDelay = 0.0f;
+    public float rollCoolTime = 2.0f;
     [HideInInspector]
     public bool isButtonFire;
     [HideInInspector]
     public bool isButtonReload;
     [HideInInspector]
     public bool isButtonGrenade;
+
     #endregion
 
     #region Weapon variables
@@ -43,7 +47,6 @@ public class Player : MonoBehaviour
     public GameObject grenadeObj;
     public Transform grenadePos;
     private bool bIsGrenadesEnable = true; //추가 : 수류탄 공격이 가능한지
-    private int maxGrenades = 3;
     public int hasGrenades;
     public float throwPower;
     public float throwHeight;
@@ -76,9 +79,14 @@ public class Player : MonoBehaviour
         movement = GetComponent<Movement>();
         animator = GetComponent<PlayerAnimator>();
         weapon = GetComponentInChildren<Weapon>();
+        playerHUD = FindObjectOfType<PlayerHUD>();
 
         HP = DefaultHP; // 추가
         ammo = defaultAmmo; // 추가
+
+        playerHUD.targetTransform = gameObject.transform;
+        playerHUD.offset = new Vector3(0, 5f, 0);
+        playerHUD.SetUpHUD();
     }
 
     // Update is called once per frame
@@ -100,21 +108,24 @@ public class Player : MonoBehaviour
 
     private void GetInput()
     {
-        // #. Keypad Control
-        if (keyControl[0]) { hAxis = -1; vAxis = 1; }
-        if (keyControl[1]) { hAxis = 0; vAxis = 1; }
-        if (keyControl[2]) { hAxis = 1; vAxis = 1; }
-        if (keyControl[3]) { hAxis = -1; vAxis = 0; }
-        if (keyControl[4]) { hAxis = 0; vAxis = 0; }
-        if (keyControl[5]) { hAxis = 1; vAxis = 0; }
-        if (keyControl[6]) { hAxis = -1; vAxis = -1; }
-        if (keyControl[7]) { hAxis = 0; vAxis = -1; }
-        if (keyControl[8]) { hAxis = 1; vAxis = -1; }
-        if (!isControl) { hAxis = 0; vAxis = 0; }
-
         // #. KeyBoard Control
-         hAxis = Input.GetAxisRaw("Horizontal"); // 좌,우 움직임
-         vAxis = Input.GetAxisRaw("Vertical"); // 위, 아래 움직임
+        hAxis = Input.GetAxisRaw("Horizontal"); // 좌,우 움직임
+        vAxis = Input.GetAxisRaw("Vertical"); // 위, 아래 움직임
+
+        // #. Keypad Control
+        if(hAxis == 0 && vAxis == 0)
+        {
+            if (keyControl[0]) { hAxis = -1; vAxis = 1; }
+            if (keyControl[1]) { hAxis = 0; vAxis = 1; }
+            if (keyControl[2]) { hAxis = 1; vAxis = 1; }
+            if (keyControl[3]) { hAxis = -1; vAxis = 0; }
+            if (keyControl[4]) { hAxis = 0; vAxis = 0; }
+            if (keyControl[5]) { hAxis = 1; vAxis = 0; }
+            if (keyControl[6]) { hAxis = -1; vAxis = -1; }
+            if (keyControl[7]) { hAxis = 0; vAxis = -1; }
+            if (keyControl[8]) { hAxis = 1; vAxis = -1; }
+            if (!isControl) { hAxis = 0; vAxis = 0; }
+        }
 
         isButtonRoll = Input.GetKeyDown(KeyCode.LeftShift);
         isButtonFire = Input.GetButton("Fire2"); //("Fire1");
@@ -151,7 +162,6 @@ public class Player : MonoBehaviour
             isButtonRoll = true;
             Roll();                     //  추가
         }
-
     }
 
     public void ButtonFireDown()
@@ -178,20 +188,23 @@ public class Player : MonoBehaviour
     private void Move()
     {
         direction = new Vector3(hAxis, 0, vAxis);
-
         movement.MoveTo(direction);
-
         animator.OnMovement(Mathf.Clamp01(Mathf.Abs(hAxis) + Mathf.Abs(vAxis)));
     }
 
     private void Roll()
     {
-        if (isButtonRoll && !movement.isRoll && !isButtonReload)
+        rollDelay += Time.deltaTime;
+        if(rollCoolTime < rollDelay)
         {
-            SoundManager.Instance.PlaySE(SoundList.Sound_roll, transform.position);
-            movement.isRoll = true;
-            movement.Roll(direction);
-            animator.OnRoll();
+            if (isButtonRoll && !movement.isRoll && !isButtonReload)
+            {
+                SoundManager.Instance.PlaySE(SoundList.Sound_roll, transform.position);
+                movement.isRoll = true;
+                movement.Roll(direction);
+                animator.OnRoll();
+                rollDelay = 0.0f;
+            }
         }
     }
 
@@ -212,6 +225,7 @@ public class Player : MonoBehaviour
             animator.OnFire();
             fireDelay = 0;
             ammo = weapon.currentAmmo; //추가
+            playerHUD.UpdateAmmo(ammo);
         }
     }
 
@@ -243,8 +257,7 @@ public class Player : MonoBehaviour
         if (isInvincible) return;
 
         HP = (HP - value) > 0 ? HP - value : 0; // 추가
-       // Debug.Log("HP: " +HP);
-       // Debug.Log("value: " +  value);
+        playerHUD.UpdateHP(HP);
     }
     #endregion
 
@@ -258,6 +271,7 @@ public class Player : MonoBehaviour
 
         HealFX.SetActive(true);
         StartCoroutine(OffHealFX());
+        playerHUD.UpdateHP(HP);
     }
 
     // #. Ammo
@@ -268,14 +282,14 @@ public class Player : MonoBehaviour
         weapon.currentAmmo = ammo;
         OtherFX.SetActive(true);
         StartCoroutine(OffOtherFX());
+        playerHUD.UpdateAmmo(ammo);
     }
     
     // #. Greande
     public void AddGrenade()
     {
         SoundManager.Instance.PlaySE(SoundList.Sound_acquisition_item, transform.position);
-        if (hasGrenades < maxGrenades)
-            hasGrenades++;
+        hasGrenades = 1;
         bIsGrenadesEnable = true;
         OtherFX.SetActive(true);
         StartCoroutine(OffOtherFX());
