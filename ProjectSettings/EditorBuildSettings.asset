@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/YM_Scene/220103.unity
     guid: cade5493c64ed7b47bd9e40b0a0c267e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/YM_Scene/YM_TEST.unity
     guid: 2245a03aec845074e9f81da8142dc766
   m_configObjects: {}

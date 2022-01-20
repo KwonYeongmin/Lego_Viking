@@ -115,8 +115,6 @@ public class StageManager : Singleton<StageManager>
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.BLUE;
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.BLUE);
-                    //attackSpawner.Instan
-                    // attackSpawner.test("b");
                     itemSpawner.CreatibleItemIndex = 3;
                     viking.speed = Speed * 1.1f;
                 }

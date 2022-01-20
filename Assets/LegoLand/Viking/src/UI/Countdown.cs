@@ -31,7 +31,7 @@ public class Countdown : MonoBehaviour
         else if (!bIsEnded)
         {
             EndTimer();
-            this.gameObject.SetActive(false); // 3,2,1,0 끝나면 이 게임 오브젝트 삭제
+            this.gameObject.SetActive(false); // 3,2,1,0 끝나면 이 게임 오브젝트 안보이기
         }
     }
 
