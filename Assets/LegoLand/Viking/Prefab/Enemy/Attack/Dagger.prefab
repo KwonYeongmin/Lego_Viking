@@ -316,12 +316,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  colortype: 0
   Dagger_fall_speed: 2
   Dagger_range: 2
   dagger_speed: 0.5
-  dagger1_damage: 1
-  dagger2_damage: 2
-  dagger3_damage: 3
+  dagger1_damage: 5
+  dagger2_damage: 6
+  dagger3_damage: 7
   lifeTime: 10
   particles:
   - {fileID: 299430426}

@@ -12,10 +12,10 @@ public class Arrow : MonoBehaviour
 
     [Header("낙하 속도")]
     private int arrow_damage = 0;
-    [SerializeField]
-    private int arrow1_damage = 1;
-    private int arrow2_damage = 2;
-    private int arrow3_damage = 3;
+    
+    [SerializeField] private int arrow1_damage = 1;
+    [SerializeField] private int arrow2_damage = 2;
+    [SerializeField] private int arrow3_damage = 3;
 
     [Header("캐릭터 이동속도 감소 비율")]
     [SerializeField]
