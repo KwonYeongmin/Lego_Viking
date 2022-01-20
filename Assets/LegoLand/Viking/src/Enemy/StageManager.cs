@@ -12,6 +12,7 @@ public class StageManager : Singleton<StageManager>
     private EnemyAttackSpawner attackSpawner;
     private ItemSpawner itemSpawner;
     private SceneManagement sceneManager;
+    private TimerUI Timer;
     private Viking viking;
     //public ItemSpawner itemSpawner; //bgm
 
