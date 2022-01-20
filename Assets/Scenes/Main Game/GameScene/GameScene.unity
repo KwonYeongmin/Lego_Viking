@@ -7038,7 +7038,7 @@ MonoBehaviour:
   - {fileID: 5934249048344279963, guid: ef3f8851144fb664d8ab4f32e02055ca, type: 3}
   SpawnPoint: {fileID: 1658191344}
   SpawnPointNum: 10
-  Interval: 5
+  Interval: 6
   InstanceCount: 1000
   Range: 5
   CreatibleItemIndex: 2

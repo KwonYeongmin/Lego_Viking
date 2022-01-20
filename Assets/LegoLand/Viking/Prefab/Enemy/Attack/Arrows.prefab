@@ -1575,9 +1575,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c05da8646372340aa0995d27b0fe81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  colortype: 0
   arrow_fall_speed: 3
-  arrow1_damage: 1
+  arrow1_damage: 5
+  arrow2_damage: 6
+  arrow3_damage: 7
   arrow_speed_down: 20
   lifeTime: 10
   particles:

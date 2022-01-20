@@ -67,19 +67,23 @@ public class StageManager : Singleton<StageManager>
     {
         if (Stage % 4 != 3)
         {
+            if (Stage == 15)
+                SceneManagement.Instance.ChangeScene("GameOver");
             Stage++;
             SetStage();
         }
         else if (Stage % 4 == 3)
         {
+
             if (enemies.Count <= 0)
             {
+                 if (Stage == 15)
+                    SceneManagement.Instance.ChangeScene("GameOver");
                 Stage++;
                 SetStage();
             }
         }
-        else if (Stage == 15)
-            SceneManagement.Instance.ChangeScene("GameOver");
+        
         Debug.Log("Stage: " + Stage);
     }
 
