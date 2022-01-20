@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class SoundList : MonoBehaviour
 {
+    [Header("Stage BGM")]
+    public AudioClip stage1;
+    public AudioClip stage1_Boss;
+    public AudioClip stage2;
+    public AudioClip stage2_Boss;
+    public AudioClip stage3;
+    public AudioClip stage3_Boss;
+    public AudioClip stage4;
+    public AudioClip stage4_Boss;
+
     [Header("Player Action Sound")]
     public AudioClip sound_walk_1;
     public AudioClip sound_walk_2;
@@ -39,7 +49,14 @@ public class SoundList : MonoBehaviour
     public AudioClip sound_win;
     public AudioClip sound_lose;
 
-
+    public static AudioClip Stage1 { get; private set; }
+    public static AudioClip Stage1_Boss { get; private set; }
+    public static AudioClip Stage2 { get; private set; }
+    public static AudioClip Stage2_Boss { get; private set; }
+    public static AudioClip Stage3 { get; private set; }
+    public static AudioClip Stage3_Boss { get; private set; }
+    public static AudioClip Stage4 { get; private set; }
+    public static AudioClip Stage4_Boss { get; private set; }
     public static AudioClip Sound_walk_1 { get; private set; }
     public static AudioClip Sound_walk_2 { get; private set; }
     public static AudioClip Sound_roll { get; private set; }
@@ -64,9 +81,16 @@ public class SoundList : MonoBehaviour
     public static AudioClip Sound_win { get; private set; }
     public static AudioClip Sound_lose { get; private set; }
 
-
     private void Awake()
     {
+        Stage1 = stage1;
+        Stage1_Boss = stage1_Boss;
+        Stage2 = stage2;
+        Stage2_Boss = stage2_Boss;
+        Stage3 = stage3;
+        Stage3_Boss = stage3_Boss;
+        Stage4 = stage4;
+        Stage4_Boss = stage4_Boss;
         Sound_walk_1 = sound_walk_1;
         Sound_walk_2 = sound_walk_2;
         Sound_roll = sound_roll;

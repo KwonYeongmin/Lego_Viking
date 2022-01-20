@@ -43,6 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904667d051a086140bc19e0b9b2cb2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: {fileID: 8300000, guid: becfd07404ae8784aa440bc473b97277, type: 3}
+  stage1: {fileID: 8300000, guid: 8aaa7e3e09e658f4d97b41e812b92614, type: 3}
+  stage1_Boss: {fileID: 8300000, guid: 77e8000a7d1f5fb459189c4c141344f3, type: 3}
+  stage2: {fileID: 8300000, guid: d93cbae8e59234748b46a2320ce9ddf8, type: 3}
+  stage2_Boss: {fileID: 8300000, guid: d2499ae8c0536eb4190081b45b5b50a6, type: 3}
+  stage3: {fileID: 8300000, guid: d784ef1feb9af8649b19ad0a3f72e05b, type: 3}
+  stage3_Boss: {fileID: 8300000, guid: ee6ce5552d0f9e741b55bb315b152524, type: 3}
+  stage4: {fileID: 8300000, guid: 18f51c64c3b4dd04793d4b725bdf002c, type: 3}
+  stage4_Boss: {fileID: 8300000, guid: bf077054a4a73484f839b19da3a4ad22, type: 3}
   sound_walk_1: {fileID: 8300000, guid: dc92be36492767f41a839165a2107efa, type: 3}
   sound_walk_2: {fileID: 8300000, guid: ec6efc0242cc50b45bb1ccc05922e022, type: 3}
   sound_roll: {fileID: 8300000, guid: fdc7733ae7de55e4aba68d0d4b7a5215, type: 3}

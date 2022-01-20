@@ -15,6 +15,11 @@ public class EnemySpawner : MonoBehaviour
     
     public EnemyType Type { get; private set; }
 
+    private void Awake()
+    {
+        StageManager.Instance.gameObject.SetActive(true);
+    }
+
     private void Start()
     {
        transform_ = GameObject.Find("enemyPoint").transform;

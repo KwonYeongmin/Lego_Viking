@@ -22,6 +22,7 @@ public class ItemSpawner : MonoBehaviour
 
         for (int i = 0; i < SpawnPointNum; i++)
             SpawnPoints[i] = SpawnPoint.transform.GetChild(i).gameObject.GetComponent<Transform>();
+
     }
 
     IEnumerator Start()
