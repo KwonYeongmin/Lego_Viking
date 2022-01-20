@@ -37,4 +37,9 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator.SetTrigger("doShot");
     }
+
+    public void OnDead()
+    {
+        animator.SetBool("isDead", true);
+    }
 }

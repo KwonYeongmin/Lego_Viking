@@ -39,7 +39,8 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+            if(collision.gameObject.GetComponent<Enemy>().HP > 0)
+                collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
         }
 
         speed = 0;

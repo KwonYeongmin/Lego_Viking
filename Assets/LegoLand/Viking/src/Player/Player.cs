@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private Vector3 direction;
     private Movement movement;
     private PlayerAnimator animator;
+    public SceneManagement scene;
     [SerializeField]private PlayerHUD playerHUD;
 
     #region Input variables
@@ -58,6 +59,7 @@ public class Player : MonoBehaviour
     [Header("HP")]
     public int DefaultHP;
     [HideInInspector] public int HP;
+    public bool isDead = false;
 
     private Timer InvincibleTimer = new Timer();
     private Timer SpeedUpTimer = new Timer();
@@ -82,6 +84,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<PlayerAnimator>();
         weapon = GetComponentInChildren<Weapon>();
         playerHUD = FindObjectOfType<PlayerHUD>();
+        scene = FindObjectOfType<SceneManagement>();
 
         HP = DefaultHP; // 추가
         ammo = defaultAmmo; // 추가
@@ -96,6 +99,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (isDead) return;
+
         GetInput(); // Update Input
 
         Move();
@@ -267,7 +272,19 @@ public class Player : MonoBehaviour
         if (isInvincible) return;
 
         HP = (HP - value) > 0 ? HP - value : 0; // 추가
+        if (HP <= 0)
+        {
+            isDead = true;
+            animator.OnDead();
+            Invoke("GameOverScene", 3.0f);
+            return;
+        }
         playerHUD.UpdateHP(HP);
+    }
+
+    private void GameOverScene()
+    {
+        scene.ChangeScene("GameOver");
     }
     #endregion
 
@@ -366,7 +383,7 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-
+    #region OFF FX
     IEnumerator OffHealFX()
     {
         yield return new WaitForSeconds(FX_Duration);
@@ -378,5 +395,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(FX_Duration);
         OtherFX.SetActive(false);
     }
-
+    #endregion
 }
