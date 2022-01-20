@@ -78,8 +78,9 @@ public class EnemyAttackSpawner : MonoBehaviour
                         }
                         else
                         {
-                            InstantiateAttack(Dagger);
+                            InstantiateAttack(Arrow);
                             obj.GetComponent<Arrow>().colortype = (EnemyColorType)(Random.Range(0, 3));
+                            Debug.Log((EnemyColorType)(Random.Range(0, 3)));
                         }
 
                     } break;

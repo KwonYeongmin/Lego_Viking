@@ -54,6 +54,7 @@ public class Arrow : MonoBehaviour
 
     private void InitializeState()
     {
+        Debug.Log("InitializeState");
         switch (colortype)
         {
             case EnemyColorType.GREY:
