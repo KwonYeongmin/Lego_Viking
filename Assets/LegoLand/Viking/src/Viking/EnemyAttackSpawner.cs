@@ -58,7 +58,6 @@ public class EnemyAttackSpawner : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log("final stage »ý¼º");
 
                             int index = Random.Range(0, 3);
 
@@ -72,30 +71,99 @@ public class EnemyAttackSpawner : MonoBehaviour
                     {
                         rot = Quaternion.Euler(0, 0, 0);
 
-                        InstantiateAttack(Arrow);
+                        if (StageManager.Instance.Stage % 4 != 3)
+                        {
+                            InstantiateAttack(Arrow);
+                            obj.GetComponent<Arrow>().colortype = StageManager.Instance.ColorType;
+                        }
+                        else
+                        {
+                            InstantiateAttack(Dagger);
+                            obj.GetComponent<Arrow>().colortype = (EnemyColorType)(Random.Range(0, 3));
+                        }
 
                     } break;
                 case EnemyType.Enemy_Dagger:
                     {
                         rot = Quaternion.Euler(90.0f, direction[Random.Range(0, 4)], 0);
-                        InstantiateAttack(Dagger);
+                        if (StageManager.Instance.Stage % 4 != 3)
+                        {
+                            InstantiateAttack(Dagger);
+                            obj.GetComponent<Dagger>().colortype = StageManager.Instance.ColorType;
+                        }
+                        else
+                        {
+                            InstantiateAttack(Dagger);
+                            obj.GetComponent<Dagger>().colortype = (EnemyColorType)(Random.Range(0, 3));
+                        }
+                        
                     }
                     break;
                 case EnemyType.Enemy_Boss:
                     {
+                        if (StageManager.Instance.Stage % 4 != 3)
+                        {
+                            int index = Random.Range(0, 3);
+                            if (index == 0)
+                            {
+                                rot = Quaternion.Euler(180.0f, 0, 0);
+                                InstantiateAttack(Missiles[StageManager.Instance.Stage % 4]);
+                              
+                            }
+                            else if (index == 1)
+                            {
+                                rot = Quaternion.Euler(0, 0, 0);
+                                InstantiateAttack(Arrow);
+                                obj.GetComponent<Arrow>().colortype = StageManager.Instance.ColorType;
+                            }
+                            else if (index == 2)
+                            {
+                                rot = Quaternion.Euler(90.0f, direction[Random.Range(0, 4)], 0);
+                                InstantiateAttack(Dagger);
+                                obj.GetComponent<Dagger>().colortype = StageManager.Instance.ColorType;
+                            }
+                        }
+                        else
+                        {
+                            int index_ = Random.Range(0, 3);
+
+                            if (!StageManager.Instance.enemiesAttacklist.Contains(index_))
+                            {
+                                InstantiateAttack(Missiles[index_]);
+                                int index = Random.Range(0, 3);
+                                if (index == 0)
+                                {
+                                    rot = Quaternion.Euler(180.0f, 0, 0);
+                                    InstantiateAttack(Missiles[Random.Range(0,3)]);
+                                }
+                                else if (index == 1)
+                                {
+                                    rot = Quaternion.Euler(0, 0, 0);
+                                    InstantiateAttack(Arrow);
+                                    obj.GetComponent<Arrow>().colortype = (EnemyColorType)(Random.Range(0, 3));
+                                }
+                                else if (index == 2)
+                                {
+                                    rot = Quaternion.Euler(90.0f, direction[Random.Range(0, 4)], 0);
+                                    InstantiateAttack(Dagger);
+                                    obj.GetComponent<Dagger>().colortype = (EnemyColorType)(Random.Range(0, 3));
+                                }
+                            }
+                                
+                        }
                     }
                     break;      
             }
             yield return new WaitForSeconds(interval);
         }
     }
-   
 
+    GameObject obj;
     public void InstantiateAttack(GameObject prefab )
     {
         ChangePositionRandom();
 
-        GameObject obj= Instantiate(prefab, this.transform.position, rot);
+        obj = Instantiate(prefab, this.transform.position, rot);
         obj.transform.parent = GameObject.Find("Deck").transform;
     }
 

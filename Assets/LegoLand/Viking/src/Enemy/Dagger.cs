@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dagger : MonoBehaviour
 {
     public AttackState state = AttackState.one;
-
+    public EnemyColorType colortype = EnemyColorType.GREY;
     [Header("낙하 속도")]
     [SerializeField]
     private float Dagger_fall_speed = 2.0f; 
@@ -46,6 +46,8 @@ public class Dagger : MonoBehaviour
         rig = this.GetComponent<Rigidbody>();
         InitializeState(); // 단계별 피해량 설정
 
+        
+
         direction[0] = 0;
         direction[1] = 90;
         direction[2] = -90;
@@ -53,15 +55,15 @@ public class Dagger : MonoBehaviour
         float num = direction[Random.Range(0, 4)];
         this.gameObject.transform.rotation = Quaternion.Euler(90.0f, num, 0);
 
-        Debug.Log(num);
+        
     }
 
 
     private void InitializeState()
     {
-        switch (state)
+        switch (colortype)
         {
-            case AttackState.one:
+            case EnemyColorType.GREY:
                 {
                     dagger_damage = dagger1_damage;
                     particles[0].SetActive(true);
@@ -73,7 +75,7 @@ public class Dagger : MonoBehaviour
                     projectors[2].SetActive(false);
                 }
                 break;
-            case AttackState.two:
+            case EnemyColorType.BLUE:
                 {
                     dagger_damage = dagger2_damage;
                     particles[0].SetActive(false);
@@ -84,7 +86,8 @@ public class Dagger : MonoBehaviour
                     projectors[2].SetActive(false);
                 }
                 break;
-            case AttackState.three: {  dagger_damage = dagger3_damage;
+            case EnemyColorType.YELLOW:
+                {  dagger_damage = dagger3_damage;
                     particles[0].SetActive(false);
                     particles[1].SetActive(false);
                     particles[2].SetActive(true);
@@ -153,7 +156,6 @@ public class Dagger : MonoBehaviour
             Vector3 direction = transform.forward;
            float sp= Dagger_fall_speed;
             rig.AddForce(direction * sp);
-            // Debug.Log("Not bIsFallen");
         }
         else
         {
@@ -161,7 +163,6 @@ public class Dagger : MonoBehaviour
             float sp = dagger_speed;
             rig.AddForce(direction * sp);
             transform.Rotate(0.0f,0.0f,0.0f);
-            // Debug.Log("bIsFallen");
         }
 
     }

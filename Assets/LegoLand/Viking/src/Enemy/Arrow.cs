@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public AttackState state = AttackState.one;
-
+   // public AttackState state = AttackState.one;
+    public EnemyColorType colortype = EnemyColorType.GREY;
     [Header("³«ÇÏ ¼Óµµ")]
     [SerializeField]
     private float arrow_fall_speed = 3.0f;
@@ -54,9 +54,9 @@ public class Arrow : MonoBehaviour
 
     private void InitializeState()
     {
-        switch (state)
+        switch (colortype)
         {
-            case AttackState.one:
+            case EnemyColorType.GREY:
                 {
                     arrow_damage = arrow1_damage;
                     particles[0].SetActive(true);
@@ -68,7 +68,7 @@ public class Arrow : MonoBehaviour
                     projectors[2].SetActive(false);
                 }
                 break;
-            case AttackState.two:
+            case EnemyColorType.BLUE:
                 {
                     arrow_damage = arrow2_damage; 
                      particles[0].SetActive(false);
@@ -79,7 +79,7 @@ public class Arrow : MonoBehaviour
                     projectors[2].SetActive(false);
                 }
                 break;
-            case AttackState.three:
+            case EnemyColorType.YELLOW:
                 {
                     arrow_damage = arrow3_damage; //
                     particles[0].SetActive(false);
