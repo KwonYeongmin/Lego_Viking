@@ -6,26 +6,57 @@ using TMPro;
 
 public class Countdown : MonoBehaviour
 {
-    Timer countdownTimer = new Timer();
-    [HideInInspector]  public TMP_Text TimeTEXT;
+     [HideInInspector]
+    public TMP_Text TimeTEXT;
 
-    void StartTimer() 
-    {
-        countdownTimer.ResetTimer();
-        countdownTimer.StartTimer();
-    }
+    private float timer;
+    private float MaxTime = 3f;
+    private bool bIsEnded;
+
+    
 
     void Update()
     {
-        int countdown = 3-(int)(countdownTimer.GetTimer());
-        TimeTEXT.text = countdown.ToString();
+        if (bIsEnded)
+            return;
 
-        if (countdownTimer.GetTimer() >= 3)
+        Check_Timer();
+    }
+
+    private void Check_Timer()
+    {
+
+        if (0 < timer)
         {
-            this.gameObject.SetActive(false);
-            countdownTimer.ResetTimer();
+            timer -= Time.deltaTime;
+            TimeTEXT.text =((int)timer).ToString();
         }
+        else if (!bIsEnded)
+        {
+            EndTimer();
+            this.gameObject.SetActive(false); // 3,2,1,0 끝나면 이 게임 오브젝트 삭제
+        }
+
+
+    }
+
+    private void EndTimer()
+    {
+        timer = 0;
+        TimeTEXT.text = ((int)timer).ToString();
+        bIsEnded = true;
     }
 
 
+    private void StartTimer() //여기서 시작해주면 됨
+    {
+        timer = MaxTime;
+        TimeTEXT.text = ((int)timer).ToString();
+        bIsEnded = false;
+    }
+
 }
+
+
+
+

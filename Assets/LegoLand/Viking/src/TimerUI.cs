@@ -74,9 +74,9 @@ public class TimerUI : MonoBehaviour
     private void UpdateSpeed(float value1, float value2, float value3)
     {
        
-        if (Min >= 1 && Min < 2) { Debug.Log("value1"); StageManager.Instance.viking.speed = Speed * value1; }
-        else if (Min >= 2) { Debug.Log("value2"); StageManager.Instance.viking.speed = Speed * value2; }
-        else { Debug.Log("value3"); StageManager.Instance.viking.speed = Speed * value3; }
+        if (Min >= 1 && Min < 2) {  StageManager.Instance.viking.speed = Speed * value1; }
+        else if (Min >= 2) { StageManager.Instance.viking.speed = Speed * value2; }
+        else {  StageManager.Instance.viking.speed = Speed * value3; }
     }
 
 }
