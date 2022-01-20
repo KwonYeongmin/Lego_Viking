@@ -10,11 +10,12 @@ public class StageManager : Singleton<StageManager>
 
     private EnemySpawner enemySpawner;
     private EnemyAttackSpawner attackSpawner;
-    private ItemSpawner itemSpawner; 
+    private ItemSpawner itemSpawner;
+    private SceneManagement sceneManager;
     private Viking viking;
     //public ItemSpawner itemSpawner; //bgm
 
-    public int Stage { get; private set; }
+    public int Stage;// { get; private set; }
    // public int Index { get; private set; }
     public EnemyType Type = EnemyType.Enemy_Missile;
     public EnemyColorType ColorType = EnemyColorType.GREY;
@@ -26,14 +27,16 @@ public class StageManager : Singleton<StageManager>
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         itemSpawner = GameObject.Find("ItemSpawner").GetComponent<ItemSpawner>();
         viking = GameObject.Find("Pin").GetComponent<Viking>();
+        sceneManager = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
         Speed = viking.speed;
     }
 
     void Start()
     {
-        Stage = 15;
-        
-        SetStage();
+        //  Stage = 0;
+        //  SetStage();
+
+        Stage = 0;
     }
 
     private void Update()
@@ -67,8 +70,8 @@ public class StageManager : Singleton<StageManager>
     {
         if (Stage % 4 != 3)
         {
-            if (Stage == 15)
-                SceneManagement.Instance.ChangeScene("GameOver");
+
+                
             Stage++;
             SetStage();
         }
@@ -77,8 +80,12 @@ public class StageManager : Singleton<StageManager>
 
             if (enemies.Count <= 0)
             {
-                 if (Stage == 15)
-                    SceneManagement.Instance.ChangeScene("GameOver");
+                if (Stage == 15)
+                {
+                    sceneManager.ChangeScene("GameOver");
+                    Stage = 0;
+                }
+                    
                 Stage++;
                 SetStage();
             }
@@ -87,7 +94,7 @@ public class StageManager : Singleton<StageManager>
         Debug.Log("Stage: " + Stage);
     }
 
-    void SetStage()
+    public void SetStage()
     {
         Debug.Log("SetStage");
         

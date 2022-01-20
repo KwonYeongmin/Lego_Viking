@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManagement : Singleton<SceneManagement>
+public class SceneManagement : MonoBehaviour
 {
-    protected SceneManagement(){}
 
     public AudioClip title;
 
@@ -17,6 +16,12 @@ public class SceneManagement : Singleton<SceneManagement>
     public void ChangeScene(string scenename)
     {
         SceneManager.LoadScene(scenename);
+    }
+
+    public void GameScene()
+    {
+        SceneManager.LoadScene("GameScene");
+       
     }
 
     public void QuitApplication()

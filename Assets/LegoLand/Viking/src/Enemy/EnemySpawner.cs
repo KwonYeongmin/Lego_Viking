@@ -18,16 +18,19 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         StageManager.Instance.gameObject.SetActive(true);
-        if(!SceneManagement.Instance.gameObject) SceneManagement.Instance.gameObject.SetActive(true);
     }
 
     private void Start()
     {
        transform_ = GameObject.Find("enemyPoint").transform;
+
+        StageManager.Instance.Stage = 0;
+        StageManager.Instance.SetStage();
     }
 
     public void InstantiateEnemies(EnemyType type)
     {
+        transform_ = GameObject.Find("enemyPoint").transform;
         switch (type)
         {
             case EnemyType.Enemy_Missile:
