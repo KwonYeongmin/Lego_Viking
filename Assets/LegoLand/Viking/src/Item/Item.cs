@@ -113,3 +113,39 @@ public class Timer
         timer += Time.deltaTime;
     }
 }
+
+
+
+/*
+   Timer countdownTimer = new Timer();
+   [HideInInspector]  public TMP_Text TimeTEXT;
+
+   private void Start()
+   {
+       StartTimer();
+   }
+
+   void StartTimer() 
+   {
+       countdownTimer.ResetTimer();
+       countdownTimer.StartTimer();
+   }
+   private void FixedUpdate()
+   {
+       countdownTimer.UpdateTimer();
+   }
+
+   void Update()
+   {
+
+       int countdown = 3-(int)(countdownTimer.GetTimer());
+       TimeTEXT.text = countdown.ToString();
+
+
+       if (countdownTimer.GetTimer() >= 3)
+       {
+           this.gameObject.SetActive(false);
+           countdownTimer.ResetTimer();
+       }
+   }
+   */

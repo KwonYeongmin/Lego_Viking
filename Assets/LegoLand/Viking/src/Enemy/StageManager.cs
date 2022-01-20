@@ -29,7 +29,7 @@ public class StageManager : Singleton<StageManager>
         itemSpawner = GameObject.Find("ItemSpawner").GetComponent<ItemSpawner>();
         viking = GameObject.Find("Pin").GetComponent<Viking>();
         sceneManager = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
-      Timer = GameObject.Find("Time").GetComponent<TimerUI>();
+        Timer = GameObject.Find("Time").GetComponent<TimerUI>();
         Speed = viking.speed;
     }
 
@@ -115,8 +115,6 @@ public class StageManager : Singleton<StageManager>
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.BLUE;
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.BLUE);
-                    //attackSpawner.Instan
-                    // attackSpawner.test("b");
                     itemSpawner.CreatibleItemIndex = 3;
                     viking.speed = Speed * 1.1f;
                 }

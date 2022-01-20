@@ -25,7 +25,6 @@ public class Countdown : MonoBehaviour
 
     private void Check_Timer()
     {
-
         if (0 < timer)
         {
             timer -= Time.deltaTime;
@@ -34,10 +33,8 @@ public class Countdown : MonoBehaviour
         else if (!bIsEnded)
         {
             EndTimer();
-            this.gameObject.SetActive(false); // 3,2,1,0 끝나면 이 게임 오브젝트 삭제
+            this.gameObject.SetActive(false); // 3,2,1,0 끝나면 이 게임 오브젝트 안보이기
         }
-
-
     }
 
     private void EndTimer()
