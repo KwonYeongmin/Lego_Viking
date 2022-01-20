@@ -62,7 +62,7 @@ public class TimerUI : MonoBehaviour
             case 7: { UpdateSpeed(1.7f, 1.7f, 1.5f); } break;//2-4
             case 8: { UpdateSpeed(1.3f, 1.4f, 1.2f); } break; //3-1
             case 9: { UpdateSpeed(1.5f, 1.4f, 1.3f); } break;//3-2
-            case 10: { UpdateSpeed(1.5f, 1.4f, 1.3f); } break;//3-3
+            case 10: { UpdateSpeed(1.5f, 1.6f, 1.4f); } break;//3-3
             case 11: { UpdateSpeed(1.8f, 1.8f, 1.6f); } break;//3-4
             case 12: { UpdateSpeed(1.4f, 1.5f, 1.3f); } break;//4-1
             case 13: { UpdateSpeed(1.6f, 1.5f, 1.4f); } break; //4-2
