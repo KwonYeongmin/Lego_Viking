@@ -37,20 +37,21 @@ public class EnemyHUD : MonoBehaviour
     private void Start()
     {
         // 위치 조정
-        Vector3 curPos = this.gameObject.GetComponentInChildren<RectTransform>().position;
+       // Vector3 curPos = this.GetComponent<RectTransform>().localPosition;
+
         if (Stage % 4 == 3)
         {
             if (enemySC.ColorType == EnemyColorType.GREY) { HPImg.color = new Color32(255, 255, 255, 255); }
             else if (enemySC.ColorType == EnemyColorType.BLUE)
             {
-                this.gameObject.GetComponentInChildren<RectTransform>().position
-                    = new Vector3(curPos.x, 355.0f, curPos.z);
+                this.gameObject.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition
+                    = new Vector3(-572.0f, 355.0f, 0);
                 HPImg.color = new Color32(255, 255, 255, 255);
             }
             else if (enemySC.ColorType == EnemyColorType.YELLOW)
             {
-                this.gameObject.GetComponentInChildren<RectTransform>().position
-                  = new Vector3(curPos.x, 245.0f, curPos.z);
+                this.gameObject.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition
+                  = new Vector3(-572.0f, 245.0f, 0);
                 HPImg.color = new Color32(255, 131, 81, 255);
             }
         }

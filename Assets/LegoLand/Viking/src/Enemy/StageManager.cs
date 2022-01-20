@@ -18,25 +18,32 @@ public class StageManager : Singleton<StageManager>
 
     void Start()
     {
-        Stage = 0;
+        Stage = 3;
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         itemSpawner = GameObject.Find("ItemSpawner").GetComponent<ItemSpawner>();
         SetStage();
     }
 
-   
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ChangeStage();
-        }
-    }
+    private int enemyNum = 0;
 
     public void ChangeStage()
     {
-        Stage++;
-        SetStage();
+        if (Stage % 4 != 3)
+        {
+            Stage++;
+            SetStage();
+        }
+        else
+        {
+            enemyNum++;
+            if (enemyNum >= 3)
+            {
+                Stage++;
+                SetStage();
+            }
+        }
+
+        Debug.Log("Stage: "+Stage);
     }
 
     void SetStage()
@@ -72,6 +79,7 @@ public class StageManager : Singleton<StageManager>
                 {
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Missile);
                     Type = EnemyType.Enemy_Missile;
+                    enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
                 }
                 break;
@@ -98,6 +106,7 @@ public class StageManager : Singleton<StageManager>
                 {
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Arrow);
                     itemSpawner.CreatibleItemIndex = 5;
+                    enemyNum = 0;
                 }
                 break;
             case 8: // 3-1
@@ -121,6 +130,7 @@ public class StageManager : Singleton<StageManager>
             case 11: // 3-4
                 {
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Dagger);
+                    enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
                 }
                 break;
@@ -145,6 +155,7 @@ public class StageManager : Singleton<StageManager>
             case 15: // 4-4
                 {
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Boss);
+                    enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
                 }
                 break;
