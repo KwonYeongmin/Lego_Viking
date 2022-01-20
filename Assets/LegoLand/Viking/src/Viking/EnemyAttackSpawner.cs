@@ -31,6 +31,8 @@ public class EnemyAttackSpawner : MonoBehaviour
     
     IEnumerator Start()
     {
+        Debug.Log("坷宏璃飘 积己");
+
         float[] direction = new float[4];
         direction[0] = 0;
         direction[1] = 90;
@@ -45,23 +47,40 @@ public class EnemyAttackSpawner : MonoBehaviour
                     {
                         rot= Quaternion.Euler(180.0f, 0, 0);
 
-                        if (StageManager.Instance.ColorType == EnemyColorType.GREY)
-                            InstantiateAttack(Missiles[0]);
-                       else if (StageManager.Instance.ColorType == EnemyColorType.BLUE)
-                            InstantiateAttack(Missiles[1]);
-                        else if (StageManager.Instance.ColorType == EnemyColorType.YELLOW)
-                            InstantiateAttack(Missiles[2]);
+                        if (StageManager.Instance.Stage % 4 != 3)
+                        {
+                            if (StageManager.Instance.ColorType == EnemyColorType.GREY)
+                                InstantiateAttack(Missiles[0]);
+                            else if (StageManager.Instance.ColorType == EnemyColorType.BLUE)
+                                InstantiateAttack(Missiles[1]);
+                            else if (StageManager.Instance.ColorType == EnemyColorType.YELLOW)
+                                InstantiateAttack(Missiles[2]);
+                        }
+                        else
+                        {
+                            Debug.Log("final stage 积己");
+
+                            int index = Random.Range(0, 3);
+
+                            if(!StageManager.Instance.enemiesAttacklist.Contains(index))
+                                InstantiateAttack(Missiles[index]);
+                        }
+                     
                     }
                     break;
                 case EnemyType.Enemy_Arrow:
                     {
                         rot = Quaternion.Euler(0, 0, 0);
+
                         InstantiateAttack(Arrow);
+
                     } break;
                 case EnemyType.Enemy_Dagger:
                     {
-
-                    } break;
+                        rot = Quaternion.Euler(90.0f, direction[Random.Range(0, 4)], 0);
+                        InstantiateAttack(Dagger);
+                    }
+                    break;
                 case EnemyType.Enemy_Boss:
                     {
                     }
@@ -70,17 +89,21 @@ public class EnemyAttackSpawner : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
     }
+   
 
+    private void Update()
+    {
+        if (StageManager.Instance.Stage %4==3)
+        {
+          
+        }
+    }
 
     public void InstantiateAttack(GameObject prefab )
     {
         ChangePositionRandom();
 
-        if (StageManager.Instance.Stage % 4 != 3) Instantiate(prefab, this.transform.position, rot);
-        else
-        {
-          
-        }
+        Instantiate(prefab, this.transform.position, rot);
     }
 
     private void ChangePositionRandom()
