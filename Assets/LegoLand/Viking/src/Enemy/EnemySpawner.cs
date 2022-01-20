@@ -37,6 +37,7 @@ public class EnemySpawner : MonoBehaviour
                         enemy = Instantiate(Enemies_Missile[i], pos, transform_.rotation);
                         enemy.transform.parent = transform_;
                         enemy.GetComponent<Enemy>().initialized(i);
+                        StageManager.Instance.AddEnemies(enemy);
                     }
                 }
                 break;
@@ -48,6 +49,7 @@ public class EnemySpawner : MonoBehaviour
                         enemy = Instantiate(Enemies_Arrow[i], pos, transform_.rotation);
                         enemy.transform.parent = transform_;
                         enemy.GetComponent<Enemy>().initialized(i);
+                        StageManager.Instance.AddEnemies(enemy);
                     }
                 }
                 break;
@@ -59,6 +61,7 @@ public class EnemySpawner : MonoBehaviour
                         enemy = Instantiate(Enemies_Dagger[i], pos, transform_.rotation);
                         enemy.transform.parent = transform_;
                         enemy.GetComponent<Enemy>().initialized(i);
+                        StageManager.Instance.AddEnemies(enemy);
                     }
                 }
                 break;
@@ -70,6 +73,7 @@ public class EnemySpawner : MonoBehaviour
                         enemy = Instantiate(Enemies_Boss[i], pos, transform_.rotation);
                         enemy.transform.parent = transform_;
                         enemy.GetComponent<Enemy>().initialized(i);
+                        StageManager.Instance.AddEnemies(enemy);
                     }
                 }
                 break;

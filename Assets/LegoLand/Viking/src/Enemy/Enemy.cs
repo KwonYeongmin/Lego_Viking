@@ -86,8 +86,8 @@ public class Enemy : MonoBehaviour
     {
         if (HP <= 0)
         {
+            if (StageManager.Instance.Stage % 4 == 3) StageManager.Instance.RemoveEnemies(this.gameObject);
             StageManager.Instance.ChangeStage();
-
             SoundManager.Instance.PlaySE(SoundList.Sound_monster_death, transform.position);
 
             Destroy(HUD);

@@ -35,11 +35,22 @@ public class StageManager : Singleton<StageManager>
         
         SetStage();
     }
-    private int enemyNum = 0;
 
     private void Update()
     {
         if (SceneManager.GetActiveScene().name == "Title") Stage = 0;
+    }
+
+
+    public List<GameObject> enemies = new List<GameObject>();
+
+    public void AddEnemies(GameObject obj)
+    {
+        enemies.Add(obj);
+    }
+    public void RemoveEnemies(GameObject obj)
+    {
+        enemies.Remove(obj);
     }
 
     public void ChangeStage()
@@ -49,16 +60,16 @@ public class StageManager : Singleton<StageManager>
             Stage++;
             SetStage();
         }
-        else
+        else if (Stage % 4 == 3)
         {
-            enemyNum++;
-            if (enemyNum >= 3)
+            if (enemies.Count <= 0)
             {
                 Stage++;
                 SetStage();
             }
         }
-
+        else if (Stage == 15)
+            SceneManagement.Instance.ChangeScene("GameOver");
         Debug.Log("Stage: " + Stage);
     }
 
@@ -69,7 +80,6 @@ public class StageManager : Singleton<StageManager>
 
         switch (Stage)
         {
-          
             case 0: // 1-1
                 {
                     Type = EnemyType.Enemy_Missile;
@@ -106,7 +116,6 @@ public class StageManager : Singleton<StageManager>
                     
                     Type = EnemyType.Enemy_Missile;
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Missile);
-                    enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.4f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage1_Boss);
@@ -114,7 +123,6 @@ public class StageManager : Singleton<StageManager>
                 break;
             case 4: //2-1
                 {
-                   
                     Type = EnemyType.Enemy_Arrow;
                     ColorType = EnemyColorType.GREY;
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Arrow, EnemyColorType.GREY);
@@ -147,7 +155,6 @@ public class StageManager : Singleton<StageManager>
                     Type = EnemyType.Enemy_Arrow;
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Arrow);
                     itemSpawner.CreatibleItemIndex = 5;
-                    enemyNum = 0;
                     viking.speed = Speed * 1.5f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage2_Boss);
                 }
@@ -184,7 +191,6 @@ public class StageManager : Singleton<StageManager>
                 {
                     Type = EnemyType.Enemy_Dagger;
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Dagger);
-                    enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.6f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage3_Boss);
@@ -222,7 +228,6 @@ public class StageManager : Singleton<StageManager>
                 {
                     Type = EnemyType.Enemy_Boss;
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Boss);
-                    enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.7f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage4_Boss);

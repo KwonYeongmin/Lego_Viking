@@ -19,27 +19,78 @@ public class EnemyAttackSpawner : MonoBehaviour
     public float dagger_range = 2.0f;
 
     private Transform transform_;
+    private Quaternion rot;
 
-
-    IEnumerator Start()
+    private void Awake()
     {
         transform_ = GameObject.Find("AttackSpawnPoint").transform;
+        rot = this.transform.rotation;
+    }
 
-        yield return new WaitForSeconds(interval);
+    
+    
+    IEnumerator Start()
+    {
+        float[] direction = new float[4];
+        direction[0] = 0;
+        direction[1] = 90;
+        direction[2] = -90;
+        direction[3] = 180.0f;
 
         while (true)
         {
-            
+            switch (StageManager.Instance.Type)
+            {
+                case EnemyType.Enemy_Missile:
+                    {
+                        rot= Quaternion.Euler(180.0f, 0, 0);
+
+                        if (StageManager.Instance.ColorType == EnemyColorType.GREY)
+                            InstantiateAttack(Missiles[0]);
+                       else if (StageManager.Instance.ColorType == EnemyColorType.BLUE)
+                            InstantiateAttack(Missiles[1]);
+                        else if (StageManager.Instance.ColorType == EnemyColorType.YELLOW)
+                            InstantiateAttack(Missiles[2]);
+                    }
+                    break;
+                case EnemyType.Enemy_Arrow:
+                    {
+                        rot = Quaternion.Euler(0, 0, 0);
+                        InstantiateAttack(Arrow);
+                    } break;
+                case EnemyType.Enemy_Dagger:
+                    {
+
+                    } break;
+                case EnemyType.Enemy_Boss:
+                    {
+                    }
+                    break;      
+            }
+            yield return new WaitForSeconds(interval);
         }
-
-        
     }
 
 
-    public void InstantiateEnemy(EnemyType type, int n)
+    public void InstantiateAttack(GameObject prefab )
     {
+        ChangePositionRandom();
 
+        if (StageManager.Instance.Stage % 4 != 3) Instantiate(prefab, this.transform.position, rot);
+        else
+        {
+          
+        }
     }
+
+    private void ChangePositionRandom()
+    {
+        transform.position 
+            = new Vector3(Random.Range(-RangeX, RangeX)
+                                   , transform.position.y,
+                                  Random.Range(-RangeZ, RangeZ));
+    }
+
     /*
     private EnemyType Type = EnemyManager.Instance.Type;
 
