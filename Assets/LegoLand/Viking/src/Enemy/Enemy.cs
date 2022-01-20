@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public  enum EnemyColorType{GREY, BLUE, YELLOW};
+public enum EnemyType { Enemy_Missile, Enemy_Arrow, Enemy_Dagger, Enemy_Boss };
 
 public class Enemy : MonoBehaviour
 {
