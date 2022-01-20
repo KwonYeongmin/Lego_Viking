@@ -39,6 +39,7 @@ public class StageManager : Singleton<StageManager>
     private void Update()
     {
         if (SceneManager.GetActiveScene().name == "Title") Stage = 0;
+        if (SceneManager.GetActiveScene().name == "EndGame") Stage = 0;
     }
 
 
