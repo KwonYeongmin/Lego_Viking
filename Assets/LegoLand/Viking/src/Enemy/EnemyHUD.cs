@@ -1,18 +1,113 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyHUD : MonoBehaviour
 {
-    private Camera cam;
+    private int DefaultHP;
+ 
+    // HPSlider
+    public Slider HPSlider;
+    public Image HPImg;
+    public Sprite[] HPSprites;
+    //HPText
+    public TMP_Text HP_TXT;
+    
+    //ProfileImage
+    public Sprite[] InfoSprites; //3개
+    public Image InfoImage;
 
-    void Start()
+    //ProfileStageInfo
+    public TMP_Text StageInfo_TXT;
+
+
+    int Stage;
+    EnemyType Type = EnemyType.Enemy_Missile;
+    Enemy enemySC;
+    bool bEndSetting=false;
+
+    void Awake()
     {
-        cam = Camera.main;
+        //stage
+        Stage = StageManager.Instance.Stage;
     }
 
-    void LateUpdate()
+    private void Start()
     {
-        transform.LookAt(cam.transform);
+        // 위치 조정
+        Vector3 curPos = this.gameObject.GetComponentInChildren<RectTransform>().position;
+        if (Stage % 4 == 3)
+        {
+            if (enemySC.ColorType == EnemyColorType.GREY) { HPImg.color = new Color32(255, 255, 255, 255); }
+            else if (enemySC.ColorType == EnemyColorType.BLUE)
+            {
+                this.gameObject.GetComponentInChildren<RectTransform>().position
+                    = new Vector3(curPos.x, 355.0f, curPos.z);
+                HPImg.color = new Color32(255, 255, 255, 255);
+            }
+            else if (enemySC.ColorType == EnemyColorType.YELLOW)
+            {
+                this.gameObject.GetComponentInChildren<RectTransform>().position
+                  = new Vector3(curPos.x, 245.0f, curPos.z);
+                HPImg.color = new Color32(255, 131, 81, 255);
+            }
+        }
+    }
+
+    public void Initialized(GameObject enemy)
+    {
+        //int hp,int defaultHP, EnemyType type,int index
+
+        enemySC = enemy.GetComponent<Enemy>();
+        
+        // HP
+        DefaultHP = enemySC.DefaultHP;
+      
+
+        //Type
+        Type = enemySC.Type;
+
+        // hp image
+        HPImg.sprite = HPSprites[(int)enemySC.ColorType];
+    
+
+       bEndSetting = true;
+
+        UpdateProfile();
+    }
+
+    void Update()
+    {
+        if(bEndSetting)  UpdateHP();
+    }
+
+    private void UpdateHP()
+    {
+        int hp = enemySC.HP;
+        HPSlider.value = (float)hp / (float)DefaultHP;
+        HP_TXT.text = string.Format("{0}{1}{2}", hp.ToString(), " / ", DefaultHP.ToString());
+    }
+
+
+    private void UpdateProfile()
+    {
+        // image
+        InfoImage.sprite = InfoSprites[(int)enemySC.ColorType];
+
+        //text : type
+        string type= "Missile";
+
+        switch (Type)
+        {
+            case EnemyType.Enemy_Missile: { type = "Missile"; } break;
+            case EnemyType.Enemy_Arrow: { type = "Arrow"; } break;
+            case EnemyType.Enemy_Dagger: { type = "Dagger"; } break;
+            case EnemyType.Enemy_Boss: { type = "Boss"; } break;
+        }
+
+        StageInfo_TXT.text= string.Format("Level{0}.{1}" , (int)enemySC.ColorType+1, type);
+    
     }
 }

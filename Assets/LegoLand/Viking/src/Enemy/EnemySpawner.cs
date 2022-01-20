@@ -11,13 +11,13 @@ public class EnemySpawner : MonoBehaviour
 
     private GameObject enemyPrefab;
     private GameObject enemy;
-    Transform transform_;
+    public Transform transform_;
+    
+    public EnemyType Type { get; private set; }
 
     private void Start()
     {
-        transform_ = GameObject.Find("enemyPoint").transform;
-        if (transform_) Debug.Log("찾음");
-        else Debug.Log("못찾음");
+       transform_ = GameObject.Find("enemyPoint").transform;
     }
 
     public void InstantiateEnemies(EnemyType type)
@@ -31,6 +31,7 @@ public class EnemySpawner : MonoBehaviour
                         Vector3 pos = new Vector3(transform_.position.x + 10 * (i - 1), transform_.position.y, transform_.position.z);
                         enemy = Instantiate(Enemies_Missile[i], pos, transform_.rotation);
                         enemy.transform.parent = transform_;
+                        enemy.GetComponent<Enemy>().initialized(i);
                     }
                 }
                 break;
@@ -41,6 +42,7 @@ public class EnemySpawner : MonoBehaviour
                         Vector3 pos = new Vector3(transform_.position.x + 10 * (i - 1), transform_.position.y, transform_.position.z);
                         enemy = Instantiate(Enemies_Arrow[i], pos, transform_.rotation);
                         enemy.transform.parent = transform_;
+                        enemy.GetComponent<Enemy>().initialized(i);
                     }
                 }
                 break;
@@ -51,6 +53,7 @@ public class EnemySpawner : MonoBehaviour
                         Vector3 pos = new Vector3(transform_.position.x + 10 * (i - 1), transform_.position.y, transform_.position.z);
                         enemy = Instantiate(Enemies_Dagger[i], pos, transform_.rotation);
                         enemy.transform.parent = transform_;
+                        enemy.GetComponent<Enemy>().initialized(i);
                     }
                 }
                 break;
@@ -61,26 +64,27 @@ public class EnemySpawner : MonoBehaviour
                         Vector3 pos = new Vector3(transform_.position.x + 10 * (i - 1), transform_.position.y, transform_.position.z);
                         enemy = Instantiate(Enemies_Boss[i], pos, transform_.rotation);
                         enemy.transform.parent = transform_;
+                        enemy.GetComponent<Enemy>().initialized(i);
                     }
                 }
                 break;
         }
     }
-    public void InstantiateEnemy(EnemyType type,int n)
+
+    public void InstantiateEnemy(EnemyType type, EnemyColorType colorType)
     {
         switch (type)
         {
-            case EnemyType.Enemy_Missile: { enemyPrefab = Enemies_Missile[n]; } break;
-            case EnemyType.Enemy_Arrow: { enemyPrefab = Enemies_Arrow[n]; } break;
-            case EnemyType.Enemy_Dagger: { enemyPrefab = Enemies_Dagger[n]; } break;
-            case EnemyType.Enemy_Boss: { enemyPrefab = Enemies_Boss[n]; } break;
+            case EnemyType.Enemy_Missile: { enemyPrefab = Enemies_Missile[(int)colorType]; } break;
+            case EnemyType.Enemy_Arrow: {  enemyPrefab = Enemies_Arrow[(int)colorType]; } break;
+            case EnemyType.Enemy_Dagger: {  enemyPrefab = Enemies_Dagger[(int)colorType]; } break;
+            case EnemyType.Enemy_Boss: {  enemyPrefab = Enemies_Boss[(int)colorType]; } break;
         }
+   
+        enemy = Instantiate(enemyPrefab, transform_);
+        enemy.transform.parent = transform_;
+        enemy.GetComponent<Enemy>().initialized((int)colorType);
 
-        if (n != 3)
-        {
-            enemy = Instantiate(enemyPrefab, transform_);
-            enemy.transform.parent = transform_;
-        }
     }
 
 

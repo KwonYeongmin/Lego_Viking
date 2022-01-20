@@ -1310,6 +1310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultHP: 100
+  HUDInstance: {fileID: 643404229928331987, guid: 331b13216d563694294c7f345d70988b, type: 3}
 --- !u!65 &3895879812583702930
 BoxCollider:
   m_ObjectHideFlags: 0
