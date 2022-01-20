@@ -36,9 +36,6 @@ public class EnemyHUD : MonoBehaviour
 
     private void Start()
     {
-        // 위치 조정
-       // Vector3 curPos = this.GetComponent<RectTransform>().localPosition;
-
         if (Stage % 4 == 3)
         {
             if (enemySC.ColorType == EnemyColorType.GREY) { HPImg.color = new Color32(255, 255, 255, 255); }
@@ -59,8 +56,6 @@ public class EnemyHUD : MonoBehaviour
 
     public void Initialized(GameObject enemy)
     {
-        //int hp,int defaultHP, EnemyType type,int index
-
         enemySC = enemy.GetComponent<Enemy>();
         
         // HP
@@ -109,6 +104,5 @@ public class EnemyHUD : MonoBehaviour
         }
 
         StageInfo_TXT.text= string.Format("Level{0}.{1}" , (int)enemySC.ColorType+1, type);
-    
     }
 }

@@ -7,7 +7,7 @@ public class Viking : MonoBehaviour
 {   
     public float angle = 0;
     private float lerpTimer = 0;
-    public float speed = 2f;
+    public float speed = 5f;
     public float Addedforce = 0f;
     public float WheelForce = 0f;
     public float gravity = 0.0f;
