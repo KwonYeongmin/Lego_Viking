@@ -5,12 +5,16 @@ using TMPro;
 
 public class TimerUI : MonoBehaviour
 {
-    private TMP_Text TimeTEXT;
+    [HideInInspector]public TMP_Text TimeTEXT;
     Timer timer = new Timer();
+
+    public int Min { get; private set; }
+    public int Sec { get; private set; }
 
     void Start()
     {
-       
+        Min =0;
+        Sec = 0;
     }
 
     void Update()
@@ -26,7 +30,10 @@ public class TimerUI : MonoBehaviour
 
     private void UpdateUI()
     {
+        Min = (int)(timer.GetTimer() / 60 % 60);
+        Sec = (int)(timer.GetTimer() % 60);
 
-        TimeTEXT.text = string.Format("{0} : {1}",0, timer.GetTimer()/60.0f);
+        if(Min <10 && Sec<10) TimeTEXT.text = string.Format("0{0} : 0{1}", Min,Sec);
+        else if(Min < 10 && Sec>=10) TimeTEXT.text = string.Format("0{0} : {1}", Min,Sec);
     }
 }
