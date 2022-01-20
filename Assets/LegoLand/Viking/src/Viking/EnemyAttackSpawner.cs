@@ -6,7 +6,6 @@ public class EnemyAttackSpawner : MonoBehaviour
 {
     [Header("미사일 관련 변수")]
     public GameObject[] Missiles;
-    // public Transform MissileSpawner;
     public float RangeX = 4.0f;
     public float RangeZ = 2.0f;
     public float interval = 5f;

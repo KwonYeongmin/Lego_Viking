@@ -103,6 +103,6 @@ public class EnemyHUD : MonoBehaviour
             case EnemyType.Enemy_Boss: { type = "Boss"; } break;
         }
 
-        StageInfo_TXT.text= string.Format("Level{0}.{1}" , (int)enemySC.ColorType+1, type);
+        StageInfo_TXT.text= string.Format("Level {0}.{1}" , (int)enemySC.ColorType+1, type);
     }
 }

@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType { Enemy_Missile, Enemy_Arrow, Enemy_Dagger, Enemy_Boss };
-
 public class StageManager : Singleton<StageManager>
 {
+    protected StageManager() { }
+
     private EnemySpawner enemySpawner;
     private EnemyAttackSpawner attackSpawner;
     private ItemSpawner itemSpawner; 
     private Viking viking;
-    //public ItemSpawner itemSpawner; //bgm
 
     public int Stage { get; private set; }
    // public int Index { get; private set; }
@@ -22,18 +21,17 @@ public class StageManager : Singleton<StageManager>
 
     private void Awake()
     {
+       
+
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         itemSpawner = GameObject.Find("ItemSpawner").GetComponent<ItemSpawner>();
         viking = GameObject.Find("Pin").GetComponent<Viking>();
         Speed = viking.speed;
-    }
 
-    void Start()
-    {
         Stage = 0;
-        
         SetStage();
     }
+
 
     private int enemyNum = 0;
 
@@ -75,7 +73,6 @@ public class StageManager : Singleton<StageManager>
                 } break;
             case 1: // 1-2
                 {
-                   
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.BLUE;
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.BLUE);
@@ -212,7 +209,7 @@ public class StageManager : Singleton<StageManager>
                     enemySpawner.InstantiateEnemies(EnemyType.Enemy_Boss);
                     enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
-                    viking.speed = Speed * 1.f;
+                    viking.speed = Speed * 1.7f;
                 }
                 break;
         }
