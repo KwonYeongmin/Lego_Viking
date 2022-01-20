@@ -20,7 +20,6 @@ public class EnemyAttackSpawner : MonoBehaviour
 
     private Transform transform_;
 
-    private string str;
 
     IEnumerator Start()
     {
@@ -30,15 +29,12 @@ public class EnemyAttackSpawner : MonoBehaviour
 
         while (true)
         {
-            Debug.Log(str);
+            
         }
 
         
     }
-    public void test(string str_)
-    {
-         str=str_;
-    }
+
 
     public void InstantiateEnemy(EnemyType type, int n)
     {
