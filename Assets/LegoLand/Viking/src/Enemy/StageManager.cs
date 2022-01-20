@@ -12,8 +12,8 @@ public class StageManager : Singleton<StageManager>
     private EnemyAttackSpawner attackSpawner;
     private ItemSpawner itemSpawner;
     private SceneManagement sceneManager;
-    private TimerUI Timer;
-    private Viking viking;
+     private TimerUI Timer;
+    [HideInInspector]public Viking viking;
     //public ItemSpawner itemSpawner; //bgm
 
     public int Stage;// { get; private set; }
@@ -21,7 +21,7 @@ public class StageManager : Singleton<StageManager>
     public EnemyType Type = EnemyType.Enemy_Missile;
     public EnemyColorType ColorType = EnemyColorType.GREY;
 
-    float Speed = 5;
+     float Speed = 5;
 
     private void Awake()
     {
@@ -29,6 +29,7 @@ public class StageManager : Singleton<StageManager>
         itemSpawner = GameObject.Find("ItemSpawner").GetComponent<ItemSpawner>();
         viking = GameObject.Find("Pin").GetComponent<Viking>();
         sceneManager = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
+      Timer = GameObject.Find("Time").GetComponent<TimerUI>();
         Speed = viking.speed;
     }
 
@@ -70,9 +71,7 @@ public class StageManager : Singleton<StageManager>
     public void ChangeStage()
     {
         if (Stage % 4 != 3)
-        {
-
-                
+        { 
             Stage++;
             SetStage();
         }
@@ -97,8 +96,7 @@ public class StageManager : Singleton<StageManager>
 
     public void SetStage()
     {
-        Debug.Log("SetStage");
-        
+        Timer.StartTimer();
 
         switch (Stage)
         {
