@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
+    public AudioClip title;
+
+    private void Awake()
+    {
+        SoundManager.Instance.PlayBGM(title);   
+    }
 
     public void ChangeScene(string scenename)
     {

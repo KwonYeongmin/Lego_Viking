@@ -6,6 +6,8 @@ public enum EnemyType { Enemy_Missile, Enemy_Arrow, Enemy_Dagger, Enemy_Boss };
 
 public class StageManager : Singleton<StageManager>
 {
+    public StageManager() { }
+
     private EnemySpawner enemySpawner;
     private EnemyAttackSpawner attackSpawner;
     private ItemSpawner itemSpawner; 
@@ -16,7 +18,6 @@ public class StageManager : Singleton<StageManager>
    // public int Index { get; private set; }
     public EnemyType Type = EnemyType.Enemy_Missile;
     public EnemyColorType ColorType = EnemyColorType.GREY;
-
 
     float Speed = 5;
 
@@ -30,7 +31,7 @@ public class StageManager : Singleton<StageManager>
 
     void Start()
     {
-        Stage = 3;
+        Stage = 0;
         
         SetStage();
     }
@@ -54,7 +55,7 @@ public class StageManager : Singleton<StageManager>
             }
         }
 
-        Debug.Log("Stage: "+Stage);
+        Debug.Log("Stage: " + Stage);
     }
 
     void SetStage()
@@ -72,10 +73,11 @@ public class StageManager : Singleton<StageManager>
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.GREY);
                     itemSpawner.CreatibleItemIndex = 2;
                     viking.speed = Speed;
-                } break;
+                    SoundManager.Instance.PlayBGM(SoundList.Stage1);
+                }
+                break;
             case 1: // 1-2
                 {
-                   
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.BLUE;
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.BLUE);
@@ -103,6 +105,7 @@ public class StageManager : Singleton<StageManager>
                     enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.4f;
+                    SoundManager.Instance.PlayBGM(SoundList.Stage1_Boss);
                 }
                 break;
             case 4: //2-1
@@ -113,6 +116,7 @@ public class StageManager : Singleton<StageManager>
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Arrow, EnemyColorType.GREY);
                     itemSpawner.CreatibleItemIndex = 4;
                     viking.speed = Speed * 1.1f;
+                    SoundManager.Instance.PlayBGM(SoundList.Stage2);
                 }
                 break;
             case 5: //2-2
@@ -141,6 +145,7 @@ public class StageManager : Singleton<StageManager>
                     itemSpawner.CreatibleItemIndex = 5;
                     enemyNum = 0;
                     viking.speed = Speed * 1.5f;
+                    SoundManager.Instance.PlayBGM(SoundList.Stage2_Boss);
                 }
                 break;
             case 8: // 3-1
@@ -150,6 +155,7 @@ public class StageManager : Singleton<StageManager>
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Dagger, EnemyColorType.GREY);
                     itemSpawner.CreatibleItemIndex = 4;
                     viking.speed = Speed * 1.2f;
+                    SoundManager.Instance.PlayBGM(SoundList.Stage3);
                 }
                 break;
             case 9: // 3-2
@@ -177,6 +183,7 @@ public class StageManager : Singleton<StageManager>
                     enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.6f;
+                    SoundManager.Instance.PlayBGM(SoundList.Stage3_Boss);
                 }
                 break;
             case 12: // 4-1
@@ -186,6 +193,7 @@ public class StageManager : Singleton<StageManager>
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Boss, EnemyColorType.GREY);
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.3f;
+                    SoundManager.Instance.PlayBGM(SoundList.Stage4);
                 }
                 break;
             case 13: // 4-2
@@ -213,6 +221,7 @@ public class StageManager : Singleton<StageManager>
                     enemyNum = 0;
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.7f;
+                    SoundManager.Instance.PlayBGM(SoundList.Stage4_Boss);
                 }
                 break;
         }
