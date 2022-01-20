@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : Singleton<StageManager>
 {
@@ -21,8 +22,6 @@ public class StageManager : Singleton<StageManager>
 
     private void Awake()
     {
-       
-
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         itemSpawner = GameObject.Find("ItemSpawner").GetComponent<ItemSpawner>();
         viking = GameObject.Find("Pin").GetComponent<Viking>();
@@ -31,9 +30,13 @@ public class StageManager : Singleton<StageManager>
         Stage = 0;
         SetStage();
     }
-
-
+    
     private int enemyNum = 0;
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Title") Stage = 0;
+    }
 
     public void ChangeStage()
     {
