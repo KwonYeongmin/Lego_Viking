@@ -59,7 +59,7 @@ public class Dagger : MonoBehaviour
     }
 
 
-    private void InitializeState()
+    public void InitializeState()
     {
         switch (colortype)
         {

@@ -6,7 +6,7 @@ public class EnemyAttackSpawner : MonoBehaviour
 {
     [Header("미사일 관련 변수")]
     public GameObject[] Missiles;
-    public float RangeX = 4.0f;
+    public float RangeX = 2.0f;
     public float RangeZ = 2.0f;
     public float interval = 5f;
 
@@ -75,12 +75,13 @@ public class EnemyAttackSpawner : MonoBehaviour
                         {
                             InstantiateAttack(Arrow);
                             obj.GetComponent<Arrow>().colortype = StageManager.Instance.ColorType;
+                            obj.GetComponent<Arrow>().InitializeState();// = StageManager.Instance.ColorType;
                         }
                         else
                         {
                             InstantiateAttack(Arrow);
                             obj.GetComponent<Arrow>().colortype = (EnemyColorType)(Random.Range(0, 3));
-                            Debug.Log((EnemyColorType)(Random.Range(0, 3)));
+                            obj.GetComponent<Arrow>().InitializeState();// = (EnemyColorType)(Random.Range(0, 3));
                         }
 
                     } break;
@@ -91,13 +92,15 @@ public class EnemyAttackSpawner : MonoBehaviour
                         {
                             InstantiateAttack(Dagger);
                             obj.GetComponent<Dagger>().colortype = StageManager.Instance.ColorType;
+                            obj.GetComponent<Dagger>().InitializeState();// = StageManager.Instance.ColorType;
                         }
                         else
                         {
                             InstantiateAttack(Dagger);
                             obj.GetComponent<Dagger>().colortype = (EnemyColorType)(Random.Range(0, 3));
+                            obj.GetComponent<Dagger>().InitializeState();// = StageManager.Instance.ColorType;
                         }
-                        
+
                     }
                     break;
                 case EnemyType.Enemy_Boss:
@@ -116,12 +119,15 @@ public class EnemyAttackSpawner : MonoBehaviour
                                 rot = Quaternion.Euler(0, 0, 0);
                                 InstantiateAttack(Arrow);
                                 obj.GetComponent<Arrow>().colortype = StageManager.Instance.ColorType;
+                                obj.GetComponent<Arrow>().InitializeState();// = StageManager.Instance.ColorType;
+
                             }
                             else if (index == 2)
                             {
                                 rot = Quaternion.Euler(90.0f, direction[Random.Range(0, 4)], 0);
                                 InstantiateAttack(Dagger);
                                 obj.GetComponent<Dagger>().colortype = StageManager.Instance.ColorType;
+                                obj.GetComponent<Dagger>().InitializeState();
                             }
                         }
                         else
@@ -142,12 +148,14 @@ public class EnemyAttackSpawner : MonoBehaviour
                                     rot = Quaternion.Euler(0, 0, 0);
                                     InstantiateAttack(Arrow);
                                     obj.GetComponent<Arrow>().colortype = (EnemyColorType)(Random.Range(0, 3));
+                                    obj.GetComponent<Arrow>().InitializeState();
                                 }
                                 else if (index == 2)
                                 {
                                     rot = Quaternion.Euler(90.0f, direction[Random.Range(0, 4)], 0);
                                     InstantiateAttack(Dagger);
                                     obj.GetComponent<Dagger>().colortype = (EnemyColorType)(Random.Range(0, 3));
+                                    obj.GetComponent<Dagger>().InitializeState();
                                 }
                             }
                                 

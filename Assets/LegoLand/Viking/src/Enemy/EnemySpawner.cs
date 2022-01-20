@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         StageManager.Instance.gameObject.SetActive(true);
+        SceneManagement.Instance.gameObject.SetActive(true);
     }
 
     private void Start()

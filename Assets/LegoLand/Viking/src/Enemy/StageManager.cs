@@ -31,7 +31,7 @@ public class StageManager : Singleton<StageManager>
 
     void Start()
     {
-        Stage = 7;
+        Stage = 15;
         
         SetStage();
     }

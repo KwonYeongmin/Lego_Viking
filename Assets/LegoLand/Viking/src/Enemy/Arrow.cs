@@ -52,7 +52,7 @@ public class Arrow : MonoBehaviour
         rig.AddForce(- transform.up * arrow_fall_speed);
     }
 
-    private void InitializeState()
+    public void InitializeState()
     {
         Debug.Log("InitializeState");
         switch (colortype)
