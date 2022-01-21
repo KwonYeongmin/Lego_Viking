@@ -41,7 +41,10 @@ public class Countdown : MonoBehaviour
         TimeTEXT.text = ((int)timer).ToString();
         bIsEnded = true;
         if (StageManager.Instance.Stage == 0)
-            StageManager.Instance.SetStage();
+        {
+            StageManager.Instance.Stage--;
+            StageManager.Instance.ChangeStage();
+        }
         else StageManager.Instance.ChangeStage();
     }
 

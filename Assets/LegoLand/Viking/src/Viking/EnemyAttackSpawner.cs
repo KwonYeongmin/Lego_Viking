@@ -42,6 +42,9 @@ public class EnemyAttackSpawner : MonoBehaviour
 
         while (true)
         {
+            if (!interfaceTimer.isPlay)
+                yield return new WaitForSeconds(9.0f);
+
             switch (StageManager.Instance.Type)
             {
                 case EnemyType.Enemy_Missile:

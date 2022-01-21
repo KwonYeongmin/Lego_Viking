@@ -101,8 +101,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!interfaceTimer.isPlay || isDead) return;
-
+        if (!interfaceTimer.isPlay || isDead)
+        {
+            hAxis = 0; vAxis = 0;
+            return;
+        }
         GetInput(); // Update Input
 
         Move();

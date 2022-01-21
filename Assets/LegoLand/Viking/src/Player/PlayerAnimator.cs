@@ -42,4 +42,13 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator.SetBool("isDead", true);
     }
+
+    public void PlayFootSound01()
+    {
+        SoundManager.Instance.PlaySE(SoundList.Sound_walk_1, transform.position);
+    }
+    public void PlayFootSound02()
+    {
+        SoundManager.Instance.PlaySE(SoundList.Sound_walk_2, transform.position);
+    }
 }
