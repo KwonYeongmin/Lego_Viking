@@ -108,6 +108,6 @@ public class InterfaceTimer : MonoBehaviour
     {
         yield return new WaitForSeconds(DelayTime);
         Clear.SetActive(false);
-        StageInfoSetup(StageManager.Instance.Stage + 1);
+        StageInfoSetup(StageManager.Instance.Stage);
     }
 }

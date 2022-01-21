@@ -40,12 +40,7 @@ public class Countdown : MonoBehaviour
         timer = 0;
         TimeTEXT.text = ((int)timer).ToString();
         bIsEnded = true;
-        if (StageManager.Instance.Stage == 0)
-        {
-            StageManager.Instance.Stage--;
-            StageManager.Instance.ChangeStage();
-        }
-        else StageManager.Instance.ChangeStage();
+        StageManager.Instance.ChangeStage();
     }
 
     public void StartTimer() //여기서 시작해주면 됨
