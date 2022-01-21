@@ -31,8 +31,6 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool isButtonFire;
     [HideInInspector]
-    public bool isButtonReload;
-    [HideInInspector]
     public bool isButtonGrenade;
 
     #endregion
@@ -143,8 +141,16 @@ public class Player : MonoBehaviour
 
         isButtonRoll = Input.GetKeyDown(KeyCode.LeftShift);
         isButtonFire = Input.GetButton("Fire2"); //("Fire1");
-        isButtonReload = Input.GetKeyDown(KeyCode.R);
         isButtonGrenade = Input.GetKeyDown(KeyCode.G);
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            AddAmmo(20);
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(20);
+        }
     }
 
     #endregion
@@ -211,7 +217,7 @@ public class Player : MonoBehaviour
         rollDelay += Time.deltaTime;
         if(rollCoolTime < rollDelay)
         {
-            if (isButtonRoll && !movement.isRoll && !isButtonReload)
+            if (isButtonRoll && !movement.isRoll)
             {
                 SoundManager.Instance.PlaySE(SoundList.Sound_roll, transform.position);
                 movement.isRoll = true;
