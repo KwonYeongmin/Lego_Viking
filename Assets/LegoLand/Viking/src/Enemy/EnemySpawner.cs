@@ -25,7 +25,10 @@ public class EnemySpawner : MonoBehaviour
        transform_ = GameObject.Find("enemyPoint").transform;
 
         StageManager.Instance.Stage = 0;
-        StageManager.Instance.SetStage();
+        var Interface = FindObjectOfType<InterfaceTimer>();
+        if (Interface != null)
+            Interface.StageInfoSetup(StageManager.Instance.Stage);
+        //StageManager.Instance.SetStage();
     }
 
     public void InstantiateEnemies(EnemyType type)

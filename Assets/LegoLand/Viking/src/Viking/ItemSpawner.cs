@@ -12,6 +12,7 @@ public class ItemSpawner : MonoBehaviour
     public float Interval = 5.0f;
     public int InstanceCount = 10;
     public float Range = 5.0f;
+    public InterfaceTimer interfaceTimer;
 
     //
     public int CreatibleItemIndex = 2;
@@ -27,6 +28,9 @@ public class ItemSpawner : MonoBehaviour
 
     IEnumerator Start()
     {
+        if (!interfaceTimer.isPlay)
+            yield return new WaitForSeconds(9.0f);
+
         for (int i = 0; i < InstanceCount; i++)
         {
              InstantiateItems();

@@ -7,6 +7,7 @@ public class TimerUI : MonoBehaviour
 {
     [HideInInspector]public TMP_Text TimeTEXT;
     Timer timer = new Timer();
+    public InterfaceTimer interfaceTimer;
 
     public int Min { get; private set; }
     public int Sec { get; private set; }
@@ -19,20 +20,20 @@ public class TimerUI : MonoBehaviour
         Sec = 0;
     }
 
-
-
     void Update()
     {
-        timer.UpdateTimer();
-        UpdateUI();
-        SetSpeed();
+        if(interfaceTimer.isPlay)
+        {
+            timer.UpdateTimer();
+            UpdateUI();
+            SetSpeed();
+        }
     }
 
     public void StartTimer()
     {
         timer.ResetTimer();
         timer.StartTimer();
-        
     }
 
     private void UpdateUI()
@@ -43,11 +44,8 @@ public class TimerUI : MonoBehaviour
         if(Min <10 && Sec<10) TimeTEXT.text = string.Format("0{0} : 0{1}", Min,Sec);
         else if(Min < 10 && Sec>=10) TimeTEXT.text = string.Format("0{0} : {1}", Min,Sec);
     }
-
     private bool bSettingFinished = true;
    
-
-
     void SetSpeed()
     {
         switch (StageManager.Instance.Stage)

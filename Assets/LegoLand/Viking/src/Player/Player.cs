@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
     private Movement movement;
     private PlayerAnimator animator;
     public SceneManagement scene;
-    [SerializeField]private PlayerHUD playerHUD;
+    [SerializeField] private PlayerHUD playerHUD;
+    [SerializeField] private InterfaceTimer interfaceTimer;
 
     #region Input variables
     // #. Keyboard
@@ -29,8 +30,6 @@ public class Player : MonoBehaviour
     public float rollCoolTime = 2.0f;
     [HideInInspector]
     public bool isButtonFire;
-    [HideInInspector]
-    public bool isButtonReload;
     [HideInInspector]
     public bool isButtonGrenade;
 
@@ -85,6 +84,7 @@ public class Player : MonoBehaviour
         weapon = GetComponentInChildren<Weapon>();
         playerHUD = FindObjectOfType<PlayerHUD>();
         scene = FindObjectOfType<SceneManagement>();
+        interfaceTimer = FindObjectOfType<InterfaceTimer>();
 
         HP = DefaultHP; // 추가
         ammo = defaultAmmo; // 추가
@@ -99,8 +99,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (isDead) return;
-
+        if (!interfaceTimer.isPlay || isDead)
+        {
+            hAxis = 0; vAxis = 0;
+            return;
+        }
         GetInput(); // Update Input
 
         Move();
@@ -138,8 +141,16 @@ public class Player : MonoBehaviour
 
         isButtonRoll = Input.GetKeyDown(KeyCode.LeftShift);
         isButtonFire = Input.GetButton("Fire2"); //("Fire1");
-        isButtonReload = Input.GetKeyDown(KeyCode.R);
         isButtonGrenade = Input.GetKeyDown(KeyCode.G);
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            AddAmmo(20);
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(20);
+        }
     }
 
     #endregion
@@ -206,7 +217,7 @@ public class Player : MonoBehaviour
         rollDelay += Time.deltaTime;
         if(rollCoolTime < rollDelay)
         {
-            if (isButtonRoll && !movement.isRoll && !isButtonReload)
+            if (isButtonRoll && !movement.isRoll)
             {
                 SoundManager.Instance.PlaySE(SoundList.Sound_roll, transform.position);
                 movement.isRoll = true;
@@ -274,6 +285,9 @@ public class Player : MonoBehaviour
         HP = (HP - value) > 0 ? HP - value : 0; // 추가
         if (HP <= 0)
         {
+            HP = 0;
+            playerHUD.UpdateHP(HP);
+            SoundManager.Instance.PlaySE(SoundList.Sound_lose, transform.position);
             isDead = true;
             animator.OnDead();
             Invoke("GameOverScene", 3.0f);
