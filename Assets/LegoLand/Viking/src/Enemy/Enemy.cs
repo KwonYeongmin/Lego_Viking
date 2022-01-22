@@ -47,8 +47,8 @@ public class Enemy : MonoBehaviour
         time += Time.deltaTime * (speed);
 
         
-       // switch (StageManager.Instance.Stage % 4)
-       switch (aaindex)
+       switch (StageManager.Instance.Stage % 4)
+       //switch (aaindex)
         {
             case 1: { Move(1); } break;
             case 2: { Move(2); } break;
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
     private float time = 0;
     public float speed =1.0f;
     private float HorizontalValue = 10.0f;
-    private float VerticalValue = 1.0f;
+    private float VerticalValue = 3.0f;
     private int DirectionIndex = 0;
 
   
@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour
                 break;
             case 1:
                 {
-                    transform.position = new Vector3( this.transform.position.x, Mathf.Sin(time) * VerticalValue, this.transform.position.z);
+                    transform.position = new Vector3( this.transform.position.x, Mathf.Sin(time) * VerticalValue + 9, this.transform.position.z);
                 }
                 break;
         }
