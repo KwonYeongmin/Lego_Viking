@@ -26,8 +26,12 @@ public class Arrow : MonoBehaviour
     [SerializeField]
     private float lifeTime = 1.0f;
 
+    [Header("Particles")]
     public GameObject[] particles;
-    public GameObject[] projectors;
+
+    [Header("Projector")]
+    public Projector projector;
+    public Material[] materials;
 
     private Rigidbody rig;
 
@@ -60,24 +64,21 @@ public class Arrow : MonoBehaviour
             case EnemyColorType.GREY:
                 {
                     arrow_damage = arrow1_damage;
+                    projector.material = materials[0];
+
                     particles[0].SetActive(true);
                     particles[1].SetActive(false);
                     particles[2].SetActive(false);
-
-                    projectors[0].SetActive(true);
-                    projectors[1].SetActive(false);
-                    projectors[2].SetActive(false);
+                    
                 }
                 break;
             case EnemyColorType.BLUE:
                 {
                     arrow_damage = arrow2_damage; 
-                     particles[0].SetActive(false);
+                    particles[0].SetActive(false);
                     particles[1].SetActive(true);
                     particles[2].SetActive(false);
-                    projectors[0].SetActive(false);
-                    projectors[1].SetActive(true);
-                    projectors[2].SetActive(false);
+                    projector.material = materials[1];
                 }
                 break;
             case EnemyColorType.YELLOW:
@@ -86,10 +87,7 @@ public class Arrow : MonoBehaviour
                     particles[0].SetActive(false);
                     particles[1].SetActive(false);
                     particles[2].SetActive(true);
-
-                    projectors[0].SetActive(false);
-                    projectors[1].SetActive(false);
-                    projectors[2].SetActive(true);
+                    projector.material = materials[2];
                 }
                 break;
         }
@@ -110,13 +108,13 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == ("deck")) Destroy(this.gameObject,1f);
-
         if (collision.gameObject.GetComponent<Player>()) //플레이어가 맞았다면
         {
             GiveDamage(collision.gameObject.GetComponent<Collider>());
             Destroy(this.gameObject);
         }
+
+        if (collision.gameObject.tag == ("deck")) Destroy(this.gameObject,1f);
     }
 
 

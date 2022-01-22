@@ -45,7 +45,7 @@ Projector:
   m_FieldOfView: 60
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 3
+  m_OrthographicSize: 2
   m_Material: {fileID: 2100000, guid: 0eaf8cdbd69c99e43a355c902dc872b8, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -95,7 +95,7 @@ Projector:
   m_FieldOfView: 60
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 2
+  m_OrthographicSize: 1
   m_Material: {fileID: 2100000, guid: 0eaf8cdbd69c99e43a355c902dc872b8, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -199,12 +199,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cef113bfb3f344bb11565835988c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
   Missile1_damage_center: 2
   Missile1_damage_edge: 1
-  Missile_fall_speed: 10
+  Missile_fall_speed: 5
   Missile_range_edge: 1
   lifeTime: 10
+  FX: {fileID: 1809022330002312, guid: ed511b7776af6174e9b1255c7a81e59c, type: 3}
 --- !u!65 &-7954258448974590832
 BoxCollider:
   m_ObjectHideFlags: 0

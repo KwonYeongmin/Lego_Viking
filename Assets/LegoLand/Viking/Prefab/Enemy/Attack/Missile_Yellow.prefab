@@ -45,7 +45,7 @@ Projector:
   m_FieldOfView: 100
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 2
+  m_OrthographicSize: 1
   m_Material: {fileID: 2100000, guid: 11f23a93906047b4d932eff07cb9ffdc, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -96,7 +96,7 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 1
   m_OrthographicSize: 2
-  m_Material: {fileID: 2100000, guid: 11f23a93906047b4d932eff07cb9ffdc, type: 2}
+  m_Material: {fileID: 2100000, guid: c429c16fa31608945a25a7f7cc360308, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 1015
@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 4408220661527598}
   - component: {fileID: 33710508393652584}
   - component: {fileID: 23085965465757342}
-  - component: {fileID: 5957073719182317071}
   - component: {fileID: 1810455819155717942}
   - component: {fileID: 8691626059662995514}
   - component: {fileID: 2288424508120966086}
@@ -188,24 +187,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5957073719182317071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766671140903152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0cef113bfb3f344bb11565835988c45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 2
-  Missile1_damage_center: 2
-  Missile1_damage_edge: 1
-  Missile_fall_speed: 10
-  Missile_range_edge: 1
-  lifeTime: 10
 --- !u!114 &1810455819155717942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,12 +199,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cef113bfb3f344bb11565835988c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 1
   Missile1_damage_center: 2
   Missile1_damage_edge: 1
-  Missile_fall_speed: 1
+  Missile_fall_speed: 5
   Missile_range_edge: 1
   lifeTime: 10
+  FX: {fileID: 1809022330002312, guid: ed511b7776af6174e9b1255c7a81e59c, type: 3}
 --- !u!65 &8691626059662995514
 BoxCollider:
   m_ObjectHideFlags: 0

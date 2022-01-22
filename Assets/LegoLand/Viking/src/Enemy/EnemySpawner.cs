@@ -26,8 +26,8 @@ public class EnemySpawner : MonoBehaviour
 
         StageManager.Instance.Stage = 0;
         var Interface = FindObjectOfType<InterfaceTimer>();
-        if (Interface != null)
-            Interface.StageInfoSetup(StageManager.Instance.Stage);
+      //  if (Interface != null)
+       //     Interface.StageInfoSetup(StageManager.Instance.Stage);
         //StageManager.Instance.SetStage();
     }
 

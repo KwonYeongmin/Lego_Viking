@@ -50,13 +50,11 @@ Shader "Projector/MultiplyWithColor" {
 			fixed4 frag (v2f i) : SV_Target
 			{
 				fixed4 texS = tex2Dproj (_ShadowTex, UNITY_PROJ_COORD(i.uvShadow));
-				texS.rgb = 1.0-_Color.rgb;
-
 				texS.a = 1.0-texS.a;
-				//texS.a = texS.a;
 				fixed4 texF = tex2Dproj (_FalloffTex, UNITY_PROJ_COORD(i.uvFalloff));
+				//texF.rgb *=_Color.rgb;
 				fixed4 res = lerp(fixed4(1,1,1,0), texS, texF.a);
-
+				// res.rgb *=_Color.rgb;
 				UNITY_APPLY_FOG_COLOR(i.fogCoord, res, fixed4(1,1,1,1));
 				return res;
 			}

@@ -33,6 +33,71 @@ public class Enemy : MonoBehaviour
         //HUD »ý¼º
        HUD =Instantiate(HUDInstance, new Vector2(960,640), Quaternion.identity);
        HUD.GetComponent<EnemyHUD>().Initialized(this.gameObject);
+
+        StartCoroutine(SetRandomDirection());
+    }
+
+    [Header("Movetest")]
+    public int aaindex = 0;
+
+    private void Update()
+    {
+        if (bSetEnd) Dead();
+
+        time += Time.deltaTime * (speed);
+
+        
+       // switch (StageManager.Instance.Stage % 4)
+       switch (aaindex)
+        {
+            case 1: { Move(1); } break;
+            case 2: { Move(2); } break;
+            case 3: { Move(DirectionIndex); } break;
+        }
+        
+    }
+
+    private float time = 0;
+    public float speed =1.0f;
+    private float HorizontalValue = 10.0f;
+    private float VerticalValue = 1.0f;
+    private int DirectionIndex = 0;
+
+  
+
+
+    IEnumerator SetRandomDirection()
+    {
+        while (true)
+        {
+            DirectionIndex = Random.Range(0, 2);
+            Debug.Log(DirectionIndex);
+            yield return new WaitForSeconds(4f);
+        }
+        
+
+    }
+
+    private void Move(int direction)
+    {
+        switch (direction)
+        {
+            case 0:
+                {
+                    transform.position = new Vector3(Mathf.Sin(time) * HorizontalValue, this.transform.position.y, this.transform.position.z);
+                }
+                break;
+            case 1:
+                {
+                    transform.position = new Vector3( this.transform.position.x, Mathf.Sin(time) * VerticalValue, this.transform.position.z);
+                }
+                break;
+        }
+
+       
+
+
+
     }
 
     public void initialized(int colorType)
@@ -70,10 +135,6 @@ public class Enemy : MonoBehaviour
         bSetEnd = true;
     }
 
-    void Update()
-    {
-       if(bSetEnd) Dead();
-    }
 
     public void TakeDamage(int value)
     {

@@ -7,7 +7,7 @@ public class EnemyAttackSpawner : MonoBehaviour
     [Header("미사일 관련 변수")]
     public GameObject[] Missiles;
     public float RangeX = 2.0f;
-    public float RangeZ = 2.0f;
+    public float RangeZ = 3.0f;
     public float interval = 5f;
 
     [Header("화살 관련 변수")]
@@ -172,19 +172,20 @@ public class EnemyAttackSpawner : MonoBehaviour
     }
 
     GameObject obj;
+
     public void InstantiateAttack(GameObject prefab )
     {
         ChangePositionRandom();
 
-        obj = Instantiate(prefab, this.transform.position, rot);
+        obj = Instantiate(prefab, transform_.position, rot);
         obj.transform.parent = GameObject.Find("Deck").transform;
     }
 
     private void ChangePositionRandom()
     {
-        transform.position 
+        transform_.position 
             = new Vector3(Random.Range(-RangeX, RangeX)
-                                   , transform.position.y,
+                                   , transform_.position.y,
                                   Random.Range(-RangeZ, RangeZ));
     }
 

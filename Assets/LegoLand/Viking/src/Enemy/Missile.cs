@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackState {  one, two, three };
 
 public class Missile : MonoBehaviour
 {
-    public AttackState state = AttackState.one;
-
+    EnemyColorType colorType = EnemyColorType.GREY;
   [Header("중앙 피해량")]
     private int Missile_damage_center = 0;
     [SerializeField]
@@ -35,8 +33,10 @@ public class Missile : MonoBehaviour
     [SerializeField]
     private float lifeTime = 10.0f;
     
-
     private Rigidbody rigid;
+
+
+    public GameObject FX;
 
 
     private void Awake()
@@ -47,20 +47,20 @@ public class Missile : MonoBehaviour
 
     private void InitializeState()
     {
-        switch (state)
+        switch (colorType)
         {
 
-            case AttackState.one:
+            case EnemyColorType.GREY:
                 {
                     Missile_damage_center = Missile1_damage_center;
                     Missile_damage_edge = Missile1_damage_edge;
                 } break;
-            case AttackState.two:
+            case EnemyColorType.BLUE:
                 {
                     Missile_damage_center = Missile2_damage_center;
                     Missile_damage_edge = Missile2_damage_edge;
                 } break;
-            case AttackState.three:
+            case EnemyColorType.YELLOW:
                 {
                     Missile_damage_center = Missile3_damage_center;
                     Missile_damage_edge = Missile3_damage_edge;
@@ -85,12 +85,16 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag== "deck") //바이킹 갑판에 부딪히면 파괴
+        if (collision.gameObject.tag == "deck") //바이킹 갑판에 부딪히면 파괴
+        {
             Destroy(this.gameObject);
+        }
 
         if (collision.gameObject.GetComponent<Player>()) // 플레이어와 부딪히면
         {
             GiveDamage(collision.gameObject.GetComponent<Collider>(), Missile_damage_center); //미사일 중앙 범위 피해
+          
+          
             Destroy(this.gameObject);
         }
     }
@@ -98,7 +102,8 @@ public class Missile : MonoBehaviour
     private void GiveDamage(Collider collision,int damage)
     {
         collision.gameObject.GetComponent<Player>().TakeDamage(damage);
-        Debug.Log(damage);
+        Instantiate(FX, new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y +5f , collision.gameObject.transform.position.z)
+                                                ,collision.gameObject.transform.rotation);
     }
 
 
@@ -111,8 +116,8 @@ public class Missile : MonoBehaviour
             if (collider.gameObject.GetComponent<Player>())
             {
                 GiveDamage(collider.gameObject.GetComponent<Collider>(), damage);
-                if (damage == Missile_damage_center) Debug.Log("중심 데미지");
-                if (damage == Missile_damage_edge) Debug.Log("외곽 데미지");
+               // if (damage == Missile_damage_center) Debug.Log("중심 데미지");
+                // if (damage == Missile_damage_edge) Debug.Log("외곽 데미지");
                 Destroy(this.gameObject);
             }
         } 
@@ -120,8 +125,6 @@ public class Missile : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-      //  Debug.Log("OnDrawGizmos");
-
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, Missile_damage_edge);
 

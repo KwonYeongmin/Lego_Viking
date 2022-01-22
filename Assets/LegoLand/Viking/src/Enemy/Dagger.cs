@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Dagger : MonoBehaviour
 {
-    public AttackState state = AttackState.one;
+   
     public EnemyColorType colortype = EnemyColorType.GREY;
     [Header("³«ÇÏ ¼Óµµ")]
     [SerializeField]

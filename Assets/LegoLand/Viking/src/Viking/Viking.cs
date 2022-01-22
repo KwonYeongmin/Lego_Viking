@@ -20,10 +20,10 @@ public class Viking : MonoBehaviour
     {
          lerpTimer += Time.deltaTime * (speed + WheelForce) / durationValue;
         transform.rotation = PendulumRotation();
-      
+      /*
         lerpTimer += Time.deltaTime * (speed+ WheelForce) / durationValue;
         transform.rotation = PendulumRotation();
-
+        */
         if (speed > 0.0f) speed -= Time.deltaTime * gravity;
         else speed = 0;
         
