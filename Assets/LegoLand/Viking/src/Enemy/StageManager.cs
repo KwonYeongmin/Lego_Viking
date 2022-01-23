@@ -14,10 +14,8 @@ public class StageManager : Singleton<StageManager>
     private SceneManagement sceneManager;
     private TimerUI Timer;
     [HideInInspector]public Viking viking;
-    //public ItemSpawner itemSpawner; //bgm
 
-    public int Stage;// { get; private set; }
-    //public int Index { get; private set; }
+    public int Stage;
     public EnemyType Type = EnemyType.Enemy_Missile;
     public EnemyColorType ColorType = EnemyColorType.GREY;
 
@@ -90,7 +88,7 @@ public class StageManager : Singleton<StageManager>
 
     public void SetStage()
     {
-        var Interface = FindObjectOfType<InterfaceTimer>();
+       // var Interface = FindObjectOfType<InterfaceTimer>();
       //  if (Interface != null)
        //     Interface.isPlay = true;
 
@@ -100,8 +98,8 @@ public class StageManager : Singleton<StageManager>
         {
             case 0: // 1-1
                 {
-
-                    Interface.ShowTutorial();
+                    GameObject tutorial =FindObjectOfType<TutorialUI>().gameObject;
+                   if(tutorial) tutorial.GetComponent<TutorialUI>().tutorialPanel.SetActive(true);
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.GREY;
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.GREY);

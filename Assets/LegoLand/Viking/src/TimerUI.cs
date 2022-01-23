@@ -7,7 +7,7 @@ public class TimerUI : MonoBehaviour
 {
     [HideInInspector]public TMP_Text TimeTEXT;
     Timer timer = new Timer();
-    public InterfaceTimer interfaceTimer;
+   // public InterfaceTimer interfaceTimer;
 
     public int Min { get; private set; }
     public int Sec { get; private set; }
