@@ -91,37 +91,36 @@ public class InterfaceTimer : MonoBehaviour
        // StartCoroutine(OFF_Clear());
     }
 
-    public void ShowTutorial()
-    {
-        Tutorial.SetActive(true);
-        StartCoroutine(OFF_StageTutorial());
-    }
 
-    /*
 
-    IEnumerator OFF_StageInfo()
-    {
-        yield return new WaitForSeconds(DelayTime);
-        StageInfo.SetActive(false);
-        if(StageManager.Instance.Stage < 4)
-        {
-            Tutorial.SetActive(true);
-            StartCoroutine(OFF_StageTutorial());
-        }
-        else
-        {
-            countdown.gameObject.SetActive(true);
-            countdown.StartTimer();
-        }
-    }*/
-
-    IEnumerator OFF_StageTutorial()
-    {
-        yield return new WaitForSeconds(DelayTime);
-        Tutorial.SetActive(false);
+   
+   IEnumerator OFF_StageInfo()
+   {
         countdown.gameObject.SetActive(true);
         countdown.StartTimer();
+        StageInfo.SetActive(false);
+        yield return new WaitForSeconds(DelayTime);
+        /*
+       StageInfo.SetActive(false);
+       if(StageManager.Instance.Stage < 4)
+       {
+           Tutorial.SetActive(true);
+           StartCoroutine(OFF_StageTutorial());
+       }
+       else
+       {
+           countdown.gameObject.SetActive(true);
+           countdown.StartTimer();
+       }*/
     }
+    /*
+  IEnumerator OFF_StageTutorial()
+  {
+      yield return new WaitForSeconds(DelayTime);
+      Tutorial.SetActive(false);
+      countdown.gameObject.SetActive(true);
+      countdown.StartTimer();
+  }*/
 
     IEnumerator OFF_Clear()
     {

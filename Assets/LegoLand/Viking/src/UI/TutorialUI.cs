@@ -6,6 +6,7 @@ public class TutorialUI : MonoBehaviour
 {
     public GameObject[] tutorialUI;
     public GameObject tutorialPanel;
+    public GameObject StageInfo;
     int index = 0;
     bool bBtnDown = false;
 
@@ -36,6 +37,7 @@ public class TutorialUI : MonoBehaviour
             {
                 tutorialUI[index].SetActive(false);
                 tutorialPanel.gameObject.SetActive(false);
+                StageInfo.SetActive(true);
             }
             bBtnDown = false;
         }
