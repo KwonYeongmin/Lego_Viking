@@ -84,6 +84,8 @@ public class EnemyHUD : MonoBehaviour
         int hp = enemySC.HP;
         HPSlider.value = (float)hp / (float)DefaultHP;
         HP_TXT.text = string.Format("{0}{1}{2}", hp.ToString(), " / ", DefaultHP.ToString());
+
+        if (hp <= 0) InfoImage.sprite=InfoSprites[3];
     }
 
 

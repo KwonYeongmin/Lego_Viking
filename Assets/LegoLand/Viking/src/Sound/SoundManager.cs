@@ -43,6 +43,16 @@ public class SoundManager : Singleton<SoundManager>
         bgmChannel.Stop();
     }
 
+    public void PlayUIAudio(AudioClip sfx)
+    {
+        if (seQueue.Count <= 0) return;
+        var channel = seQueue.Dequeue();
+        channel.audioClip = sfx;
+        channel.gameObject.SetActive(true);
+        channel.transform.parent = null;
+        channel.transform.position = new Vector3(0,0,0);
+    }
+
     public void PlayBGM(AudioClip bgm)
     {
         bgmChannel.audioClip = bgm;

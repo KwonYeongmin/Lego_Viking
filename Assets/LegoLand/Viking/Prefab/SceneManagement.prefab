@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: {fileID: 8300000, guid: becfd07404ae8784aa440bc473b97277, type: 3}
+  btnSFX: {fileID: 8300000, guid: 159afa5c3b1409e44aa2d9524c9e0b15, type: 3}

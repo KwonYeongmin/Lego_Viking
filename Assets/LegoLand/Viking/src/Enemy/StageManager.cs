@@ -10,7 +10,7 @@ public class StageManager : Singleton<StageManager>
 
     private EnemySpawner enemySpawner;
     private EnemyAttackSpawner attackSpawner;
-    private ItemSpawner itemSpawner;
+    private ItemSpawnerSelector itemSpawner;
     private SceneManagement sceneManager;
     private TimerUI Timer;
     [HideInInspector]public Viking viking;
@@ -21,12 +21,12 @@ public class StageManager : Singleton<StageManager>
     public EnemyType Type = EnemyType.Enemy_Missile;
     public EnemyColorType ColorType = EnemyColorType.GREY;
 
-    float Speed = 5;
+    float Speed = 0;
 
     private void Awake()
     {
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
-        itemSpawner = GameObject.Find("ItemSpawner").GetComponent<ItemSpawner>();
+        itemSpawner = GameObject.Find("ItemSpawnerSelector").GetComponent<ItemSpawnerSelector>();
         viking = GameObject.Find("Pin").GetComponent<Viking>();
         sceneManager = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
         Timer = GameObject.Find("Time").GetComponent<TimerUI>();
@@ -35,10 +35,8 @@ public class StageManager : Singleton<StageManager>
 
     void Start()
     {
-        //  Stage = 0;
-        //  SetStage();
-
-        Stage = 0;
+        // Stage = 8;
+        // Stage = 0;
     }
 
     private void Update()
@@ -93,15 +91,17 @@ public class StageManager : Singleton<StageManager>
     public void SetStage()
     {
         var Interface = FindObjectOfType<InterfaceTimer>();
-        if (Interface != null)
-            Interface.isPlay = true;
+      //  if (Interface != null)
+       //     Interface.isPlay = true;
 
         Timer.StartTimer();
-
+        Debug.Log("Stage: " + Stage);
         switch (Stage)
         {
             case 0: // 1-1
                 {
+
+                    Interface.ShowTutorial();
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.GREY;
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.GREY);

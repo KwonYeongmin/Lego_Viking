@@ -32,7 +32,9 @@ public class Dagger : MonoBehaviour
     private float lifeTime = 10.0f;
 
     public GameObject[] particles;
-    public GameObject[] projectors;
+    [Header("Projector")]
+    public Projector Projector;
+    public Material[] ProjectorMaterials;
 
     private Rigidbody rig;
      private GameObject Player;
@@ -40,13 +42,13 @@ public class Dagger : MonoBehaviour
 
     private GameObject[] deckEdges;
     float[] direction = new float[4];
+   [HideInInspector] public Transform daggerTransform;
 
+    private bool bIsFallen = false;
     private void Awake()
     {
         rig = this.GetComponent<Rigidbody>();
         InitializeState(); // 단계별 피해량 설정
-
-        
 
         direction[0] = 0;
         direction[1] = 90;
@@ -55,7 +57,7 @@ public class Dagger : MonoBehaviour
         float num = direction[Random.Range(0, 4)];
         this.gameObject.transform.rotation = Quaternion.Euler(90.0f, num, 0);
 
-        
+        bIsFallen = false;
     }
 
 
@@ -70,9 +72,7 @@ public class Dagger : MonoBehaviour
                     particles[1].SetActive(false);
                     particles[2].SetActive(false);
 
-                    projectors[0].SetActive(true);
-                    projectors[1].SetActive(false);
-                    projectors[2].SetActive(false);
+                    Projector.material = ProjectorMaterials[0];
                 }
                 break;
             case EnemyColorType.BLUE:
@@ -81,9 +81,8 @@ public class Dagger : MonoBehaviour
                     particles[0].SetActive(false);
                     particles[1].SetActive(true);
                     particles[2].SetActive(false);
-                    projectors[0].SetActive(false);
-                    projectors[1].SetActive(true);
-                    projectors[2].SetActive(false);
+                    Projector.material = ProjectorMaterials[1];
+
                 }
                 break;
             case EnemyColorType.YELLOW:
@@ -92,20 +91,14 @@ public class Dagger : MonoBehaviour
                     particles[1].SetActive(false);
                     particles[2].SetActive(true);
 
-                    projectors[0].SetActive(false);
-                    projectors[1].SetActive(false);
-                    projectors[2].SetActive(true);
+                    Projector.material = ProjectorMaterials[2];
+
                 }
                 break;
         }
     }
 
-    private void Start()
-    {
 
-    }
-
-   
 
     private void Update()
     {
@@ -113,40 +106,42 @@ public class Dagger : MonoBehaviour
          Move();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnCollisionEnter : "+collision.gameObject.name );
-
-        if (collision.gameObject.GetComponent<Player>())
+        if (other.gameObject.GetComponent<Player>())
         {
-            GiveDamage(collision.gameObject.GetComponent<Collider>());
+            GiveDamage(other);
+            Debug.Log("triggerEnter");
             Destroy(this.gameObject);
         }
 
-        if (collision.gameObject.tag =="deckEdge")
-        {
-            Debug.Log("edge에 닿음");
-            Destroy(this.gameObject); }
+        if (other.gameObject.tag != "deck" && other.gameObject.tag != "Player")
+            Destroy(this.gameObject);
     }
+
 
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "deck")
         {
             bIsFallen = true;
-            Destroy(this.gameObject, 5f);
         }
         
     }
-
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "deck") Destroy(this.gameObject);
+    }
 
     private void GiveDamage(Collider collision)
     {
         collision.gameObject.GetComponent<Player>().TakeDamage(dagger_damage);
-        Debug.Log("표창 데미지");
+        SoundManager.Instance.PlaySE(SoundList.Sound_dagger_hit, this.transform.position);
     }
 
-    private bool bIsFallen=false;
+    
+
+
 
     private void Move()
     {
@@ -163,6 +158,8 @@ public class Dagger : MonoBehaviour
             float sp = dagger_speed;
             rig.AddForce(direction * sp);
             transform.Rotate(0.0f,0.0f,0.0f);
+            this.GetComponent<AudioSource>().Play();
+            daggerTransform.Rotate(new Vector3(0, 50, 0) * Time.deltaTime);
         }
 
     }

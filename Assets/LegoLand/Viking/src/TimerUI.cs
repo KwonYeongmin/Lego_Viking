@@ -22,7 +22,7 @@ public class TimerUI : MonoBehaviour
 
     void Update()
     {
-        if(interfaceTimer.isPlay)
+      //  if(interfaceTimer.isPlay)
         {
             timer.UpdateTimer();
             UpdateUI();
@@ -46,7 +46,7 @@ public class TimerUI : MonoBehaviour
     }
     private bool bSettingFinished = true;
    
-    void SetSpeed()
+    void SetSpeed()  //StageManager.Instance.Stage ¿Å±â±â
     {
         switch (StageManager.Instance.Stage)
         {

@@ -46,15 +46,14 @@ public class Enemy : MonoBehaviour
 
         time += Time.deltaTime * (speed);
 
-        
-       switch (StageManager.Instance.Stage % 4)
-       //switch (aaindex)
+
+        switch (StageManager.Instance.Stage % 4)
         {
-            case 1: { Move(1); } break;
-            case 2: { Move(2); } break;
-            case 3: { Move(DirectionIndex); } break;
+            case 1: { Move(0); } break;
+            case 2: { Move(1); } break;
+            // case 3: { Move(DirectionIndex); } break; -> 겹치는 문제 발생
+            case 3: { Move(1); } break; //-> 위아래로 수정
         }
-        
     }
 
     private float time = 0;
@@ -75,7 +74,6 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(4f);
         }
         
-
     }
 
     private void Move(int direction)
@@ -151,7 +149,7 @@ public class Enemy : MonoBehaviour
                 StageManager.Instance.RemoveEnemies(this.gameObject);
             StageManager.Instance.ChangeStage();
             SoundManager.Instance.PlaySE(SoundList.Sound_monster_death, transform.position);
-            Destroy(HUD);
+           //Destroy(HUD);
             Destroy(this.gameObject);
         }
     }

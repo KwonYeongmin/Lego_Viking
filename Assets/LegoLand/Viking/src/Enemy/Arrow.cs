@@ -44,6 +44,7 @@ public class Arrow : MonoBehaviour
     private void Start()
     {
        Destroy(this.gameObject, 10.0f);
+        SoundManager.Instance.PlaySE(SoundList.Sound_arrow_stick,this.transform.position);
     }
 
     private void Update()
@@ -125,5 +126,7 @@ public class Arrow : MonoBehaviour
         float value = collision.gameObject.GetComponent<Movement>().moveSpeed;
         value *= arrow_speed_down;
         collision.gameObject.GetComponent<Player>().DecreaseSpeed(value); //스피드 감소
+
+        SoundManager.Instance.PlaySE(SoundList.Sound_arrow_hit, this.transform.position);
     }
 }

@@ -74,6 +74,7 @@ public class Missile : MonoBehaviour
     {
         rigid = this.GetComponent<Rigidbody>();
         Destroy(this.gameObject, lifeTime);
+        SoundManager.Instance.PlaySE(SoundList.Sound_missile_explosion, this.transform.position);
     }
 
     private void Update()
@@ -93,8 +94,6 @@ public class Missile : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>()) // 플레이어와 부딪히면
         {
             GiveDamage(collision.gameObject.GetComponent<Collider>(), Missile_damage_center); //미사일 중앙 범위 피해
-          
-          
             Destroy(this.gameObject);
         }
     }
@@ -104,6 +103,7 @@ public class Missile : MonoBehaviour
         collision.gameObject.GetComponent<Player>().TakeDamage(damage);
         Instantiate(FX, new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y +5f , collision.gameObject.transform.position.z)
                                                 ,collision.gameObject.transform.rotation);
+        SoundManager.Instance.PlaySE(SoundList.Sound_missile_hit,this.transform.position);
     }
 
 

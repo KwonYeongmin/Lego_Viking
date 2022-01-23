@@ -37,7 +37,7 @@ public class InterfaceTimer : MonoBehaviour
 
         ReadTextFile();
 
-        StageInfoSetup(0);
+       // StageInfoSetup(0);
     }
 
     private void ReadTextFile()
@@ -62,6 +62,17 @@ public class InterfaceTimer : MonoBehaviour
         stringReader.Close();
     }
 
+    //
+    private void Update()
+    {
+        if(StageInfo.activeSelf==true) Time.timeScale = 0.0f;
+        else Time.timeScale = 1.0f;
+
+        if (Tutorial.activeSelf == true) Time.timeScale = 0.0f;
+        else Time.timeScale = 1.0f;
+    }
+    //
+
     public void StageInfoSetup(int num)
     {
         isPlay = false;
@@ -69,7 +80,7 @@ public class InterfaceTimer : MonoBehaviour
         stage_num.text = "Stage " + stageText[num].stage_num;
         stage_attack.text = stageText[num].stage_attack;
         stage_enemy.text = stageText[num].stage_enemy;
-        StartCoroutine(OFF_StageInfo());
+       // StartCoroutine(OFF_StageInfo());
     }
 
     public void ClearTimeSetup()
@@ -77,8 +88,16 @@ public class InterfaceTimer : MonoBehaviour
         isPlay = false;
         Clear.SetActive(true);
         clear_time.text = timer.text;
-        StartCoroutine(OFF_Clear());
+       // StartCoroutine(OFF_Clear());
     }
+
+    public void ShowTutorial()
+    {
+        Tutorial.SetActive(true);
+        StartCoroutine(OFF_StageTutorial());
+    }
+
+    /*
 
     IEnumerator OFF_StageInfo()
     {
@@ -94,7 +113,7 @@ public class InterfaceTimer : MonoBehaviour
             countdown.gameObject.SetActive(true);
             countdown.StartTimer();
         }
-    }
+    }*/
 
     IEnumerator OFF_StageTutorial()
     {

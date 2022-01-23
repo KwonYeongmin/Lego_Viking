@@ -124,6 +124,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d86099816ff8b4746ac08e55954073c0, type: 3}
   - {fileID: 21300000, guid: 8155a68725ff84b949853519dabf2513, type: 3}
   - {fileID: 21300000, guid: 7d50eb4c510eb4e8b9ae8223cdbf70b4, type: 3}
+  - {fileID: 21300000, guid: 5a350ac1f8e0a416499529612b3f7dab, type: 3}
   InfoImage: {fileID: 8929118877676618422}
   StageInfo_TXT: {fileID: 8929118877992213222}
 --- !u!1 &8929118877476242311

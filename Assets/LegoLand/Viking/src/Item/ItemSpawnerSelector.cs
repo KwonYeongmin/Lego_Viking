@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ItemSpawnerSelector : MonoBehaviour
+{
+    public GameObject itemSpawner;
+    private ItemSpawner[] ItemSpawners = new ItemSpawner[10];
+    private int ItemSpawnersCount = 10;
+    public float Interval = 5.0f;
+    public int CreatibleItemIndex = 2;
+
+    private void Awake()
+    {
+        for (int i = 0; i < ItemSpawnersCount; i++)
+        {
+       
+            ItemSpawners[i] = itemSpawner.transform.GetChild(i).gameObject.GetComponent<ItemSpawner>();
+
+        }
+    }
+
+    IEnumerator Start()
+    {
+        while (true)
+        {
+            int index = Random.Range(0, ItemSpawnersCount);
+            ItemSpawners[index].CreatibleItemIndex = CreatibleItemIndex;
+            ItemSpawners[index].bIsChoosen = true;
+            yield return new WaitForSeconds(Interval);
+        }
+    }
+
+    void Update()
+    {
+        
+    }
+}

@@ -25,6 +25,7 @@ public class PauseWindow : MonoBehaviour
         isButtonPause = true;
         PauseMenu.SetActive(true);
         Time.timeScale = 0.0f;
+        SoundManager.Instance.PlayUIAudio(SoundList.Sound_button);
     }
 
     public void ButtonContinueDown()
@@ -37,7 +38,10 @@ public class PauseWindow : MonoBehaviour
     public void ButtonReStartDown()
     {
         Time.timeScale = 1.0f;
-        sceneManagement.ChangeScene("GameScene");
+       // sceneManagement.ChangeScene("GameScene");
+        StageManager.Instance.Stage = 0;
+        StageManager.Instance.SetStage();
+        PauseMenu.SetActive(false);
     }
 
     public void ButtonGiveUpDown()

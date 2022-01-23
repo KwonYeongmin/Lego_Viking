@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-    public AudioClip title;
+    [HideInInspector]public AudioClip title;
+   [HideInInspector] public AudioClip btnSFX;
 
     private void Awake()
     {
@@ -25,5 +26,10 @@ public class SceneManagement : MonoBehaviour
     public void QuitApplication()
     {
         Application.Quit();
+    }
+
+    public void PlayBtnSFX()
+    {
+        SoundManager.Instance.PlayUIAudio(btnSFX);
     }
 }

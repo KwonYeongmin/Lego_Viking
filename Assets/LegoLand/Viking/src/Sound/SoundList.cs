@@ -49,6 +49,7 @@ public class SoundList : MonoBehaviour
     public AudioClip sound_win;
     public AudioClip sound_lose;
 
+    // BGM
     public static AudioClip Stage1 { get; private set; }
     public static AudioClip Stage1_Boss { get; private set; }
     public static AudioClip Stage2 { get; private set; }
@@ -57,23 +58,29 @@ public class SoundList : MonoBehaviour
     public static AudioClip Stage3_Boss { get; private set; }
     public static AudioClip Stage4 { get; private set; }
     public static AudioClip Stage4_Boss { get; private set; }
+    //Player
     public static AudioClip Sound_walk_1 { get; private set; }
     public static AudioClip Sound_walk_2 { get; private set; }
     public static AudioClip Sound_roll { get; private set; }
     public static AudioClip Sound_shoot { get; private set; }
     public static AudioClip Sound_lack { get; private set; }
     public static AudioClip Sound_grenade { get; private set; }
+    //Item
     public static AudioClip Sound_acquisition_item { get; private set; }
     public static AudioClip Sound_acquisition_bullet { get; private set; }
     public static AudioClip Sound_acquisition_heal { get; private set; }
+    //Attack
     public static AudioClip Sound_missile_hit { get; private set; }
     public static AudioClip Sound_missile_explosion { get; private set; }
     public static AudioClip Sound_arrow_hit { get; private set; }
     public static AudioClip Sound_arrow_stick { get; private set; }
     public static AudioClip Sound_dagger_hit { get; private set; }
     public static AudioClip Sound_dagger_move { get; private set; }
+    //Monster
     public static AudioClip Sound_monster_death { get; private set; }
     public static AudioClip Sound_monster_hit { get; private set; }
+
+    // Viking
     public static AudioClip Sound_viking { get; private set; }
     public static AudioClip Sound_motor { get; private set; }
     public static AudioClip Sound_button { get; private set; }

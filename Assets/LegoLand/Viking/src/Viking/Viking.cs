@@ -15,6 +15,8 @@ public class Viking : MonoBehaviour
     public float durationValue = 30.0f;
 
     public bool bForce = false;
+    private bool bChangedDirection = false;
+
 
     private void FixedUpdate()
     {
@@ -39,10 +41,21 @@ public class Viking : MonoBehaviour
             speed += WheelForce;
             WheelForce = 0;
         }
-    }
 
-  
-   
+        if ((int)(transform.rotation.z) == 0)
+        {
+            bChangedDirection = true;
+        }
+
+        if (Mathf.Abs(transform.rotation.z) >= 0.25f && bChangedDirection)
+        {
+            SoundManager.Instance.PlaySE(SoundList.Sound_viking,this.transform.position);
+            bChangedDirection = false;
+        }
+    }
+ 
+
+
 
     Quaternion PendulumRotation()
     {
