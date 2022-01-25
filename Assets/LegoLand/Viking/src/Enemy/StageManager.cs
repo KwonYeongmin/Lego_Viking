@@ -13,6 +13,7 @@ public class StageManager : Singleton<StageManager>
     private ItemSpawnerSelector itemSpawner;
     private SceneManagement sceneManager;
     private TimerUI Timer;
+    private StageInfoUI StageInfo;//= FindObjectOfType<StageInfoUI>();
     [HideInInspector]public Viking viking;
 
     public int Stage;
@@ -28,6 +29,8 @@ public class StageManager : Singleton<StageManager>
         viking = GameObject.Find("Pin").GetComponent<Viking>();
         sceneManager = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
         Timer = GameObject.Find("Time").GetComponent<TimerUI>();
+        StageInfo = GameObject.Find("StageInfo ").GetComponent <StageInfoUI>();
+
         Speed = viking.speed;
     }
 
@@ -50,6 +53,7 @@ public class StageManager : Singleton<StageManager>
     {
         enemies.Add(obj);
     }
+
     public void RemoveEnemies(GameObject obj)
     {
         enemies.Remove(obj);
@@ -73,6 +77,7 @@ public class StageManager : Singleton<StageManager>
         {
             if (enemies.Count <= 0)
             {
+                ClearEnemyHUD();
                 if (Stage == 15)
                 {
                     sceneManager.ChangeScene("GameOver");
@@ -86,20 +91,36 @@ public class StageManager : Singleton<StageManager>
         Debug.Log("Stage: " + Stage);
     }
 
+    private void ClearEnemyHUD()
+    {
+        // List<GameObject> enemyHUD_list = new List<GameObject>();
+        GameObject[]  enemyHUD;
+        enemyHUD= GameObject.FindGameObjectsWithTag("EnemyHUD");
+        Debug.Log("enemyHUD_list : " + enemyHUD.Length);
+        for (int i = 0; i < enemyHUD.Length; i++)
+        {
+            Destroy(enemyHUD[i]);
+        }
+    }
+
     public void SetStage()
     {
-       // var Interface = FindObjectOfType<InterfaceTimer>();
-      //  if (Interface != null)
-       //     Interface.isPlay = true;
-
-        Timer.StartTimer();
         Debug.Log("Stage: " + Stage);
+
+
+        if (StageInfo.gameObject) StageInfo.SetStageInfo(Stage);
+        if(Stage!=0) if (StageInfo.gameObject) StageInfo.ShowStageInfo();
+        Timer.StartTimer();
+        viking.SetDefaultRotation();
+
+
         switch (Stage)
         {
             case 0: // 1-1
                 {
                     GameObject tutorial =FindObjectOfType<TutorialUI>().gameObject;
                    if(tutorial) tutorial.GetComponent<TutorialUI>().tutorialPanel.SetActive(true);
+                  
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.GREY;
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.GREY);
@@ -110,6 +131,7 @@ public class StageManager : Singleton<StageManager>
                 break;
             case 1: // 1-2
                 {
+                   
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.BLUE;
                     enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.BLUE);

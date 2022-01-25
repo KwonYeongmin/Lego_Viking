@@ -11,6 +11,7 @@ TagManager:
   - EnemySpawner
   - FX
   - deckBox
+  - EnemyHUD
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ public class InterfaceTimer : MonoBehaviour
     [SerializeField] private Countdown countdown;
 
     [Header("Interface DelayTime")]
-    [SerializeField]private float DelayTime = 3.0f;
+    [SerializeField] private float DelayTime = 3.0f;
     public bool isPlay = false;
 
     [Header("Stage Infomation")]

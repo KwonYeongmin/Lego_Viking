@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
         //HUD »ý¼º
        HUD =Instantiate(HUDInstance, new Vector2(960,640), Quaternion.identity);
        HUD.GetComponent<EnemyHUD>().Initialized(this.gameObject);
+        HUD.name = "EnemyHUD";
 
         StartCoroutine(SetRandomDirection());
     }

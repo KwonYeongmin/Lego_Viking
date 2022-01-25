@@ -24,15 +24,13 @@ public class ItemSpawnerSelector : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(Interval);
+
             int index = Random.Range(0, ItemSpawnersCount);
             ItemSpawners[index].CreatibleItemIndex = CreatibleItemIndex;
             ItemSpawners[index].bIsChoosen = true;
-            yield return new WaitForSeconds(Interval);
+            
         }
     }
 
-    void Update()
-    {
-        
-    }
 }

@@ -24,7 +24,7 @@ public class PauseWindow : MonoBehaviour
     {
         isButtonPause = true;
         PauseMenu.SetActive(true);
-        Time.timeScale = 0.0f;
+       // Time.timeScale = 0.0f;
         SoundManager.Instance.PlayUIAudio(SoundList.Sound_button);
     }
 
@@ -32,7 +32,7 @@ public class PauseWindow : MonoBehaviour
     {
         isButtonPause = false;
         PauseMenu.SetActive(false);
-        Time.timeScale = 1.0f;
+       // Time.timeScale = 1.0f;
     }
 
     public void ButtonReStartDown()

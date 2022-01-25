@@ -7,6 +7,8 @@ public class TutorialUI : MonoBehaviour
     public GameObject[] tutorialUI;
     public GameObject tutorialPanel;
     public GameObject StageInfo;
+   
+
     int index = 0;
     bool bBtnDown = false;
 
@@ -18,7 +20,6 @@ public class TutorialUI : MonoBehaviour
 
     public void TutorialNextBtnDown()
     {
-        
         bBtnDown = true;
         SoundManager.Instance.PlayUIAudio(SoundList.Sound_button);
     }
@@ -37,13 +38,13 @@ public class TutorialUI : MonoBehaviour
             {
                 tutorialUI[index].SetActive(false);
                 tutorialPanel.gameObject.SetActive(false);
-                StageInfo.SetActive(true);
+                StageInfo.GetComponent<StageInfoUI>().ShowStageInfo();
             }
             bBtnDown = false;
         }
 
-        if (tutorialPanel.activeSelf) Time.timeScale = 0.0f;
-       else Time.timeScale = 1;
+       // if (tutorialPanel.activeSelf) Time.timeScale = 0.0f;
+        // else Time.timeScale = 1;
     }
        
     

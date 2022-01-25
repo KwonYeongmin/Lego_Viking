@@ -11,7 +11,7 @@ public class Countdown : MonoBehaviour
 
     private float timer;
     private float MaxTime = 3f;
-    private bool bIsEnded;
+    [HideInInspector]public bool bIsEnded;
 
     void Update()
     {
@@ -25,8 +25,8 @@ public class Countdown : MonoBehaviour
     {
         if (0 < timer)
         {
-            timer -= Time.deltaTime;
-            TimeTEXT.text = ((int)timer).ToString();
+            timer -= Time.unscaledDeltaTime;
+            TimeTEXT.text = ((int)timer + 1).ToString();
         }
         else if (!bIsEnded)
         {
@@ -40,7 +40,7 @@ public class Countdown : MonoBehaviour
         timer = 0;
         TimeTEXT.text = ((int)timer).ToString();
         bIsEnded = true;
-        StageManager.Instance.ChangeStage();
+       //  StageManager.Instance.ChangeStage();
     }
 
     public void StartTimer() //여기서 시작해주면 됨

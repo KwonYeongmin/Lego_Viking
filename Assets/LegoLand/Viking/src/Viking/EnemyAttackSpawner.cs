@@ -42,6 +42,7 @@ public class EnemyAttackSpawner : MonoBehaviour
 
         while (true)
         {
+            yield return new WaitForSeconds(interval);
             /*
             if (!interfaceTimer.isPlay)
                 yield return new WaitForSeconds(9.0f);
@@ -168,7 +169,7 @@ public class EnemyAttackSpawner : MonoBehaviour
                     }
                     break;      
             }
-            yield return new WaitForSeconds(interval);
+            
         }
     }
 

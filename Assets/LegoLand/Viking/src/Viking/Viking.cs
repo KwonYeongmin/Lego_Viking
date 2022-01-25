@@ -16,11 +16,23 @@ public class Viking : MonoBehaviour
 
     public bool bForce = false;
     private bool bChangedDirection = false;
+    Quaternion defaultRotation;
 
+    private void Awake()
+    {
+        defaultRotation = transform.localRotation;
+    }
+
+    public void SetDefaultRotation()
+    {
+        transform.localRotation = Quaternion.Euler(defaultRotation.x, defaultRotation.y, defaultRotation.z);
+    }
 
     private void FixedUpdate()
     {
-         lerpTimer += Time.deltaTime * (speed + WheelForce) / durationValue;
+
+
+        lerpTimer += Time.deltaTime * (speed + WheelForce) / durationValue;
         transform.rotation = PendulumRotation();
       /*
         lerpTimer += Time.deltaTime * (speed+ WheelForce) / durationValue;
