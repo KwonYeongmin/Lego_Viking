@@ -1324,7 +1324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HUDInstance: {fileID: 643404229928331987, guid: 331b13216d563694294c7f345d70988b, type: 3}
-  EnemtProfileImg: {fileID: 0}
+  EnemtProfileImg: {fileID: 21300000, guid: c935ea747c0427443a36906d5975d14b, type: 3}
   Index: 0
   speed: 1
 --- !u!1 &7345634737143025827

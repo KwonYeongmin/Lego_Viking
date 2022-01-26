@@ -42,9 +42,6 @@ public class PauseWindow : MonoBehaviour
         // 아예 처음으로
       sceneManagement.ChangeScene("GameScene");
 
-
-
-
         // 해당 스테이지만 처음으로
         /*
          int stage =StageManager.Instance.Stage ;

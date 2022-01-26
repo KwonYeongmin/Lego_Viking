@@ -16,9 +16,9 @@ public class EnemyHUD : MonoBehaviour
     public TMP_Text HP_TXT;
     
     //ProfileImage
-    public Sprite[] InfoSprites; //3°³
+    //public Sprite[] InfoSprites; //3°³
     public Image InfoImage;
-
+    public GameObject deadImg;
     //ProfileStageInfo
     public TMP_Text StageInfo_TXT;
 
@@ -85,15 +85,15 @@ public class EnemyHUD : MonoBehaviour
         HPSlider.value = (float)hp / (float)DefaultHP;
         HP_TXT.text = string.Format("{0}{1}{2}", hp.ToString(), " / ", DefaultHP.ToString());
 
-        if (hp <= 0) InfoImage.sprite=InfoSprites[3];
+        if (hp <= 0) deadImg.SetActive(true);
     }
 
 
     private void UpdateProfile()
     {
         // image
-        InfoImage.sprite = InfoSprites[(int)enemySC.ColorType];
-
+        // InfoImage.sprite = InfoSprites[(int)enemySC.ColorType];
+        InfoImage.SetNativeSize();
         //text : type
         string type= "Missile";
 

@@ -19988,7 +19988,7 @@ PrefabInstance:
       objectReference: {fileID: 7338745420004226461}
     - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: DefaultHP
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: playerHUD

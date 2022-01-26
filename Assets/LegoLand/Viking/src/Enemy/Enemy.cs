@@ -32,11 +32,11 @@ public class Enemy : MonoBehaviour
         SetHP();
         HP = DefaultHP;
 
-        //HUD ����
+        //HUD 
        HUD =Instantiate(HUDInstance, new Vector2(960,640), Quaternion.identity);
        HUD.GetComponent<EnemyHUD>().Initialized(this.gameObject);
-        HUD.name = "EnemyHUD";
-
+       HUD.name = "EnemyHUD";
+        HUD.GetComponent<EnemyHUD>().InfoImage.sprite = EnemtProfileImg;
         StartCoroutine(SetRandomDirection());
     }
 
@@ -147,9 +147,10 @@ public class Enemy : MonoBehaviour
         {
             if (StageManager.Instance.Stage % 4 == 3)
                 StageManager.Instance.RemoveEnemies(this.gameObject);
+            else { Destroy(HUD); }
             StageManager.Instance.ChangeStage();
             SoundManager.Instance.PlaySE(SoundList.Sound_monster_death, transform.position);
-           //Destroy(HUD);
+           
             Destroy(this.gameObject);
         }
     }
