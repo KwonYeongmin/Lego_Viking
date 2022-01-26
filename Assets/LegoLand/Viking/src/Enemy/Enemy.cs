@@ -71,7 +71,6 @@ public class Enemy : MonoBehaviour
         while (true)
         {
             DirectionIndex = Random.Range(0, 2);
-            Debug.Log(DirectionIndex);
             yield return new WaitForSeconds(4f);
         }
         

@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     [Header("MoveSpeed")]
     public float defaultMoveSpeed; //Ãß°¡
     public float moveSpeed;
+    public float rollSpeed = 15.0f;
 
     [Header("Rotation")]
     [SerializeField]
@@ -49,10 +50,10 @@ public class Movement : MonoBehaviour
         moveDirection.y = 0.0f;
 
         if (isRoll)
+        {
             moveDirection = rollDirection;
-
-        //if (!characterController.isGrounded)
-        //    moveDirection.y -= gravity * Time.deltaTime;
+            moveSpeed = rollSpeed;
+        }
 
         if (OnSteepSlope())
             SteepSlopeMovement();
@@ -68,12 +69,9 @@ public class Movement : MonoBehaviour
         if (risingSlope)
         {
             characterController.Move(projectedVelocity * Time.deltaTime);
-            // characterController.Move(moveDirection * Time.deltaTime);
             return;
         }
         characterController.Move(projectedVelocity * Time.deltaTime);
-
-        //characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
     }
 
     public void Rotation(Vector3 direction)
@@ -104,6 +102,7 @@ public class Movement : MonoBehaviour
 
     public void Roll(Vector3 direction)
     {
+        moveSpeed = rollSpeed;
         rollDirection = transform.forward;
         rollDirection.Normalize();
 
@@ -113,7 +112,7 @@ public class Movement : MonoBehaviour
 
     private bool OnSteepSlope()
     {
-        if (isSpeedUp) return false;
+        if (isSpeedUp || isRoll) return false;
 
         if (!characterController.isGrounded) return false;
 
@@ -154,6 +153,4 @@ public class Movement : MonoBehaviour
         }
         lastDirection = moveDirection.normalized;
     }
-
-
 }

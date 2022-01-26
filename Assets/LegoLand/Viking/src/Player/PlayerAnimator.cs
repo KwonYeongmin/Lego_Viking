@@ -23,7 +23,6 @@ public class PlayerAnimator : MonoBehaviour
     public void OnRoll()
     {
         animator.SetTrigger("isRoll");
-        movement.moveSpeed = 7.5f;
     }
 
     public void EndRoll()

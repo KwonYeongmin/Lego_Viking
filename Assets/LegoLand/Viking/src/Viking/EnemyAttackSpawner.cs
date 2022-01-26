@@ -32,8 +32,6 @@ public class EnemyAttackSpawner : MonoBehaviour
     IEnumerator Start()
     {
 
-        Debug.Log("오브젝트 생성");
-
         float[] direction = new float[4];
         direction[0] = 0;
         direction[1] = 90;
