@@ -38,9 +38,9 @@ public class PauseWindow : MonoBehaviour
     public void ButtonReStartDown()
     {
         Time.timeScale = 1.0f;
-       // sceneManagement.ChangeScene("GameScene");
-        StageManager.Instance.Stage = 0;
-        StageManager.Instance.SetStage();
+        sceneManagement.ChangeScene("GameScene");
+       // StageManager.Instance.Stage = 0;
+       // StageManager.Instance.SetStage();
         PauseMenu.SetActive(false);
     }
 
