@@ -7,22 +7,25 @@ public class TimerUI : MonoBehaviour
 {
     [HideInInspector]public TMP_Text TimeTEXT;
     Timer timer = new Timer();
-   // public InterfaceTimer interfaceTimer;
-
+    // public InterfaceTimer interfaceTimer;
+    public SceneManagement SceneManager;
     public int Min { get; private set; }
     public int Sec { get; private set; }
     float Speed = 5;
 
     private void Awake()
     {
-        Speed = StageManager.Instance.viking.speed;
         Min = 0;
         Sec = 0;
+    }
+    private void Start()
+    {
+        Speed = StageManager.Instance.viking.speed;
     }
 
     void Update()
     {
-      //  if(interfaceTimer.isPlay)
+       if (Min >= 3) { SceneManager.ChangeScene("GameOver"); }
         {
             timer.UpdateTimer();
             UpdateUI();
@@ -36,13 +39,31 @@ public class TimerUI : MonoBehaviour
         timer.StartTimer();
     }
 
+
+     //
+    string Rec;
+    void SaveRec(string rec)
+    {
+        Rec = rec;
+    }
+
+    public string GetRec()
+    {
+        return Rec;
+    }
+     //
+
     private void UpdateUI()
     {
         Min = (int)(timer.GetTimer() / 60 % 60);
         Sec = (int)(timer.GetTimer() % 60);
 
-        if(Min <10 && Sec<10) TimeTEXT.text = string.Format("0{0} : 0{1}", Min,Sec);
-        else if(Min < 10 && Sec>=10) TimeTEXT.text = string.Format("0{0} : {1}", Min,Sec);
+        if (Min < 10 && Sec < 10)
+            SaveRec(string.Format("0{0} : 0{1}", Min, Sec)); 
+        else if (Min < 10 && Sec>=10)
+            SaveRec(string.Format("0{0} : {1}", Min,Sec));
+
+        TimeTEXT.text = GetRec();
     }
     private bool bSettingFinished = true;
    
@@ -71,10 +92,10 @@ public class TimerUI : MonoBehaviour
 
     private void UpdateSpeed(float value1, float value2, float value3)
     {
-       
-        if (Min >= 1 && Min < 2) {  StageManager.Instance.viking.speed = Speed * value1; }
+        if (Min >= 1 && Min < 2) { StageManager.Instance.viking.speed = Speed * value1; }
         else if (Min >= 2) { StageManager.Instance.viking.speed = Speed * value2; }
-        else {  StageManager.Instance.viking.speed = Speed * value3; }
+       
+        else { StageManager.Instance.viking.speed = Speed * value3; }
     }
 
 }

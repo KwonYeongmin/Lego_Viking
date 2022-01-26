@@ -390,6 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HUDInstance: {fileID: 643404229928331987, guid: 331b13216d563694294c7f345d70988b, type: 3}
   Index: 0
+  aaindex: 0
+  speed: 1
 --- !u!1 &79219089747875090
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,7 +902,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b9b45a2d68e4a145adffec7122ca708, type: 2}
+  - {fileID: 2100000, guid: 1ce061aa5c14e5f41adf6169ec10e130, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1368,7 +1370,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 198ee9081f0982a4baef2da47e2a1c0c, type: 2}
+  - {fileID: 2100000, guid: 43fa2e8879018a944a0cb01d88aba6d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

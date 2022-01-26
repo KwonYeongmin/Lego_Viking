@@ -21,12 +21,9 @@ public class Viking : MonoBehaviour
     private void Awake()
     {
         defaultRotation = transform.localRotation;
+        speed = 6;
     }
 
-    public void SetDefaultRotation()
-    {
-        transform.localRotation = Quaternion.Euler(defaultRotation.x, defaultRotation.y, defaultRotation.z);
-    }
 
     private void FixedUpdate()
     {

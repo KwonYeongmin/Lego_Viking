@@ -22,7 +22,7 @@ public class StageManager : Singleton<StageManager>
 
     float Speed = 0;
 
-    private void Awake()
+    private void Start()
     {
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         itemSpawner = GameObject.Find("ItemSpawnerSelector").GetComponent<ItemSpawnerSelector>();
@@ -34,11 +34,7 @@ public class StageManager : Singleton<StageManager>
         Speed = viking.speed;
     }
 
-    void Start()
-    {
-        // Stage = 8;
-        // Stage = 0;
-    }
+
 
     private void Update()
     {
@@ -68,6 +64,8 @@ public class StageManager : Singleton<StageManager>
 
     public void ChangeStage()
     {
+        SavePrevTimer();
+
         if (Stage % 4 != 3)
         { 
             Stage++;
@@ -78,6 +76,7 @@ public class StageManager : Singleton<StageManager>
             if (enemies.Count <= 0)
             {
                 ClearEnemyHUD();
+                
                 if (Stage == 15)
                 {
                     sceneManager.ChangeScene("GameOver");
@@ -103,38 +102,55 @@ public class StageManager : Singleton<StageManager>
         }
     }
 
+    public void SavePrevTimer()
+    {
+        StageInfo.SavePrevTimer(Timer.GetRec());
+    }
+
     public void SetStage()
     {
-        Debug.Log("Stage: " + Stage);
+        //
+        enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        itemSpawner = GameObject.Find("ItemSpawnerSelector").GetComponent<ItemSpawnerSelector>();
+        viking = GameObject.Find("Pin").GetComponent<Viking>();
+        sceneManager = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
+        Timer = GameObject.Find("Time").GetComponent<TimerUI>();
+        StageInfo = GameObject.Find("StageInfo ").GetComponent<StageInfoUI>();
+        //
+
+        // Stage 정보
+       if (StageInfo) StageInfo.SetStageInfo(Stage);
+
+        if (Stage != 0)
+        {
+            if (StageInfo) StageInfo.ShowClearInfo();
+        }
+        else
+         {
+                GameObject tutorial = FindObjectOfType<TutorialUI>().gameObject;
+                if (tutorial) tutorial.GetComponent<TutorialUI>().tutorialPanel.SetActive(true);
+         }
 
 
-        if (StageInfo.gameObject) StageInfo.SetStageInfo(Stage);
-        if(Stage!=0) if (StageInfo.gameObject) StageInfo.ShowStageInfo();
+        //Timer
         Timer.StartTimer();
-        viking.SetDefaultRotation();
 
 
         switch (Stage)
         {
             case 0: // 1-1
                 {
-                    GameObject tutorial =FindObjectOfType<TutorialUI>().gameObject;
-                   if(tutorial) tutorial.GetComponent<TutorialUI>().tutorialPanel.SetActive(true);
-                  
+                    if(enemiesAttacklist.Count>=3)  for (int i = 0; i < 3; i++) enemiesAttacklist.Remove(i);
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.GREY;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.GREY);
                     itemSpawner.CreatibleItemIndex = 2;
-                    viking.speed = Speed;
                     SoundManager.Instance.PlayBGM(SoundList.Stage1);
                 }
                 break;
             case 1: // 1-2
-                {
-                   
+                {  
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.BLUE;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.BLUE);
                     itemSpawner.CreatibleItemIndex = 3;
                     viking.speed = Speed * 1.1f;
                 }
@@ -143,8 +159,6 @@ public class StageManager : Singleton<StageManager>
                 {
                     Type = EnemyType.Enemy_Missile;
                     ColorType = EnemyColorType.YELLOW;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Missile, EnemyColorType.YELLOW);
-                    // attackSpawner.test("c");
                     itemSpawner.CreatibleItemIndex = 4;
                     viking.speed = Speed * 1.2f;
                 }
@@ -152,7 +166,6 @@ public class StageManager : Singleton<StageManager>
             case 3: // 1-4
                 {
                     Type = EnemyType.Enemy_Missile;
-                    enemySpawner.InstantiateEnemies(EnemyType.Enemy_Missile);
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.4f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage1_Boss);
@@ -160,13 +173,12 @@ public class StageManager : Singleton<StageManager>
                 break;
             case 4: //2-1
                 {
+                    if (enemiesAttacklist.Count >= 3) for (int i = 0; i < 3; i++) enemiesAttacklist.Remove(i);
                     Type = EnemyType.Enemy_Arrow;
                     ColorType = EnemyColorType.GREY;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Arrow, EnemyColorType.GREY);
                     itemSpawner.CreatibleItemIndex = 4;
                     viking.speed = Speed * 1.1f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage2);
-                    for(int i=0;i<3;i++) enemiesAttacklist.Remove(i);
                 }
                 break;
             case 5: //2-2
@@ -174,7 +186,6 @@ public class StageManager : Singleton<StageManager>
                   
                     Type = EnemyType.Enemy_Arrow;
                     ColorType = EnemyColorType.BLUE;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Arrow, EnemyColorType.YELLOW);
                     itemSpawner.CreatibleItemIndex = 4;
                     viking.speed = Speed * 1.2f;
                 }
@@ -183,7 +194,6 @@ public class StageManager : Singleton<StageManager>
                 {
                     Type = EnemyType.Enemy_Arrow;
                     ColorType = EnemyColorType.YELLOW;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Arrow, EnemyColorType.YELLOW);
                     itemSpawner.CreatibleItemIndex = 4;
                     viking.speed = Speed * 1.3f;
                 }
@@ -191,7 +201,6 @@ public class StageManager : Singleton<StageManager>
             case 7: //2-4
                 {
                     Type = EnemyType.Enemy_Arrow;
-                    enemySpawner.InstantiateEnemies(EnemyType.Enemy_Arrow);
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.5f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage2_Boss);
@@ -200,20 +209,19 @@ public class StageManager : Singleton<StageManager>
                 break;
             case 8: // 3-1
                 {
+                    if (enemiesAttacklist.Count >= 3) for (int i = 0; i < 3; i++) enemiesAttacklist.Remove(i);
                     Type = EnemyType.Enemy_Dagger;
                     ColorType = EnemyColorType.GREY;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Dagger, EnemyColorType.GREY);
                     itemSpawner.CreatibleItemIndex = 4;
                     viking.speed = Speed * 1.2f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage3);
-                    for (int i = 0; i < 3; i++) enemiesAttacklist.Remove(i);
+                  
                 }
                 break;
             case 9: // 3-2
                 {
                     Type = EnemyType.Enemy_Dagger;
                     ColorType = EnemyColorType.BLUE;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Dagger, EnemyColorType.BLUE);
                     itemSpawner.CreatibleItemIndex = 4;
                     viking.speed = Speed * 1.3f;
                 }
@@ -222,7 +230,6 @@ public class StageManager : Singleton<StageManager>
                 {
                     Type = EnemyType.Enemy_Dagger;
                     ColorType = EnemyColorType.YELLOW;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Dagger, EnemyColorType.YELLOW);
                     itemSpawner.CreatibleItemIndex = 4;
                     viking.speed = Speed * 1.4f;
                 }
@@ -230,7 +237,6 @@ public class StageManager : Singleton<StageManager>
             case 11: // 3-4
                 {
                     Type = EnemyType.Enemy_Dagger;
-                    enemySpawner.InstantiateEnemies(EnemyType.Enemy_Dagger);
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.6f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage3_Boss);
@@ -238,20 +244,19 @@ public class StageManager : Singleton<StageManager>
                 break;
             case 12: // 4-1
                 {
+                    if (enemiesAttacklist.Count >= 3) for (int i = 0; i < 3; i++) enemiesAttacklist.Remove(i);
                     Type = EnemyType.Enemy_Boss;
                     ColorType = EnemyColorType.GREY;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Boss, EnemyColorType.GREY);
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.3f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage4);
-                    for (int i = 0; i < 3; i++) enemiesAttacklist.Remove(i);
+                  
                 }
                 break;
             case 13: // 4-2
                 {
                     Type = EnemyType.Enemy_Boss;
                     ColorType = EnemyColorType.BLUE;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Boss, EnemyColorType.BLUE);
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.4f;
                 }
@@ -260,7 +265,6 @@ public class StageManager : Singleton<StageManager>
                 {
                     Type = EnemyType.Enemy_Boss;
                     ColorType = EnemyColorType.YELLOW;
-                    enemySpawner.InstantiateEnemy(EnemyType.Enemy_Boss, EnemyColorType.YELLOW);
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.5f;
                 }
@@ -268,13 +272,17 @@ public class StageManager : Singleton<StageManager>
             case 15: // 4-4
                 {
                     Type = EnemyType.Enemy_Boss;
-                    enemySpawner.InstantiateEnemies(EnemyType.Enemy_Boss);
                     itemSpawner.CreatibleItemIndex = 5;
                     viking.speed = Speed * 1.7f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage4_Boss);
-                }
-                break;
+                }break;
         }
 
+
+        //EnemySapwner
+        if (Stage % 4 == 3) // 스테이지 마지막 레벨이면
+            enemySpawner.InstantiateEnemies();
+        else
+            enemySpawner.InstantiateEnemy();
     }
 }

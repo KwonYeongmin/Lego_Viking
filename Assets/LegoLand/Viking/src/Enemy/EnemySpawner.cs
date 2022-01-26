@@ -24,21 +24,15 @@ public class EnemySpawner : MonoBehaviour
     {
        transform_ = GameObject.Find("enemyPoint").transform;
         
-        //
         StageManager.Instance.Stage = 0;
         StageManager.Instance.SetStage();
-        //
-
-      //  var Interface = FindObjectOfType<InterfaceTimer>();
-      //  if (Interface != null)
-       //     Interface.StageInfoSetup(StageManager.Instance.Stage);
        
     }
 
-    public void InstantiateEnemies(EnemyType type)
+    public void InstantiateEnemies()
     {
         transform_ = GameObject.Find("enemyPoint").transform;
-        switch (type)
+        switch (StageManager.Instance.Type)
         {
             case EnemyType.Enemy_Missile:
                 {
@@ -91,11 +85,12 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void InstantiateEnemy(EnemyType type, EnemyColorType colorType)
+    public void InstantiateEnemy()
     {
         transform_ = GameObject.Find("enemyPoint").transform;
+        EnemyColorType colorType = StageManager.Instance.ColorType;
 
-        switch (type)
+        switch (StageManager.Instance.Type)
         {
             case EnemyType.Enemy_Missile: { enemyPrefab = Enemies_Missile[(int)colorType]; } break;
             case EnemyType.Enemy_Arrow: {  enemyPrefab = Enemies_Arrow[(int)colorType]; } break;
@@ -106,6 +101,5 @@ public class EnemySpawner : MonoBehaviour
         enemy = Instantiate(enemyPrefab, transform_);
         enemy.transform.parent = transform_;
         enemy.GetComponent<Enemy>().initialized((int)colorType);
-
     }
 }

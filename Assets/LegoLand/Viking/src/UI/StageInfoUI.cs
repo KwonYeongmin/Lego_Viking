@@ -7,10 +7,11 @@ using System.IO;
 public class StageInfoUI : MonoBehaviour
 {
     public GameObject StageInfo;
-    [SerializeField] private GameObject Clear;
+   
     [SerializeField] private GameObject CountDown; // text
     [SerializeField] private GameObject Tutorial; // text
     [SerializeField] private GameObject PauseWindow; // text
+    [SerializeField] private GameObject TimeUi; // text
 
 
     [Header("Stage Infomation")]
@@ -19,11 +20,19 @@ public class StageInfoUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI stage_enemy;
     [SerializeField] private float DelayTime;
 
-
+    [Header("Clear")]
+    [SerializeField] private GameObject Clear;
+    [SerializeField] private TextMeshProUGUI record;
     //
-    bool bIsPlaying = true;
 
+    // == timer
+    UnscaledTimer StageInfoTimer = new UnscaledTimer();
+    UnscaledTimer ClearTimer = new UnscaledTimer();
+
+    bool bIsPlaying = true;
     public List<Stagetext> stageText;
+
+
     private void Awake()
     {
         stageText = new List<Stagetext>();
@@ -31,11 +40,8 @@ public class StageInfoUI : MonoBehaviour
         SetStageInfo(0);
     }
 
-    private void Start()
-    {
-
-       
-    }
+    // 1-1 start : tutorial -> stageInfo;
+    // ±× ¿Ü : StageClear -> StageInfo -> countdown
 
     void Update()
     {
@@ -48,15 +54,29 @@ public class StageInfoUI : MonoBehaviour
 
         if (StageInfo.activeSelf)
         {
-            UpdateTimer();
+            StageInfoTimer.UpdateTimer();
         }
 
-        if (TimeOut)
+        if (Clear.activeSelf)
+        {
+            ClearTimer.UpdateTimer();
+        }
+
+        if (ClearTimer.TimeOut())
+        {
+            Clear.SetActive(false);
+           // CountDown.SetActive(true);
+            // CountDown.GetComponent<Countdown>().StartTimer();
+            ShowStageInfo();
+            ClearTimer.SetTimeOut(false);
+        }
+
+        if (StageInfoTimer.TimeOut())
         {
             StageInfo.SetActive(false);
             CountDown.SetActive(true);
             CountDown.GetComponent<Countdown>().StartTimer();
-            TimeOut = false;
+            StageInfoTimer.SetTimeOut(false);
         }
     }
 
@@ -83,11 +103,26 @@ public class StageInfoUI : MonoBehaviour
         stringReader.Close();
     }
 
+    private int PrevMin;
+    private int PrevSec;
+    private string PrevRec;
+
+    public void SavePrevTimer(string rec)
+    {
+        PrevRec = rec;
+    }
+
+    public void ShowClearInfo()
+    {
+        Clear.SetActive(true);
+        record.text = PrevRec;
+        ClearTimer.StartTimer(DelayTime);
+    }
+
     public void ShowStageInfo()
     {
-        Debug.Log("ShowStageInfo");
         StageInfo.SetActive(true);
-        StartTimer();
+        StageInfoTimer.StartTimer(DelayTime);
     }
 
     public void SetStageInfo(int index)
@@ -97,25 +132,38 @@ public class StageInfoUI : MonoBehaviour
         stage_enemy.text = stageText[index].stage_enemy;
     }
 
+    public void ShowClear()
+    {
+        Clear.SetActive(true);
+    }
+
+
+    
+}
 
 // ================= timer ===================
-
+public class UnscaledTimer
+ {
     private float timer = 0;
-    private bool TimeOut = false;
+    private bool timeOut = false;
+    public bool TimeOut() { return timeOut; }
+    public void SetTimeOut(bool b) {  timeOut = b; }
     private bool bTimer = false;
+    private float DelayTime;
 
-    private void StartTimer()
+
+    public void StartTimer(float delayTime)
     {
+        DelayTime = delayTime;
         timer = 0; //reset
         bTimer = true;
     }
 
-    private void UpdateTimer()
+    public void UpdateTimer()
     {
         if (bTimer)
             timer += Time.unscaledDeltaTime;
 
-        if (timer >= DelayTime) TimeOut = true;
+        if (timer >= DelayTime) timeOut = true;
     }
-    
-}
+};
