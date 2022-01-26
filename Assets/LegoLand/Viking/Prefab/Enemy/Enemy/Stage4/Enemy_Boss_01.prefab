@@ -1324,8 +1324,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HUDInstance: {fileID: 643404229928331987, guid: 331b13216d563694294c7f345d70988b, type: 3}
+  EnemtProfileImg: {fileID: 0}
   Index: 0
-  aaindex: 0
   speed: 1
 --- !u!1 &1678548408654333728
 GameObject:
@@ -1613,6 +1613,10 @@ PrefabInstance:
     - target: {fileID: 1479494835856364, guid: 7d53b2a40ca830044a27aba623ee0c7f, type: 3}
       propertyPath: m_Name
       value: FireWing (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479494835856364, guid: 7d53b2a40ca830044a27aba623ee0c7f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4521056073084984, guid: 7d53b2a40ca830044a27aba623ee0c7f, type: 3}
       propertyPath: m_RootOrder

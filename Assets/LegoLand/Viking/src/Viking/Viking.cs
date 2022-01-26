@@ -8,33 +8,36 @@ public class Viking : MonoBehaviour
     public float angle = 0;
     private float lerpTimer = 0;
     public float speed = 5f;
+    [HideInInspector]
     public float Addedforce = 0f;
+    [HideInInspector]
     public float WheelForce = 0f;
+    [HideInInspector]
     public float gravity = 0.0f;
+    [HideInInspector]
     public float angleGravity = 0.0f;
+    [HideInInspector]
     public float durationValue = 30.0f;
 
     public bool bForce = false;
     private bool bChangedDirection = false;
     Quaternion defaultRotation;
 
+    public AudioSource audioSource;
+
     private void Awake()
     {
         defaultRotation = transform.localRotation;
         speed = 6;
+        audioSource = this.GetComponent<AudioSource>();
     }
 
 
     private void FixedUpdate()
     {
-
-
         lerpTimer += Time.deltaTime * (speed + WheelForce) / durationValue;
         transform.rotation = PendulumRotation();
-      /*
-        lerpTimer += Time.deltaTime * (speed+ WheelForce) / durationValue;
-        transform.rotation = PendulumRotation();
-        */
+
         if (speed > 0.0f) speed -= Time.deltaTime * gravity;
         else speed = 0;
         
@@ -50,7 +53,7 @@ public class Viking : MonoBehaviour
             speed += WheelForce;
             WheelForce = 0;
         }
-
+        /*
         if ((int)(transform.rotation.z) == 0)
         {
             bChangedDirection = true;
@@ -58,11 +61,14 @@ public class Viking : MonoBehaviour
 
         if (Mathf.Abs(transform.rotation.z) >= 0.25f && bChangedDirection)
         {
-            SoundManager.Instance.PlaySE(SoundList.Sound_viking,this.transform.position);
+            // SoundManager.Instance.PlaySE(SoundList.Sound_viking,this.transform.position);
+            audioSource.clip = SoundList.Sound_viking;
+            audioSource.Play();
             bChangedDirection = false;
-        }
+            Debug.Log("바이킹 소리");
+        }*/
     }
- 
+
 
 
 

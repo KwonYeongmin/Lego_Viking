@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     public EnemyType Type { get; private set; }
     public EnemyColorType ColorType { get; private set; }
 
+    public Sprite EnemtProfileImg;
+
     [HideInInspector] public int Index;
 
 
@@ -38,8 +40,6 @@ public class Enemy : MonoBehaviour
         StartCoroutine(SetRandomDirection());
     }
 
-    [Header("Movetest")]
-    public int aaindex = 0;
 
     private void Update()
     {
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
         while (true)
         {
             DirectionIndex = Random.Range(0, 2);
-            Debug.Log(DirectionIndex);
+           
             yield return new WaitForSeconds(4f);
         }
         
