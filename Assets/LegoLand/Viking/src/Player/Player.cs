@@ -26,8 +26,9 @@ public class Player : MonoBehaviour
     public bool isControl;
     [HideInInspector]
     public bool isButtonRoll;
-    public float rollDelay = 0.0f;
-    public float rollCoolTime = 2.0f;
+    public float rollDelay = 1.0f;
+    public float rollCoolTime = 1.0f;
+    public Image rollImg;
     [HideInInspector]
     public bool isButtonFire;
     [HideInInspector]
@@ -218,14 +219,19 @@ public class Player : MonoBehaviour
         rollDelay += Time.deltaTime;
         if(rollCoolTime < rollDelay)
         {
+            rollImg.color = new Color(1, 1, 1, 1.0f);
             if (isButtonRoll && !movement.isRoll)
             {
-                SoundManager.Instance.PlaySE(SoundList.Sound_roll, transform.position);
                 movement.isRoll = true;
+                SoundManager.Instance.PlaySE(SoundList.Sound_roll, transform.position);
                 movement.Roll(direction);
                 animator.OnRoll();
                 rollDelay = 0.0f;
             }
+        }
+        else
+        {
+            rollImg.color = new Color(1, 1, 1, 0.25f);
         }
     }
 
@@ -271,7 +277,7 @@ public class Player : MonoBehaviour
             if (hasGrenades == 0)
             {
                 bIsGrenadesEnable = false;
-                grenadeImg.color = new Color(1, 1, 1, 0.5f);
+                grenadeImg.color = new Color(1, 1, 1, 0.25f);
             }
         }
 

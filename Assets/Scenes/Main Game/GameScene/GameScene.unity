@@ -19970,18 +19970,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 103444215}
     m_Modifications:
+    - target: {fileID: 2069020378007859584, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
+      propertyPath: rollSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069020378007859584, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
+      propertyPath: defaultMoveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: scene
       value: 
       objectReference: {fileID: 616956479}
     - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
+      propertyPath: rollImg
+      value: 
+      objectReference: {fileID: 7338745420004226461}
+    - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: playerHUD
       value: 
       objectReference: {fileID: 885765891}
     - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
+      propertyPath: rollDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: grenadeImg
       value: 
       objectReference: {fileID: 7338745419129476564}
+    - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
+      propertyPath: rollCoolTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: interfaceTimer
       value: 
@@ -19992,7 +20012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069020378007859611, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2069020378007859611, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: m_LocalPosition.x

@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
         SetHP();
         HP = DefaultHP;
 
-        //HUD »ý¼º
+        //HUD ï¿½ï¿½ï¿½ï¿½
        HUD =Instantiate(HUDInstance, new Vector2(960,640), Quaternion.identity);
        HUD.GetComponent<EnemyHUD>().Initialized(this.gameObject);
         HUD.name = "EnemyHUD";
@@ -52,8 +52,8 @@ public class Enemy : MonoBehaviour
         {
             case 1: { Move(0); } break;
             case 2: { Move(1); } break;
-            // case 3: { Move(DirectionIndex); } break; -> °ãÄ¡´Â ¹®Á¦ ¹ß»ý
-            case 3: { Move(1); } break; //-> À§¾Æ·¡·Î ¼öÁ¤
+            // case 3: { Move(DirectionIndex); } break; -> ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
+            case 3: { Move(1); } break; //-> ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
 
@@ -71,7 +71,6 @@ public class Enemy : MonoBehaviour
         while (true)
         {
             DirectionIndex = Random.Range(0, 2);
-           
             yield return new WaitForSeconds(4f);
         }
         
