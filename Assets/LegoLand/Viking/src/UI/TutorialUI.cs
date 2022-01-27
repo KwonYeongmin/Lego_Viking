@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class TutorialUI : MonoBehaviour
 {
-    public GameObject[] tutorialUI;
+    public GameObject[] tutorialUI1;
+    public GameObject tutorialUI2;
+    public GameObject tutorialUI3;
+    public GameObject tutorialUI4;
     public GameObject tutorialPanel;
     public GameObject StageInfo;
-   
+
 
     int index = 0;
     bool bBtnDown = false;
@@ -15,7 +18,7 @@ public class TutorialUI : MonoBehaviour
     public void Start()
     {
         index = 0;
-        
+
     }
 
     public void TutorialNextBtnDown()
@@ -24,27 +27,64 @@ public class TutorialUI : MonoBehaviour
         SoundManager.Instance.PlayUIAudio(SoundList.Sound_button);
     }
 
+    public void ShowTutorial()
+    {
+        switch (StageManager.Instance.Stage)
+        {
+            case 0: { tutorialUI1[0].SetActive(true); } break;
+            case 1: { tutorialUI2.SetActive(true); } break;
+            case 2: { tutorialUI3.SetActive(true); } break;
+            case 3: { tutorialUI4.SetActive(true); } break;
+        }
+    }
+
     private void Update()
     {
-        if (bBtnDown)
+        
+
+          if (bBtnDown)
         {
-            if (index < 3)
+            if (StageManager.Instance.Stage == 0)
             {
-                tutorialUI[index].SetActive(false);
-                tutorialUI[index + 1].SetActive(true);
-                index++;
+                if (index < 2)
+                {
+                    tutorialUI1[index].SetActive(false);
+                    tutorialUI1[index + 1].SetActive(true);
+                    index++;
+                }
+                else
+                {
+                    tutorialUI1[index].SetActive(false);
+                    tutorialPanel.gameObject.SetActive(false);
+                    StageInfo.GetComponent<StageInfoUI>().ShowStageInfo();
+                }
+                bBtnDown = false;
             }
-            else
+
+            else  if( StageManager.Instance.Stage == 1)
             {
-                tutorialUI[index].SetActive(false);
+                tutorialUI2.SetActive(false);
                 tutorialPanel.gameObject.SetActive(false);
                 StageInfo.GetComponent<StageInfoUI>().ShowStageInfo();
             }
-            bBtnDown = false;
-        }
 
+            else if (StageManager.Instance.Stage == 2)
+            {
+                tutorialUI3.SetActive(false);
+                tutorialPanel.gameObject.SetActive(false);
+                StageInfo.GetComponent<StageInfoUI>().ShowStageInfo();
+            }
+
+            else if (StageManager.Instance.Stage == 3)
+            {
+                tutorialUI4.SetActive(false);
+                tutorialPanel.gameObject.SetActive(false);
+                StageInfo.GetComponent<StageInfoUI>().ShowStageInfo();
+            }
+        }
+     
        // if (tutorialPanel.activeSelf) Time.timeScale = 0.0f;
-        // else Time.timeScale = 1;
+       // else Time.timeScale = 1;
     }
        
     

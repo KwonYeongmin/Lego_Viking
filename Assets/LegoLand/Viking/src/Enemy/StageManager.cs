@@ -121,15 +121,20 @@ public class StageManager : Singleton<StageManager>
         // Stage Á¤º¸
        if (StageInfo) StageInfo.SetStageInfo(Stage);
 
-        if (Stage != 0)
+        if (Stage < 4)
+        {
+            GameObject tutorial = FindObjectOfType<TutorialUI>().gameObject;
+            if (tutorial)
+            {
+                tutorial.GetComponent<TutorialUI>().tutorialPanel.SetActive(true);
+                tutorial.GetComponent<TutorialUI>().ShowTutorial();
+            }
+           
+        }
+        else
         {
             if (StageInfo) StageInfo.ShowClearInfo();
         }
-        else
-         {
-                GameObject tutorial = FindObjectOfType<TutorialUI>().gameObject;
-                if (tutorial) tutorial.GetComponent<TutorialUI>().tutorialPanel.SetActive(true);
-         }
 
 
         //Timer

@@ -88,6 +88,8 @@ public class Missile : MonoBehaviour
     {
         if (collision.gameObject.tag == "deck") //¹ÙÀÌÅ· °©ÆÇ¿¡ ºÎµúÈ÷¸é ÆÄ±«
         {
+            Instantiate(FX, new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y + 5f, collision.gameObject.transform.position.z)
+                                              , collision.gameObject.transform.rotation);
             Destroy(this.gameObject);
         }
 
