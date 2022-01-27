@@ -32,10 +32,18 @@ public class Viking : MonoBehaviour
         audioSource = this.GetComponent<AudioSource>();
     }
 
+    public void Reset()
+    {
+        lerpTimer = 0;
+        transform.rotation = new Quaternion(defaultRotation.x, defaultRotation.y, defaultRotation.z, defaultRotation.w);
+    }
+   
 
     private void FixedUpdate()
     {
         lerpTimer += Time.deltaTime * (speed + WheelForce) / durationValue;
+
+  
         transform.rotation = PendulumRotation();
 
         if (speed > 0.0f) speed -= Time.deltaTime * gravity;
