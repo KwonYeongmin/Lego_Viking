@@ -53,14 +53,10 @@ public class StageInfoUI : MonoBehaviour
         else if(!StageInfo.activeSelf && !Clear.activeSelf && !Tutorial.activeSelf && !CountDown.activeSelf && !PauseWindow.activeSelf)  bIsPlaying = true;
 
         if (StageInfo.activeSelf)
-        {
             StageInfoTimer.UpdateTimer();
-        }
 
         if (Clear.activeSelf)
-        {
             ClearTimer.UpdateTimer();
-        }
 
         if (ClearTimer.TimeOut())
         {

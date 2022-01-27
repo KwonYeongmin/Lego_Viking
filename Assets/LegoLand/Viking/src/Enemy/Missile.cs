@@ -90,7 +90,7 @@ public class Missile : MonoBehaviour
         {
             Instantiate(FX, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f, this.gameObject.transform.position.z)
                                                 , this.gameObject.transform.rotation);
-            Debug.Log("FX °©ÆÇ¿¡ ºÎµúÈû");
+           
             Destroy(this.gameObject);
         }
 
