@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public bool isButtonFire;
     [HideInInspector]
     public bool isButtonGrenade;
-
+    Vector3 defaultPosition;
     #endregion
 
     #region Weapon variables
@@ -97,6 +97,8 @@ public class Player : MonoBehaviour
         playerHUD.targetTransform = gameObject.transform;
         playerHUD.offset = new Vector3(0, 5f, 0);
         playerHUD.SetUpHUD();
+
+        defaultPosition = this.gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -331,7 +333,19 @@ public class Player : MonoBehaviour
         StartCoroutine(OffOtherFX());
         playerHUD.UpdateAmmo(ammo);
     }
-    
+
+    public void Reset()
+    {
+        HP = DefaultHP;
+        playerHUD.UpdateHP(HP);
+
+        ammo = defaultAmmo;
+        weapon.currentAmmo = ammo;
+        playerHUD.UpdateAmmo(ammo);
+
+        this.gameObject.transform.position = new Vector3(defaultPosition.x, defaultPosition.y, defaultPosition.z);
+    }
+
     // #. Greande
     public void AddGrenade()
     {
