@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38522753, g: 0.47261494, b: 0.61848855, a: 1}
+  m_IndirectSpecularColor: {r: 0.385163, g: 0.4724688, b: 0.61866236, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3522,6 +3522,7 @@ MonoBehaviour:
   StageInfo: {fileID: 1175709364}
   CountDown: {fileID: 911809118}
   Tutorial: {fileID: 7470147714168109342}
+  tutorialUI: {fileID: 1327539164}
   PauseWindow: {fileID: 4729870634768820204}
   TimeUi: {fileID: 0}
   stage_num: {fileID: 1255564643}

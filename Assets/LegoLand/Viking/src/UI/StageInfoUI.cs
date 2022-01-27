@@ -10,6 +10,7 @@ public class StageInfoUI : MonoBehaviour
    
     [SerializeField] private GameObject CountDown; // text
     [SerializeField] private GameObject Tutorial; // text
+    [SerializeField] private GameObject tutorialUI; // text
     [SerializeField] private GameObject PauseWindow; // text
     [SerializeField] private GameObject TimeUi; // text
 
@@ -52,8 +53,12 @@ public class StageInfoUI : MonoBehaviour
         if (StageInfo.activeSelf || Clear.activeSelf || Tutorial.activeSelf || CountDown.activeSelf || PauseWindow.activeSelf) bIsPlaying = false;
         else if(!StageInfo.activeSelf && !Clear.activeSelf && !Tutorial.activeSelf && !CountDown.activeSelf && !PauseWindow.activeSelf)  bIsPlaying = true;
 
-        if (StageInfo.activeSelf)
+        if (StageInfo.activeSelf) 
+            {
             StageInfoTimer.UpdateTimer();
+            Debug.Log("Stage: "+StageManager.Instance.Stage+"  _UpdateStageInfo");
+            }
+            
 
         if (Clear.activeSelf)
             ClearTimer.UpdateTimer();
@@ -61,9 +66,14 @@ public class StageInfoUI : MonoBehaviour
         if (ClearTimer.TimeOut())
         {
             Clear.SetActive(false);
-           // CountDown.SetActive(true);
+            // CountDown.SetActive(true);
             // CountDown.GetComponent<Countdown>().StartTimer();
-            ShowStageInfo();
+            if (StageManager.Instance.Stage >= 4) ShowStageInfo();
+            else if (StageManager.Instance.Stage != 0 && StageManager.Instance.Stage < 4)
+            {
+                tutorialUI.GetComponent<TutorialUI>().tutorialPanel.SetActive(true);
+                tutorialUI.GetComponent<TutorialUI>().ShowTutorial();
+            }
             ClearTimer.SetTimeOut(false);
         }
 
@@ -119,6 +129,7 @@ public class StageInfoUI : MonoBehaviour
     {
         StageInfo.SetActive(true);
         StageInfoTimer.StartTimer(DelayTime);
+        Debug.Log("ShowStageInfo_DelayTime");
     }
 
     public void SetStageInfo(int index)
@@ -157,9 +168,11 @@ public class UnscaledTimer
 
     public void UpdateTimer()
     {
-        if (bTimer)
+        if (bTimer) 
             timer += Time.unscaledDeltaTime;
 
         if (timer >= DelayTime) timeOut = true;
     }
+    public float GetTimer()
+    { return (float)timer; } 
 };

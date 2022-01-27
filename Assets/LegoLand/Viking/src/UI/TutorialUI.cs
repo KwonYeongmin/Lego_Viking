@@ -66,6 +66,8 @@ public class TutorialUI : MonoBehaviour
                 tutorialUI2.SetActive(false);
                 tutorialPanel.gameObject.SetActive(false);
                 StageInfo.GetComponent<StageInfoUI>().ShowStageInfo();
+
+                bBtnDown = false;
             }
 
             else if (StageManager.Instance.Stage == 2)
@@ -73,6 +75,8 @@ public class TutorialUI : MonoBehaviour
                 tutorialUI3.SetActive(false);
                 tutorialPanel.gameObject.SetActive(false);
                 StageInfo.GetComponent<StageInfoUI>().ShowStageInfo();
+
+                bBtnDown = false;
             }
 
             else if (StageManager.Instance.Stage == 3)
@@ -80,6 +84,8 @@ public class TutorialUI : MonoBehaviour
                 tutorialUI4.SetActive(false);
                 tutorialPanel.gameObject.SetActive(false);
                 StageInfo.GetComponent<StageInfoUI>().ShowStageInfo();
+
+                bBtnDown = false;
             }
         }
      
