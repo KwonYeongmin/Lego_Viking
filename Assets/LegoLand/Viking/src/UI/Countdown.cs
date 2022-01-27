@@ -19,7 +19,6 @@ public class Countdown : MonoBehaviour
             return;
 
         Check_Timer();
-       if(!t.TimeOut()) t.UpdateTimer();
     }
 
     private void Check_Timer()
@@ -50,10 +49,10 @@ public class Countdown : MonoBehaviour
         timer = MaxTime;
         TimeTEXT.text = ((int)timer).ToString();
         bIsEnded = false;
-        t.StartTimer(0.1f);
+       
     }
 
-    UnscaledTimer t;
+
     
 }
 
