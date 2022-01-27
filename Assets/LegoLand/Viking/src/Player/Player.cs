@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
     #region Item FX
     public GameObject HealFX;
     public GameObject OtherFX;
+    public GameObject InvincibleFX;
     public float FX_Duration = 2.0f;
     #endregion
 
@@ -353,6 +354,7 @@ public class Player : MonoBehaviour
         isInvincible = true;
         invincible_Duration = duration;
         OtherFX.SetActive(true);
+        InvincibleFX.SetActive(true);
         StartCoroutine(OffOtherFX());
     }
 
@@ -364,6 +366,7 @@ public class Player : MonoBehaviour
         {
             InvincibleTimer.StopTimer();
             isInvincible = false;
+            InvincibleFX.SetActive(false);
         }
     }
 
