@@ -130,12 +130,7 @@ public class StageManager : Singleton<StageManager>
                 tutorial.GetComponent<TutorialUI>().ShowTutorial();
             }
         }
-       else  if (Stage < 4)
-        {
-          
-           
-        }
-        else
+        else if(Stage !=0 && Stage < 4 )
         {
             if (StageInfo) StageInfo.ShowClearInfo();
         }
