@@ -65,13 +65,17 @@ public class StageInfoUI : MonoBehaviour
         if (ClearTimer.TimeOut())
         {
             Clear.SetActive(false);
-            if (StageManager.Instance.Stage >= 4) ShowStageInfo();
+            if (StageManager.Instance.Stage >= 4 && StageManager.Instance.Stage <= 15) ShowStageInfo();
             else if (StageManager.Instance.Stage != 0 && StageManager.Instance.Stage < 4)
             {
                 tutorialUI.GetComponent<TutorialUI>().tutorialPanel.SetActive(true);
                 tutorialUI.GetComponent<TutorialUI>().ShowTutorial();
             }
-            else if (StageManager.Instance.Stage > 15) StageManager.Instance.EndGame();
+            else if (StageManager.Instance.Stage > 15)
+            {
+                StageManager.Instance.EndGame();
+            }
+           
             ClearTimer.SetTimeOut(false);
         }
 

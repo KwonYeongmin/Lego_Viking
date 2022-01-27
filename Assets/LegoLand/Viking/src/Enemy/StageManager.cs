@@ -39,7 +39,7 @@ public class StageManager : Singleton<StageManager>
     private void Update()
     {
         if (SceneManager.GetActiveScene().name == "Title") Stage = 0;
-        if (SceneManager.GetActiveScene().name == "EndGame") Stage = 0;
+        if (SceneManager.GetActiveScene().name == "GameOver") Stage = 0;
     }
 
     private List<GameObject> enemies = new List<GameObject>();
@@ -77,11 +77,12 @@ public class StageManager : Singleton<StageManager>
             {
                 ClearEnemyHUD();
                 
-                if (Stage == 15)
-                {
-                    //sceneManager.ChangeScene("EndGame");
-                    Stage = 0;
-                }
+                //if (Stage == 15)
+                //{
+                //    //sceneManager.ChangeScene("EndGame");
+                //    StageInfo.ShowClearInfo();
+                //    Stage = 0;
+                //}
                 Stage++;
                 SetStage();
             }
@@ -107,7 +108,12 @@ public class StageManager : Singleton<StageManager>
         StageInfo.SavePrevTimer(Timer.GetRec());
     }
 
-    public void EndGame() { }
+    public void EndGame()
+    {
+        Debug.Log("EndGame");
+        Stage = 0;
+        sceneManager.ChangeScene("Title");
+    }
 
     public void SetStage()
     {
@@ -133,7 +139,7 @@ public class StageManager : Singleton<StageManager>
 
         
         // Stage Á¤º¸
-        if (StageInfo) StageInfo.SetStageInfo(Stage);
+        if (StageInfo&& Stage<=15) StageInfo.SetStageInfo(Stage);
 
         if (Stage == 0)
         {
@@ -294,6 +300,7 @@ public class StageManager : Singleton<StageManager>
                     viking.speed = Speed * 1.7f;
                     SoundManager.Instance.PlayBGM(SoundList.Stage4_Boss);
                 }break;
+            case 16: { }break;
         }
 
 
