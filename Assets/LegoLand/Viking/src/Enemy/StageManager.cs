@@ -79,7 +79,7 @@ public class StageManager : Singleton<StageManager>
                 
                 if (Stage == 15)
                 {
-                    sceneManager.ChangeScene("GameOver");
+                    //sceneManager.ChangeScene("EndGame");
                     Stage = 0;
                 }
                 Stage++;
@@ -106,6 +106,8 @@ public class StageManager : Singleton<StageManager>
     {
         StageInfo.SavePrevTimer(Timer.GetRec());
     }
+
+    public void EndGame() { }
 
     public void SetStage()
     {

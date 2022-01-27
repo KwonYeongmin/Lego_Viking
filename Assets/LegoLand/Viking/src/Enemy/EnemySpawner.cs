@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     {
        transform_ = GameObject.Find("enemyPoint").transform;
         
-        StageManager.Instance.Stage = 0;
+        StageManager.Instance.Stage = 8;
         StageManager.Instance.SetStage();
        
     }
