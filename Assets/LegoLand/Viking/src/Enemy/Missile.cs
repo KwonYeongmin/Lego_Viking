@@ -86,10 +86,11 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "deck") //¹ÙÀÌÅ· °©ÆÇ¿¡ ºÎµúÈ÷¸é ÆÄ±«
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Deck") ) //¹ÙÀÌÅ· °©ÆÇ¿¡ ºÎµúÈ÷¸é ÆÄ±«
         {
-            Instantiate(FX, new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y + 5f, collision.gameObject.transform.position.z)
-                                              , collision.gameObject.transform.rotation);
+            Instantiate(FX, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f, this.gameObject.transform.position.z)
+                                                , this.gameObject.transform.rotation);
+           
             Destroy(this.gameObject);
         }
 

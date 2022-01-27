@@ -121,7 +121,7 @@ public class StageManager : Singleton<StageManager>
         // Stage Á¤º¸
        if (StageInfo) StageInfo.SetStageInfo(Stage);
 
-        if (Stage < 4)
+        if (Stage == 0)
         {
             GameObject tutorial = FindObjectOfType<TutorialUI>().gameObject;
             if (tutorial)
@@ -129,6 +129,10 @@ public class StageManager : Singleton<StageManager>
                 tutorial.GetComponent<TutorialUI>().tutorialPanel.SetActive(true);
                 tutorial.GetComponent<TutorialUI>().ShowTutorial();
             }
+        }
+       else  if (Stage < 4)
+        {
+          
            
         }
         else
