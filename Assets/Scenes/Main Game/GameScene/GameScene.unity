@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.385163, g: 0.4724688, b: 0.61866236, a: 1}
+  m_IndirectSpecularColor: {r: 0.38522753, g: 0.47261494, b: 0.61848855, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3496,7 +3496,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1175709365}
-  - {fileID: 1003383835}
   - {fileID: 911809119}
   - {fileID: 1205866601}
   m_Father: {fileID: 0}
@@ -9343,7 +9342,7 @@ RectTransform:
   - {fileID: 1823076405}
   - {fileID: 741702019}
   m_Father: {fileID: 795773581}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10002,65 +10001,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000248378}
   m_CullTransparentMesh: 0
---- !u!1 &1003383834
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1003383835}
-  - component: {fileID: 1003383836}
-  m_Layer: 5
-  m_Name: Interface
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1003383835
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003383834}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 795773581}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1003383836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003383834}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c26c9893cbb7a44b1c370602f094ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StageInfo: {fileID: 0}
-  Tutorial: {fileID: 0}
-  Clear: {fileID: 1205866600}
-  countdown: {fileID: 911809120}
-  DelayTime: 3
-  isPlay: 0
-  stage_num: {fileID: 1255564643}
-  stage_attack: {fileID: 328078075}
-  stage_enemy: {fileID: 1616114555}
-  clear_time: {fileID: 1297688274}
-  timer: {fileID: 5761365481488940585}
 --- !u!1 &1007406896
 GameObject:
   m_ObjectHideFlags: 0
@@ -11171,7 +11111,7 @@ RectTransform:
   - {fileID: 427676014}
   - {fileID: 1395780998}
   m_Father: {fileID: 795773581}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -20051,6 +19991,10 @@ PrefabInstance:
       propertyPath: rollImg
       value: 
       objectReference: {fileID: 7338745420004226461}
+    - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
+      propertyPath: inputImg
+      value: 
+      objectReference: {fileID: 2076594205297536435}
     - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: playerHUD
       value: 

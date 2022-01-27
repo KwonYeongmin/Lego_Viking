@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     private PlayerAnimator animator;
     public SceneManagement scene;
     [SerializeField] private PlayerHUD playerHUD;
-    [SerializeField] private InterfaceTimer interfaceTimer;
 
     #region Input variables
     // #. Keyboard
@@ -87,7 +86,6 @@ public class Player : MonoBehaviour
         weapon = GetComponentInChildren<Weapon>();
         playerHUD = FindObjectOfType<PlayerHUD>();
         scene = FindObjectOfType<SceneManagement>();
-        interfaceTimer = FindObjectOfType<InterfaceTimer>();
 
         HP = DefaultHP; // 추가
         ammo = defaultAmmo; // 추가

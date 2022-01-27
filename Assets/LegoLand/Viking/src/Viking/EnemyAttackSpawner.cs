@@ -21,8 +21,6 @@ public class EnemyAttackSpawner : MonoBehaviour
     private Transform transform_;
     private Quaternion rot;
 
-    public InterfaceTimer interfaceTimer;
-
     private void Awake()
     {
         transform_ = GameObject.Find("AttackSpawnPoint").transform;
