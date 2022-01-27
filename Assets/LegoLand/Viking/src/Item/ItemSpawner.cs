@@ -6,7 +6,6 @@ public class ItemSpawner : MonoBehaviour
 {
     public GameObject[] Instances;
 
-    public InterfaceTimer interfaceTimer;
     [HideInInspector] public int CreatibleItemIndex = 2;
     [HideInInspector] public bool bIsChoosen = false;
 

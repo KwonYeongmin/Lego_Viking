@@ -56,7 +56,6 @@ public class StageInfoUI : MonoBehaviour
         if (StageInfo.activeSelf) 
             {
             StageInfoTimer.UpdateTimer();
-            Debug.Log("Stage: "+StageManager.Instance.Stage+"  _UpdateStageInfo");
             }
             
 
