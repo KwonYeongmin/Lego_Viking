@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public bool[] keyControl = new bool[9];
     //[HideInInspector]
     public bool isControl;
+    public Image inputImg;
     [HideInInspector]
     public bool isButtonRoll;
     public float rollDelay = 1.0f;
@@ -117,6 +118,15 @@ public class Player : MonoBehaviour
         if(isInvincible)
             UpdateInvincibleTimer(); // 추가 : UpdateInput
         UpdateSpeedUpTimer();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            AddAmmo(20);
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(20);
+        }
     }
 
     #region Input
@@ -126,34 +136,25 @@ public class Player : MonoBehaviour
         // #. KeyBoard Control
         hAxis = Input.GetAxisRaw("Horizontal"); // 좌,우 움직임
         vAxis = Input.GetAxisRaw("Vertical"); // 위, 아래 움직임
-
         // #. Keypad Control
-        if(hAxis == 0 && vAxis == 0)
+
+        if (hAxis == 0 && vAxis == 0)
         {
-            if (keyControl[0]) { hAxis = -1; vAxis = 1; }
-            if (keyControl[1]) { hAxis = 0; vAxis = 1; }
-            if (keyControl[2]) { hAxis = 1; vAxis = 1; }
-            if (keyControl[3]) { hAxis = -1; vAxis = 0; }
-            if (keyControl[4]) { hAxis = 0; vAxis = 0; }
-            if (keyControl[5]) { hAxis = 1; vAxis = 0; }
-            if (keyControl[6]) { hAxis = -1; vAxis = -1; }
-            if (keyControl[7]) { hAxis = 0; vAxis = -1; }
-            if (keyControl[8]) { hAxis = 1; vAxis = -1; }
-            if (!isControl) { hAxis = 0; vAxis = 0; }
+            if (keyControl[0]) { hAxis = -1; vAxis = 1; inputImg.rectTransform.anchoredPosition = new Vector3(-50, 50, 0);  }
+            if (keyControl[1]) { hAxis = 0; vAxis = 1; inputImg.rectTransform.anchoredPosition = new Vector3(0, 75, 0); }
+            if (keyControl[2]) { hAxis = 1; vAxis = 1; inputImg.rectTransform.anchoredPosition = new Vector3(50, 50, 0); }
+            if (keyControl[3]) { hAxis = -1; vAxis = 0; inputImg.rectTransform.anchoredPosition = new Vector3(-75, 0, 0); }
+            if (keyControl[4]) { hAxis = 0; vAxis = 0; inputImg.rectTransform.anchoredPosition = new Vector3(0, 0, 0); }
+            if (keyControl[5]) { hAxis = 1; vAxis = 0; inputImg.rectTransform.anchoredPosition = new Vector3(75, 0, 0); }
+            if (keyControl[6]) { hAxis = -1; vAxis = -1; inputImg.rectTransform.anchoredPosition = new Vector3(-50, -50, 0); }
+            if (keyControl[7]) { hAxis = 0; vAxis = -1; inputImg.rectTransform.anchoredPosition = new Vector3(0, -75, 0); }
+            if (keyControl[8]) { hAxis = 1; vAxis = -1; inputImg.rectTransform.anchoredPosition = new Vector3(50, -50, 0); }
+            if (!isControl) { hAxis = 0; vAxis = 0; inputImg.rectTransform.anchoredPosition = new Vector3(0, 0, 0); }
         }
 
-        isButtonRoll = Input.GetKeyDown(KeyCode.LeftShift);
-        isButtonFire = Input.GetButton("Fire2"); //("Fire1");
-        isButtonGrenade = Input.GetKeyDown(KeyCode.G);
-
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            AddAmmo(20);
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            TakeDamage(20);
-        }
+        //isButtonRoll = Input.GetKeyDown(KeyCode.LeftShift);
+        //isButtonFire = Input.GetButton("Fire2"); //("Fire1");
+        //isButtonGrenade = Input.GetKeyDown(KeyCode.G);
     }
 
     #endregion
@@ -183,14 +184,12 @@ public class Player : MonoBehaviour
         if (!movement.isRoll)
         {
             isButtonRoll = true;
-            Roll();                     //  추가
         }
     }
 
     public void ButtonFireDown()
     {
         isButtonFire = true;
-        Fire();                          //  추가
     }
 
     public void ButtonFireUp()
@@ -201,7 +200,6 @@ public class Player : MonoBehaviour
     public void ButtonGrenadeDown()
     {
         isButtonGrenade = true;
-        Grenade();                       //  추가
     }
 
     #endregion
