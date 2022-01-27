@@ -335,7 +335,6 @@ public class Player : MonoBehaviour
         StartCoroutine(OffOtherFX());
         playerHUD.UpdateAmmo(ammo);
     }
-
     public void Reset()
     {
         HP = DefaultHP;
@@ -345,7 +344,10 @@ public class Player : MonoBehaviour
         weapon.currentAmmo = ammo;
         playerHUD.UpdateAmmo(ammo);
 
-        this.gameObject.transform.position = new Vector3(defaultPosition.x, defaultPosition.y, defaultPosition.z);
+        this.gameObject.transform.position = new Vector3(0, 6.27f, 0.9f);
+
+        GameObject.FindWithTag("MainCamera").GetComponent<Transform>().position =
+            new Vector3(0, 21.6f, -16.6f);
     }
 
     // #. Greande
