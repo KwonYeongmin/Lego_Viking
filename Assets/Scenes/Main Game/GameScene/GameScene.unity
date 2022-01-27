@@ -19972,22 +19972,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 103444215}
     m_Modifications:
-    - target: {fileID: 191926037383964715, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 191926037383964715, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: lengthInSec
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 203840303918787925, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 204052105172855331, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2069020378007859585, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: scene
       value: 
@@ -20054,38 +20038,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069020378007859611, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3485877522878496512, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3485877522878496512, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: lengthInSec
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3485877522878496512, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: scalingMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3485877522878496512, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: InheritVelocityModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3486121458807523658, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3486121458807523658, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: lengthInSec
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5422743347693427874, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9208652997901144467, guid: 20aa8f664f9131c42b382bb69d5a8968, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
