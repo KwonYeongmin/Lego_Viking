@@ -88,9 +88,9 @@ public class Missile : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Deck") ) //¹ÙÀÌÅ· °©ÆÇ¿¡ ºÎµúÈ÷¸é ÆÄ±«
         {
-            Instantiate(FX, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f, this.gameObject.transform.position.z)
+            GameObject obj= Instantiate(FX, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f, this.gameObject.transform.position.z)
                                                 , this.gameObject.transform.rotation);
-           
+            Destroy(obj.gameObject, 2f);
             Destroy(this.gameObject);
         }
 

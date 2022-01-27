@@ -14,9 +14,15 @@ public class ItemSpawnerSelector : MonoBehaviour
     {
         for (int i = 0; i < ItemSpawnersCount; i++)
         {
-       
             ItemSpawners[i] = itemSpawner.transform.GetChild(i).gameObject.GetComponent<ItemSpawner>();
+        }
+    }
 
+    public void Reset()
+    {
+        for (int i = 0; i < ItemSpawnersCount; i++)
+        {
+            itemSpawner.transform.GetChild(i).gameObject.GetComponent<ItemSpawner>().Reset();
         }
     }
 

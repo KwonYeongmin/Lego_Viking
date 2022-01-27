@@ -116,12 +116,20 @@ public class StageManager : Singleton<StageManager>
         sceneManager = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
         Timer = GameObject.Find("Time").GetComponent<TimerUI>();
         StageInfo = GameObject.Find("StageInfo ").GetComponent<StageInfoUI>();
+        
+        
+
         //
         Player player = GameObject.Find("Player").GetComponent<Player>();//
         player.Reset();
         //
         viking.Reset();
+        //
+        itemSpawner.Reset();
+        //
+        enemySpawner.Reset();
 
+        
         // Stage Á¤º¸
         if (StageInfo) StageInfo.SetStageInfo(Stage);
 

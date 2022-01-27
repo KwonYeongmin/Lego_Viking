@@ -13,6 +13,7 @@ TagManager:
   - deckBox
   - EnemyHUD
   - Viking
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX

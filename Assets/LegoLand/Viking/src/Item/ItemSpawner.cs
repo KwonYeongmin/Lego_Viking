@@ -20,6 +20,14 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        if (this.transform.childCount != 0)
+        {
+            Destroy(this.transform.GetChild(0).gameObject);
+        }
+    }
+
     private void InstantiateItems()
     {
 

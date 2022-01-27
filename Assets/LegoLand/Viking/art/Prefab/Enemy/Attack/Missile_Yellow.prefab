@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 2288424508120966086}
   m_Layer: 8
   m_Name: Missile_Yellow
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

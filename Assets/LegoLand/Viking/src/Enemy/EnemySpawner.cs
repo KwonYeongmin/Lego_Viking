@@ -102,4 +102,11 @@ public class EnemySpawner : MonoBehaviour
         enemy.transform.parent = transform_;
         enemy.GetComponent<Enemy>().initialized((int)colorType);
     }
+
+    public void Reset()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("EnemyAttack");
+        for (int i = 0; i < objs.Length; i++)
+            Destroy(objs[i]);
+    }
 }
