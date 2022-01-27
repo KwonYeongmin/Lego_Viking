@@ -119,13 +119,13 @@ public class StageManager : Singleton<StageManager>
         
         
 
-        //
+        /*
         Player player = GameObject.Find("Player").GetComponent<Player>();//
         player.Reset();
-        //
+        */
         viking.Reset();
         //
-        itemSpawner.Reset();
+       // itemSpawner.Reset();
         //
         enemySpawner.Reset();
 
