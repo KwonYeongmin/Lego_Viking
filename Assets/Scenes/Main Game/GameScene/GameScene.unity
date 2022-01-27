@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.73758453, g: 0.75578326, b: 0.8018868, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: cdbb40e11399e4a17882ada20a1b896a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: f8f7bed47f048d24fa35cae410618bc3, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 7779b6747c130f94abcf7f055a5286fc, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -751,14 +751,14 @@ RectTransform:
   m_GameObject: {fileID: 176328885}
   m_LocalRotation: {x: -0, y: -0, z: -0.0023161368, w: 0.9999973}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1535939, y: 1.2298783, z: 2.3999999}
+  m_LocalScale: {x: 0.6, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1175709365}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.265}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 258.27478}
+  m_AnchoredPosition: {x: -1, y: 134}
   m_SizeDelta: {x: 1603.1, y: 336}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &176328887
@@ -1654,7 +1654,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.265}
   m_AnchorMin: {x: 0.5, y: 0.6906109}
   m_AnchorMax: {x: 0.5, y: 0.6906109}
-  m_AnchoredPosition: {x: -466.05127, y: -254.14069}
+  m_AnchoredPosition: {x: -466, y: -212}
   m_SizeDelta: {x: 800, y: 150.54883}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328078075
@@ -1704,8 +1704,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1972,7 +1972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.037424356, g: 0.06706019, b: 0.2735849, a: 1}
+  m_Color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10996,7 +10996,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.265}
   m_AnchorMin: {x: 0.5, y: 0.6906109}
   m_AnchorMax: {x: 0.5, y: 0.6906109}
-  m_AnchoredPosition: {x: 0, y: -255.7395}
+  m_AnchoredPosition: {x: 0.05126953, y: -213.59882}
   m_SizeDelta: {x: 1232.2, y: 150.54883}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1178407853
@@ -11048,8 +11048,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16247,7 +16247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.265}
   m_AnchorMin: {x: 0.5, y: 0.6906109}
   m_AnchorMax: {x: 0.5, y: 0.6906109}
-  m_AnchoredPosition: {x: 0, y: 236.58142}
+  m_AnchoredPosition: {x: -1, y: 121.72523}
   m_SizeDelta: {x: 1232.2, y: 150.54883}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1255564643
@@ -16297,8 +16297,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -17873,7 +17873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.265}
   m_AnchorMin: {x: 0.5, y: 0.6906109}
   m_AnchorMax: {x: 0.5, y: 0.6906109}
-  m_AnchoredPosition: {x: -342.61688, y: -368.5195}
+  m_AnchoredPosition: {x: -402.94873, y: -276.8593}
   m_SizeDelta: {x: 800, y: 150.54883}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1616114555
@@ -17923,8 +17923,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
