@@ -21,30 +21,24 @@ public class Dagger : MonoBehaviour
     [Header("ÇÇÇØ·®")]
     private int dagger_damage = 0;
     [SerializeField]
-    private int dagger1_damage = 1;
-    [SerializeField]
-    private int dagger2_damage = 2;
-    [SerializeField]
-    private int dagger3_damage = 3;
+    private int[] Damage;
 
     [Header("lifetime")]
     [SerializeField]
     private float lifeTime = 10.0f;
-
     public GameObject[] particles;
+
     [Header("Projector")]
     public Projector Projector;
     public Material[] ProjectorMaterials;
 
     private Rigidbody rig;
-     private GameObject Player;
-     private Vector3 targetPosition;
 
-    private GameObject[] deckEdges;
     float[] direction = new float[4];
    [HideInInspector] public Transform daggerTransform;
 
     private bool bIsFallen = false;
+
     private void Awake()
     {
         rig = this.GetComponent<Rigidbody>();
@@ -63,46 +57,18 @@ public class Dagger : MonoBehaviour
 
     public void InitializeState()
     {
-        switch (colortype)
-        {
-            case EnemyColorType.GREY:
-                {
-                    dagger_damage = dagger1_damage;
-                    particles[0].SetActive(true);
-                    particles[1].SetActive(false);
-                    particles[2].SetActive(false);
+        dagger_damage = Damage[(int)(colortype)];
 
-                    Projector.material = ProjectorMaterials[0];
-                }
-                break;
-            case EnemyColorType.BLUE:
-                {
-                    dagger_damage = dagger2_damage;
-                    particles[0].SetActive(false);
-                    particles[1].SetActive(true);
-                    particles[2].SetActive(false);
-                    Projector.material = ProjectorMaterials[1];
+        for(int i=0;i<3;i++) particles[i].SetActive(false);
+        particles[(int)(colortype)].SetActive(true);
 
-                }
-                break;
-            case EnemyColorType.YELLOW:
-                {  dagger_damage = dagger3_damage;
-                    particles[0].SetActive(false);
-                    particles[1].SetActive(false);
-                    particles[2].SetActive(true);
-
-                    Projector.material = ProjectorMaterials[2];
-
-                }
-                break;
-        }
+        Projector.material = ProjectorMaterials[(int)colortype];
     }
 
 
 
     private void Update()
     {
-        // CheckDeck();
          Move();
     }
 
@@ -164,6 +130,7 @@ public class Dagger : MonoBehaviour
 
     }
 
+    /*
     private void CheckDeck()
     {
         Collider[] collidersEdge = Physics.OverlapSphere(transform.position, 0.5f);
@@ -171,5 +138,5 @@ public class Dagger : MonoBehaviour
         foreach (Collider collider in collidersEdge)
             if (collider.gameObject.tag == "deck")
                 bIsFallen = true;
-    }
+    }*/
 }

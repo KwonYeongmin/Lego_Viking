@@ -20,6 +20,10 @@ public class StageManager : Singleton<StageManager>
     public EnemyType Type = EnemyType.Enemy_Missile;
     public EnemyColorType ColorType = EnemyColorType.GREY;
 
+   
+    private List<GameObject> enemies = new List<GameObject>();
+    public List<int> enemiesAttacklist = new List<int>();
+
     float Speed = 0;
 
     private void Start()
@@ -42,8 +46,7 @@ public class StageManager : Singleton<StageManager>
         if (SceneManager.GetActiveScene().name == "GameOver") Stage = 0;
     }
 
-    private List<GameObject> enemies = new List<GameObject>();
-    public List<int> enemiesAttacklist = new List<int>();
+   
 
     public void AddEnemies(GameObject obj)
     {
@@ -76,13 +79,7 @@ public class StageManager : Singleton<StageManager>
             if (enemies.Count <= 0)
             {
                 ClearEnemyHUD();
-                
-                //if (Stage == 15)
-                //{
-                //    //sceneManager.ChangeScene("EndGame");
-                //    StageInfo.ShowClearInfo();
-                //    Stage = 0;
-                //}
+
                 Stage++;
                 SetStage();
             }
@@ -93,7 +90,6 @@ public class StageManager : Singleton<StageManager>
 
     private void ClearEnemyHUD()
     {
-        // List<GameObject> enemyHUD_list = new List<GameObject>();
         GameObject[]  enemyHUD;
         enemyHUD= GameObject.FindGameObjectsWithTag("EnemyHUD");
         Debug.Log("enemyHUD_list : " + enemyHUD.Length);
@@ -115,7 +111,7 @@ public class StageManager : Singleton<StageManager>
         sceneManager.ChangeScene("Title");
     }
 
-    public void SetStage()
+    public void SetStage() 
     {
         //
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
@@ -124,17 +120,8 @@ public class StageManager : Singleton<StageManager>
         sceneManager = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
         Timer = GameObject.Find("Time").GetComponent<TimerUI>();
         StageInfo = GameObject.Find("StageInfo ").GetComponent<StageInfoUI>();
-        
-        
 
-        /*
-        Player player = GameObject.Find("Player").GetComponent<Player>();//
-        player.Reset();
-        */
         viking.Reset();
-        //
-       // itemSpawner.Reset();
-        //
         enemySpawner.Reset();
 
         

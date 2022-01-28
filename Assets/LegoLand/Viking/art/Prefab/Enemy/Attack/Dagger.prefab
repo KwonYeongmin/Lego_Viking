@@ -168,9 +168,7 @@ MonoBehaviour:
   Dagger_fall_speed: 2
   Dagger_range: 2
   dagger_speed: 0.5
-  dagger1_damage: 5
-  dagger2_damage: 6
-  dagger3_damage: 7
+  Damage: 010000000200000003000000
   lifeTime: 10
   particles:
   - {fileID: 299430426}

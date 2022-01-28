@@ -199,10 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cef113bfb3f344bb11565835988c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Missile1_damage_center: 2
-  Missile1_damage_edge: 1
+  Damage_center: 020000000300000004000000
+  Damage_Edge: 010000000200000003000000
   Missile_fall_speed: 5
-  Missile_range_edge: 1
+  Missile_range_edge: 1.3
+  Missile_range_center: 1
   lifeTime: 10
   FX: {fileID: 1809022330002312, guid: ed511b7776af6174e9b1255c7a81e59c, type: 3}
 --- !u!65 &8691626059662995514
@@ -216,7 +217,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5586095, y: 9.780996, z: 2.5586097}
+  m_Size: {x: 2.5586095, y: 14, z: 2.5586097}
   m_Center: {x: 0.0000032782557, y: 0.98390317, z: 0.000007867813}
 --- !u!54 &2288424508120966086
 Rigidbody:
