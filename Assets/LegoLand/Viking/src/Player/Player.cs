@@ -257,8 +257,9 @@ public class Player : MonoBehaviour
 
     private void Grenade()
     {
-        if (hasGrenades == 0 || !bIsGrenadesEnable)
+        if (hasGrenades == 0 || !bIsGrenadesEnable || isButtonRoll)
         {
+            isButtonGrenade = false;
             return; //추가 : bIsGrenadesEnable 추가
         }
 
@@ -272,15 +273,11 @@ public class Player : MonoBehaviour
             rigidGrenade.AddForce(throwVec, ForceMode.Impulse);
             rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
 
-            hasGrenades--;
-            if (hasGrenades == 0)
-            {
-                isButtonGrenade = false;
-                bIsGrenadesEnable = false;
-                grenadeImg.color = new Color(1, 1, 1, 0.25f);
-            }
+            hasGrenades = 0;
+            bIsGrenadesEnable = false;
+            isButtonGrenade = false;
+            grenadeImg.color = new Color(1, 1, 1, 0.25f);
         }
-
     }
     #endregion
 
@@ -288,6 +285,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(int value)
     {
         if (isInvincible) return;
+
+        value *= 5;
 
         HP = (HP - value) > 0 ? HP - value : 0; // 추가
         if (HP <= 0)
@@ -340,6 +339,11 @@ public class Player : MonoBehaviour
         ammo = defaultAmmo;
         weapon.currentAmmo = ammo;
         playerHUD.UpdateAmmo(ammo);
+
+        isButtonGrenade = false;
+        bIsGrenadesEnable = false;
+        hasGrenades = 0;
+        grenadeImg.color = new Color(1, 1, 1, 0.25f);
 
         this.gameObject.transform.position = new Vector3(0, 6.27f, 0.9f);
 

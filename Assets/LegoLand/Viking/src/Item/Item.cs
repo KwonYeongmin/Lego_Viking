@@ -59,11 +59,11 @@ public class Item : MonoBehaviour
 
     private void UseHealItem(Collider other)
     {
-        Debug.Log("회복 아이템 사용");
-        float hp = other.gameObject.GetComponent<Player>().HP;
-        hp *= (heal_Recovery*0.01f);
-        Debug.Log("회복량 : " +  hp);
-        other.gameObject.GetComponent<Player>().AddHP(Mathf.RoundToInt(hp));
+        //Debug.Log("회복 아이템 사용");
+        //float hp = other.gameObject.GetComponent<Player>().HP;
+        //hp += (heal_Recovery*0.01f);
+        //Debug.Log("회복량 : " +  hp);
+        other.gameObject.GetComponent<Player>().AddHP(Mathf.RoundToInt(heal_Recovery));
     }
 
 
