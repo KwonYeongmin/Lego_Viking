@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
     [Header("Grenade")]
     public GameObject grenadeObj;
     public Transform grenadePos;
-    private bool bIsGrenadesEnable = true; //추가 : 수류탄 공격이 가능한지
+    public bool bIsGrenadesEnable = false; //추가 : 수류탄 공격이 가능한지
     public int hasGrenades;
     public float throwPower;
     public float throwHeight;
@@ -275,6 +275,7 @@ public class Player : MonoBehaviour
             hasGrenades--;
             if (hasGrenades == 0)
             {
+                isButtonGrenade = false;
                 bIsGrenadesEnable = false;
                 grenadeImg.color = new Color(1, 1, 1, 0.25f);
             }
