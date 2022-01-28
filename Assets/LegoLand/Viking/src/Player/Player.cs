@@ -331,6 +331,7 @@ public class Player : MonoBehaviour
         StartCoroutine(OffOtherFX());
         playerHUD.UpdateAmmo(ammo);
     }
+
     public void Reset()
     {
         HP = DefaultHP;

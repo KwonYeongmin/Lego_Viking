@@ -20,8 +20,6 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        //transform.position = player.transform.position + offset;
-
         Vector3 newPos = player.transform.position + offset;
         if (newPos.x <= minXPos)
         {
@@ -39,12 +37,6 @@ public class CameraController : MonoBehaviour
         {
             newPos.z = maxZPos;
         }
-
-        //Vector3 temp = newPos - transform.position;
-
-        //Quaternion q = transform.rotation;
-        //q.eulerAngles = new Vector3(q.eulerAngles.x + temp.y * 2, q.eulerAngles.y - temp.x, q.eulerAngles.z);
-        //transform.rotation = q;
 
         transform.position = newPos;
     }
