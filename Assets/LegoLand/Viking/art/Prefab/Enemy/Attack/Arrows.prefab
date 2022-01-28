@@ -1460,6 +1460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colortype: 0
   arrow_fall_speed: 3
+  Damage: 050000000600000007000000
   arrow1_damage: 5
   arrow2_damage: 6
   arrow3_damage: 7

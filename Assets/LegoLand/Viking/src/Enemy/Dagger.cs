@@ -26,17 +26,14 @@ public class Dagger : MonoBehaviour
     [Header("lifetime")]
     [SerializeField]
     private float lifeTime = 10.0f;
-
     public GameObject[] particles;
+
     [Header("Projector")]
     public Projector Projector;
     public Material[] ProjectorMaterials;
 
     private Rigidbody rig;
-     private GameObject Player;
-     private Vector3 targetPosition;
 
-    private GameObject[] deckEdges;
     float[] direction = new float[4];
    [HideInInspector] public Transform daggerTransform;
 
@@ -64,14 +61,14 @@ public class Dagger : MonoBehaviour
 
         for(int i=0;i<3;i++) particles[i].SetActive(false);
         particles[(int)(colortype)].SetActive(true);
-     
+
+        Projector.material = ProjectorMaterials[(int)colortype];
     }
 
 
 
     private void Update()
     {
-        // CheckDeck();
          Move();
     }
 
@@ -133,6 +130,7 @@ public class Dagger : MonoBehaviour
 
     }
 
+    /*
     private void CheckDeck()
     {
         Collider[] collidersEdge = Physics.OverlapSphere(transform.position, 0.5f);
@@ -140,5 +138,5 @@ public class Dagger : MonoBehaviour
         foreach (Collider collider in collidersEdge)
             if (collider.gameObject.tag == "deck")
                 bIsFallen = true;
-    }
+    }*/
 }

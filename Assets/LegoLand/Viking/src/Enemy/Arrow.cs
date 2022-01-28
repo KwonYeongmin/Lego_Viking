@@ -13,9 +13,7 @@ public class Arrow : MonoBehaviour
     [Header("낙하 속도")]
     private int arrow_damage = 0;
     
-    [SerializeField] private int arrow1_damage = 1;
-    [SerializeField] private int arrow2_damage = 2;
-    [SerializeField] private int arrow3_damage = 3;
+    [SerializeField] private int[] Damage;
 
     [Header("캐릭터 이동속도 감소 비율")]
     [SerializeField]
@@ -59,51 +57,12 @@ public class Arrow : MonoBehaviour
 
     public void InitializeState()
     {
-        Debug.Log("InitializeState");
-        switch (colortype)
-        {
-            case EnemyColorType.GREY:
-                {
-                    arrow_damage = arrow1_damage;
-                    projector.material = materials[0];
+        for(int i=0;i<3;i++) particles[i].SetActive(false);
+        particles[(int)(colortype)].SetActive(true);
 
-                    particles[0].SetActive(true);
-                    particles[1].SetActive(false);
-                    particles[2].SetActive(false);
-                    
-                }
-                break;
-            case EnemyColorType.BLUE:
-                {
-                    arrow_damage = arrow2_damage; 
-                    particles[0].SetActive(false);
-                    particles[1].SetActive(true);
-                    particles[2].SetActive(false);
-                    projector.material = materials[1];
-                }
-                break;
-            case EnemyColorType.YELLOW:
-                {
-                    arrow_damage = arrow3_damage; //
-                    particles[0].SetActive(false);
-                    particles[1].SetActive(false);
-                    particles[2].SetActive(true);
-                    projector.material = materials[2];
-                }
-                break;
-        }
-    }
+        arrow_damage = Damage[(int)(colortype)];
 
-
-    private void OnDrawGizmos()
-    {
-        // Debug.Log("OnDrawGizmos");
-
-        Gizmos.color = Color.red;
-      //  Gizmos.DrawWireSphere(transform.position, Missile_damage_edge);
-
-        Gizmos.color = Color.yellow;
-     //   Gizmos.DrawWireSphere(transform.position, Missile_damage_center);
+        projector.material = materials[(int)colortype];
     }
 
 
