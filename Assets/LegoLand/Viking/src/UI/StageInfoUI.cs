@@ -46,22 +46,23 @@ public class StageInfoUI : MonoBehaviour
 
     void Update()
     {
+        SetTimeScale();
+        UpdateTimer();
+        EndClearUI();
+        EndStageInfoUI();
+    }
 
-        if (bIsPlaying) Time.timeScale = 1;
-        else Time.timeScale = 0;
-
-        if (StageInfo.activeSelf || Clear.activeSelf || Tutorial.activeSelf || CountDown.activeSelf || PauseWindow.activeSelf) bIsPlaying = false;
-        else if(!StageInfo.activeSelf && !Clear.activeSelf && !Tutorial.activeSelf && !CountDown.activeSelf && !PauseWindow.activeSelf)  bIsPlaying = true;
-
-        if (StageInfo.activeSelf) 
-            {
+    void UpdateTimer()
+    {
+        if (StageInfo.activeSelf)
             StageInfoTimer.UpdateTimer();
-            }
-            
 
         if (Clear.activeSelf)
             ClearTimer.UpdateTimer();
+    }
 
+    void EndClearUI()
+    {
         if (ClearTimer.TimeOut())
         {
             Clear.SetActive(false);
@@ -75,10 +76,12 @@ public class StageInfoUI : MonoBehaviour
             {
                 StageManager.Instance.EndGame();
             }
-           
+
             ClearTimer.SetTimeOut(false);
         }
-
+    }
+    void EndStageInfoUI()
+    {
         if (StageInfoTimer.TimeOut())
         {
             StageInfo.SetActive(false);
@@ -87,7 +90,14 @@ public class StageInfoUI : MonoBehaviour
             StageInfoTimer.SetTimeOut(false);
         }
     }
+    void SetTimeScale()
+    {
+        if (bIsPlaying) Time.timeScale = 1;
+        else Time.timeScale = 0;
 
+        if (StageInfo.activeSelf || Clear.activeSelf || Tutorial.activeSelf || CountDown.activeSelf || PauseWindow.activeSelf) bIsPlaying = false;
+        else if (!StageInfo.activeSelf && !Clear.activeSelf && !Tutorial.activeSelf && !CountDown.activeSelf && !PauseWindow.activeSelf) bIsPlaying = true;
+    }
 
     void ReadTextFile()
     {

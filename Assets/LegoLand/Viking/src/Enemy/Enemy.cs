@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
        HUD.GetComponent<EnemyHUD>().Initialized(this.gameObject);
        HUD.name = "EnemyHUD";
         HUD.GetComponent<EnemyHUD>().InfoImage.sprite = EnemtProfileImg;
-        StartCoroutine(SetRandomDirection());
+      //  StartCoroutine(SetRandomDirection());
     }
 
 
@@ -52,8 +52,7 @@ public class Enemy : MonoBehaviour
         {
             case 1: { Move(0); } break;
             case 2: { Move(1); } break;
-            // case 3: { Move(DirectionIndex); } break; -> ��ġ�� ���� �߻�
-            case 3: { Move(1); } break; //-> ���Ʒ��� ����
+            case 3: { Move(1); } break; 
         }
     }
 
@@ -65,7 +64,7 @@ public class Enemy : MonoBehaviour
 
   
 
-
+    /*
     IEnumerator SetRandomDirection()
     {
         while (true)
@@ -74,7 +73,7 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(4f);
         }
         
-    }
+    }*/
 
     private void Move(int direction)
     {
@@ -92,17 +91,15 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
-       
-
-
-
     }
 
     public void initialized(int colorType)
     {
         ColorType = (EnemyColorType)colorType;
     }
+
     private bool bSetEnd=false;
+
     void SetHP()
     {
         if (Type == EnemyType.Enemy_Missile)

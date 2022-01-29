@@ -61,17 +61,15 @@ public class EnemyHUD : MonoBehaviour
         // HP
         DefaultHP = enemySC.DefaultHP;
       
-
         //Type
         Type = enemySC.Type;
 
         // hp image
         HPImg.sprite = HPSprites[(int)enemySC.ColorType];
     
-
        bEndSetting = true;
 
-        UpdateProfile();
+        SetProfile();
     }
 
     void Update()
@@ -89,12 +87,10 @@ public class EnemyHUD : MonoBehaviour
     }
 
 
-    private void UpdateProfile()
+    private void SetProfile()
     {
-        // image
-        // InfoImage.sprite = InfoSprites[(int)enemySC.ColorType];
         InfoImage.SetNativeSize();
-        //text : type
+
         string type= "Missile";
 
         switch (Type)

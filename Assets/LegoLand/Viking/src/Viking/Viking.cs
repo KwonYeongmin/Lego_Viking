@@ -43,7 +43,6 @@ public class Viking : MonoBehaviour
     private void FixedUpdate()
     {
         lerpTimer += Time.deltaTime * (speed) / durationValue;
-
         transform.rotation = PendulumRotation();
         /*
       if (speed > 0.0f) speed -= Time.deltaTime;
